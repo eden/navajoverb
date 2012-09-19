@@ -1,0 +1,10 @@
+#!/bin/bash
+
+# "Compiles" the two XML files to Prolog format
+# See the Perl script for the process.
+if [ -f ./compile_bases.pl ]; then
+    ./compile_bases.pl ~/verbs/htdocs/xml/Segments.xml \
+                       ~/verbs/htdocs/xml/VerbBases.xml \
+                       ~/verbs/htdocs/prolog/stems.P \
+                       ~/verbs/htdocs/prolog/segments.P
+fi

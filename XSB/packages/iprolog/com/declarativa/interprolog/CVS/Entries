@@ -1,0 +1,17 @@
+/.cvsignore/1.1/Fri Dec  6 05:16:06 2002//Trelease_2_6
+/ObjectExamplePair.java/1.1/Fri Aug 16 19:28:28 2002//Trelease_2_6
+/PrologEngine.java/1.2/Tue Aug 20 19:42:55 2002//Trelease_2_6
+/PrologOperatorsContext.java/1.1/Fri Aug 16 19:28:29 2002//Trelease_2_6
+/PrologOutputListener.java/1.1/Fri Aug 16 19:28:29 2002//Trelease_2_6
+/SubprocessEngine.java/1.2/Tue Aug 20 18:32:28 2002//Trelease_2_6
+/SubprocessEngine.java.save/1.1/Fri Aug 16 19:28:29 2002//Trelease_2_6
+/TermModel.java/1.1/Fri Aug 16 19:28:29 2002//Trelease_2_6
+/TermModelListener.java/1.1/Fri Aug 16 19:28:29 2002//Trelease_2_6
+/interprolog.O/1.1/Fri Aug 16 19:28:29 2002/-kb/Trelease_2_6
+/interprolog.P/1.1/Fri Aug 16 19:28:29 2002//Trelease_2_6
+/tests.O/1.1/Fri Aug 16 19:28:29 2002/-kb/Trelease_2_6
+/tests.P/1.1/Fri Aug 16 19:28:29 2002//Trelease_2_6
+/tests.xwam/1.1/Fri Aug 16 19:28:29 2002/-kb/Trelease_2_6
+D/examples////
+D/gui////
+D/util////

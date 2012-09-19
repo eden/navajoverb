@@ -1,0 +1,51 @@
+/************************************************************************
+  file: includes/flrdefinition.flh
+
+  Author(s): Guizhen Yang
+
+  This file is automatically included by the FLORA compiler.
+************************************************************************/
+
+:- import
+        storage_delete_all/1,
+   	storage_find_fact/2,
+	storage_insert_fact/3,
+	storage_delete_fact/3 
+   from storage.
+:- import
+	flora_load_dyndata_for_user_modules/1,
+	FLORA_SYMBOL('debugger_loaded')/0
+   from flrdebugger.
+:- import flora_storage_registry/1,
+     	  flora_debug_module_registry/1,
+	  flora_module_registry/1,
+	  flora_trailer_registry/1,
+	  flora_in_debug_mode/1
+   from flrregistry.
+
+:- import flora_set_counter/2 from flrporting.
+:- import flora_error_undefined/1 from flrundefined.
+
+?- storage_delete_all(FLORA_THIS_FLD_STORAGE).
+?- flora_in_debug_mode(_), !,
+      assert(flora_debug_module_registry(FLORA_THIS_MODULE_NAME))
+      ; true.
+
+?- storage_delete_all(FLORA_THIS_FDB_STORAGE).
+?- (flora_storage_registry(FLORA_THIS_FDB_STORAGE), !
+    ; assert(flora_storage_registry(FLORA_THIS_FDB_STORAGE))
+    ).
+
+?- (flora_module_registry(FLORA_THIS_MODULE_NAME) -> true
+    ; assert(flora_module_registry(FLORA_THIS_MODULE_NAME)),
+      %% If debugger is loaded, read debugger data for this module
+      (current_predicate(flrdebugger:FLORA_SYMBOL('debugger_loaded')/0)
+      -> flora_load_dyndata_for_user_modules([FLORA_THIS_MODULE_NAME])
+      ;  true
+      )
+   ).
+
+?- retract(flora_trailer_registry(FLORA_THIS_MODULE_NAME)).
+
+
+/***********************************************************************/

@@ -1,0 +1,42 @@
+/.cvsignore/1.2/Fri Oct 22 03:51:46 1999//Trelease_2_6
+/Makefile/1.2/Fri Mar 15 08:09:43 2002//Trelease_2_6
+/README/1.2/Fri Oct 22 03:51:47 1999//Trelease_2_6
+/cyl.P/1.1/Wed Oct 20 21:37:21 1999//Trelease_2_6
+/dyn_examples.P/1.1/Wed Oct 20 21:37:22 1999//Trelease_2_6
+/farmer.H/1.1.1.1/Thu Nov  5 17:00:57 1998//Trelease_2_6
+/farmer.P/1.1.1.1/Thu Nov  5 17:00:57 1998//Trelease_2_6
+/fib.P/1.1.1.1/Thu Nov  5 17:00:58 1998//Trelease_2_6
+/first.P/1.1.1.1/Thu Nov  5 17:01:02 1998//Trelease_2_6
+/gap.P/1.1/Wed Oct 20 21:37:23 1999//Trelease_2_6
+/ham.H/1.1.1.1/Thu Nov  5 17:00:59 1998//Trelease_2_6
+/ham.P/1.1.1.1/Thu Nov  5 17:00:59 1998//Trelease_2_6
+/houses.H/1.1.1.1/Thu Nov  5 17:00:59 1998//Trelease_2_6
+/houses.P/1.1.1.1/Thu Nov  5 17:00:59 1998//Trelease_2_6
+/lips_mega.H/1.1.1.1/Thu Nov  5 17:00:59 1998//Trelease_2_6
+/lips_mega.P/1.1.1.1/Thu Nov  5 17:00:59 1998//Trelease_2_6
+/mandel.H/1.2/Tue Mar 25 16:49:44 2003//Trelease_2_6
+/mandel.P/1.1.1.1/Thu Nov  5 17:01:00 1998//Trelease_2_6
+/map.H/1.1.1.1/Thu Nov  5 17:01:00 1998//Trelease_2_6
+/map.P/1.1.1.1/Thu Nov  5 17:01:00 1998//Trelease_2_6
+/nrev.H/1.1.1.1/Thu Nov  5 17:01:00 1998//Trelease_2_6
+/nrev.P/1.1.1.1/Thu Nov  5 17:01:01 1998//Trelease_2_6
+/ora_demo.P/1.1.1.1/Thu Nov  5 17:00:56 1998//Trelease_2_6
+/parser.P/1.1.1.1/Thu Nov  5 17:01:03 1998//Trelease_2_6
+/ptq.P/1.1.1.1/Thu Nov  5 17:00:57 1998//Trelease_2_6
+/ptq_examples.P/1.1.1.1/Thu Nov  5 17:01:03 1998//Trelease_2_6
+/ptq_utils.P/1.1.1.1/Thu Nov  5 17:00:57 1998//Trelease_2_6
+/ptqlex.P/1.1.1.1/Thu Nov  5 17:01:04 1998//Trelease_2_6
+/qsort.P/1.1.1.1/Thu Nov  5 17:01:01 1998//Trelease_2_6
+/queens.H/1.1.1.1/Thu Nov  5 17:01:01 1998//Trelease_2_6
+/queens.P/1.1.1.1/Thu Nov  5 17:01:01 1998//Trelease_2_6
+/shortest_path.P/1.2/Sun Jan  9 02:30:01 2000//Trelease_2_6
+/table_examples.P/1.2/Tue Aug  1 21:10:35 2000//Trelease_2_6
+/tree1k.P/1.1/Wed Oct 20 21:37:24 1999//Trelease_2_6
+/wf_examples.P/1.1.1.1/Thu Nov  5 17:01:06 1998//Trelease_2_6
+/wfs.P/1.1.1.1/Thu Nov  5 17:01:05 1998//Trelease_2_6
+D/XSB_calling_c////
+D/c_calling_XSB////
+D/libwww////
+D/socket////
+D/subprocess////
+D/xmc////

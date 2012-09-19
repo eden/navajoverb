@@ -1,0 +1,187 @@
+
+
+			INSTALLATION SUMMARY
+			--------------------
+
+XSB Version:	   2.6
+Code name:	   Duff
+Release date:	   2003-06-24
+Configuration:	   i686-pc-linux-gnu
+Installation date: Tue Jul  3 23:15:18 CST 2007
+
+  Build process is looking for XSB sources in:	  /home/eden/dev/navajoverb/XSB
+  XSB should be installed in:			  /home/eden/dev/navajoverb/XSB
+  Configuration-specific executables go in:	  /home/eden/dev/navajoverb/XSB/config/i686-pc-linux-gnu/bin
+  Configuration-specific libraries go in:	  /home/eden/dev/navajoverb/XSB/config/i686-pc-linux-gnu/lib
+  Object code goes in:				  /home/eden/dev/navajoverb/XSB/config/i686-pc-linux-gnu/saved.o
+  Site-specific code goes in:			  /home/eden/dev/navajoverb/XSB/site 
+  Site configuration-specific code goes in:	  /home/eden/dev/navajoverb/XSB/site/config/i686-pc-linux-gnu
+  XSB will be built with:			  gcc  -O4 -fomit-frame-pointer -finline-functions -Wall 
+  builtin.c will be built with: 		  gcc  -O4 -fomit-frame-pointer -finline-functions -Wall 
+  loader_xsb.c will be built with: 		  gcc  -O2 -fomit-frame-pointer -finline-functions -Wall 
+  emuloop.c will be built with: 		  gcc  -O4 -fomit-frame-pointer -finline-functions -Wall 
+  tr_utils.c will be built with:		  gcc  -O1 -fomit-frame-pointer -finline-functions -Wall 
+  Loader flags: 				    -lm -ldl -Wl,-export-dynamic
+  Compilation mode:				  optimal
+  XSB abstract machine: 			  slg-wam
+  XSB scheduling strategy:			  local
+  Garbage Collection Stress-Test:		  no
+  Jumptable-based emulator loop:		  yes
+  Demand support:                                 no
+	POSIX regexp matching libraries:		  yes
+	POSIX wildcard matching libraries:		  yes
+	Perl support:					  yes
+  Perl archlib: 				  /usr/lib/perl/5.8/CORE
+  Perl C compiler:				  cc
+  Perl C flags: 				  -D_REENTRANT -D_GNU_SOURCE -DTHREADS_HAVE_PIDS -DDEBIAN -fno-strict-aliasing -pipe -I/usr/local/include -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64
+  Perl loader flags:				  -lgdbm -lgdbm_compat -ldb -ldl -lm -lpthread -lc -lcrypt
+
+  Libwww support: 				  no
+  Java compiler:				  /usr/bin/javac
+
+
+make[1]: Entering directory `/home/eden/dev/navajoverb/XSB/emu'
+gcc -I/home/eden/dev/navajoverb/XSB/config/i686-pc-linux-gnu  -c -O4 -fomit-frame-pointer -finline-functions -Wall  main_xsb.c
+gcc -I/home/eden/dev/navajoverb/XSB/config/i686-pc-linux-gnu  -c -O4 -fomit-frame-pointer -finline-functions -Wall  auxlry.c
+gcc -I/home/eden/dev/navajoverb/XSB/config/i686-pc-linux-gnu  -c -O4 -fomit-frame-pointer -finline-functions -Wall  biassert.c
+biassert.c: In function ‘prefix_to_chain’:
+biassert.c:1327: warning: passing argument 3 of ‘dbgen_printinst’ makes integer from pointer without a cast
+biassert.c:1330: warning: passing argument 3 of ‘dbgen_printinst’ makes integer from pointer without a cast
+biassert.c:1339: warning: passing argument 3 of ‘dbgen_printinst’ makes integer from pointer without a cast
+biassert.c: In function ‘append_to_chain’:
+biassert.c:1346: warning: passing argument 3 of ‘dbgen_printinst’ makes integer from pointer without a cast
+biassert.c:1351: warning: passing argument 3 of ‘dbgen_printinst’ makes integer from pointer without a cast
+biassert.c:1354: warning: passing argument 3 of ‘dbgen_printinst’ makes integer from pointer without a cast
+biassert.c: In function ‘db_addbuff’:
+biassert.c:1370: warning: passing argument 2 of ‘dbgen_printinst’ makes integer from pointer without a cast
+biassert.c:1371: warning: passing argument 3 of ‘dbgen_printinst’ makes integer from pointer without a cast
+biassert.c: In function ‘addto_hashchain’:
+biassert.c:1518: warning: passing argument 3 of ‘dbgen_printinst’ makes integer from pointer without a cast
+biassert.c:1521: warning: passing argument 3 of ‘dbgen_printinst’ makes integer from pointer without a cast
+biassert.c:1524: warning: passing argument 3 of ‘dbgen_printinst’ makes integer from pointer without a cast
+biassert.c:1529: warning: passing argument 3 of ‘dbgen_printinst’ makes integer from pointer without a cast
+biassert.c:1533: warning: passing argument 3 of ‘dbgen_printinst’ makes integer from pointer without a cast
+biassert.c:1536: warning: passing argument 3 of ‘dbgen_printinst’ makes integer from pointer without a cast
+biassert.c: In function ‘addto_allchain’:
+biassert.c:1549: warning: passing argument 2 of ‘dbgen_printinst’ makes integer from pointer without a cast
+biassert.c: In function ‘new_SOBblock’:
+biassert.c:1486: warning: passing argument 3 of ‘dbgen_printinst3’ makes integer from pointer without a cast
+biassert.c: In function ‘db_genterms’:
+biassert.c:716: warning: passing argument 3 of ‘dbgen_printinst’ makes integer from pointer without a cast
+biassert.c: In function ‘db_putterm’:
+biassert.c:840: warning: passing argument 3 of ‘dbgen_printinst’ makes integer from pointer without a cast
+biassert.c: In function ‘db_build_prref’:
+biassert.c:2128: warning: passing argument 3 of ‘dbgen_printinst’ makes integer from pointer without a cast
+biassert.c:2131: warning: passing argument 3 of ‘dbgen_printinst’ makes integer from pointer without a cast
+biassert.c: In function ‘db_get_clause’:
+biassert.c:2017: warning: ‘IndexArg’ may be used uninitialized in this function
+biassert.c:2017: warning: ‘IndexLevel’ may be used uninitialized in this function
+biassert.c: In function ‘assert_code_to_buff_p’:
+biassert.c:642: warning: passing argument 2 of ‘dbgen_printinst’ makes integer from pointer without a cast
+gcc -I/home/eden/dev/navajoverb/XSB/config/i686-pc-linux-gnu  -c -O4 -fomit-frame-pointer -finline-functions -Wall  builtin.c
+gcc -I/home/eden/dev/navajoverb/XSB/config/i686-pc-linux-gnu  -c -O4 -fomit-frame-pointer -finline-functions -Wall  cinterf.c
+gcc -I/home/eden/dev/navajoverb/XSB/config/i686-pc-linux-gnu  -c -O4 -fomit-frame-pointer -finline-functions -Wall  debug_xsb.c
+gcc -I/home/eden/dev/navajoverb/XSB/config/i686-pc-linux-gnu  -c -O4 -fomit-frame-pointer -finline-functions -Wall  dis.c
+dis.c: In function ‘dis_data’:
+dis.c:90: warning: dereferencing type-punned pointer will break strict-aliasing rules
+gcc -I/home/eden/dev/navajoverb/XSB/config/i686-pc-linux-gnu  -c -O4 -fomit-frame-pointer -finline-functions -Wall  dynload.c
+gcc -I/home/eden/dev/navajoverb/XSB/config/i686-pc-linux-gnu  -c -O4 -fomit-frame-pointer -finline-functions -Wall  dynamic_stack.c
+gcc -I/home/eden/dev/navajoverb/XSB/config/i686-pc-linux-gnu  -c -O4 -fomit-frame-pointer -finline-functions -Wall  emuloop.c
+gcc -I/home/eden/dev/navajoverb/XSB/config/i686-pc-linux-gnu  -c -O4 -fomit-frame-pointer -finline-functions -Wall  error_xsb.c
+gcc -I/home/eden/dev/navajoverb/XSB/config/i686-pc-linux-gnu  -c -O4 -fomit-frame-pointer -finline-functions -Wall  findall.c
+gcc -I/home/eden/dev/navajoverb/XSB/config/i686-pc-linux-gnu  -c -O4 -fomit-frame-pointer -finline-functions -Wall  function.c
+gcc -I/home/eden/dev/navajoverb/XSB/config/i686-pc-linux-gnu  -c -O4 -fomit-frame-pointer -finline-functions -Wall  hash_xsb.c
+gcc -I/home/eden/dev/navajoverb/XSB/config/i686-pc-linux-gnu  -c -O4 -fomit-frame-pointer -finline-functions -Wall  hashtable_xsb.c
+hashtable_xsb.c: In function ‘search_bucket’:
+hashtable_xsb.c:86: warning: implicit declaration of function ‘memcpy’
+hashtable_xsb.c:86: warning: incompatible implicit declaration of built-in function ‘memcpy’
+hashtable_xsb.c:89: warning: implicit declaration of function ‘memset’
+hashtable_xsb.c:89: warning: incompatible implicit declaration of built-in function ‘memset’
+hashtable_xsb.c: In function ‘init_hashtable’:
+hashtable_xsb.c:128: warning: pointer targets in assignment differ in signedness
+gcc -I/home/eden/dev/navajoverb/XSB/config/i686-pc-linux-gnu  -c -O4 -fomit-frame-pointer -finline-functions -Wall  heap_xsb.c
+In file included from heap_xsb.c:269:
+gc_print.h: In function ‘print_regs’:
+gc_print.h:335: warning: dereferencing type-punned pointer will break strict-aliasing rules
+In file included from heap_xsb.c:271:
+gc_copy.h: In function ‘copy_heap’:
+gc_copy.h:288: warning: dereferencing type-punned pointer will break strict-aliasing rules
+gcc -I/home/eden/dev/navajoverb/XSB/config/i686-pc-linux-gnu  -c -O4 -fomit-frame-pointer -finline-functions -Wall  init_xsb.c
+gcc -I/home/eden/dev/navajoverb/XSB/config/i686-pc-linux-gnu  -c -O4 -fomit-frame-pointer -finline-functions -Wall  inst_xsb.c
+gcc -I/home/eden/dev/navajoverb/XSB/config/i686-pc-linux-gnu  -c -O4 -fomit-frame-pointer -finline-functions -Wall  io_builtins_xsb.c
+gcc -I/home/eden/dev/navajoverb/XSB/config/i686-pc-linux-gnu  -c -O2 -fomit-frame-pointer -finline-functions -Wall  loader_xsb.c
+loader_xsb.c: In function ‘inserth’:
+loader_xsb.c:188: warning: dereferencing type-punned pointer will break strict-aliasing rules
+loader_xsb.c: In function ‘get_index_tab’:
+loader_xsb.c:217: warning: dereferencing type-punned pointer will break strict-aliasing rules
+loader_xsb.c:232: warning: dereferencing type-punned pointer will break strict-aliasing rules
+loader_xsb.c:237: warning: dereferencing type-punned pointer will break strict-aliasing rules
+loader_xsb.c:244: warning: dereferencing type-punned pointer will break strict-aliasing rules
+loader_xsb.c:244: warning: dereferencing type-punned pointer will break strict-aliasing rules
+loader_xsb.c:244: warning: dereferencing type-punned pointer will break strict-aliasing rules
+loader_xsb.c: In function ‘load_index’:
+loader_xsb.c:438: warning: dereferencing type-punned pointer will break strict-aliasing rules
+loader_xsb.c:440: warning: dereferencing type-punned pointer will break strict-aliasing rules
+loader_xsb.c: In function ‘get_obj_atom’:
+loader_xsb.c:571: warning: dereferencing type-punned pointer will break strict-aliasing rules
+loader_xsb.c: In function ‘loader1’:
+loader_xsb.c:725: warning: dereferencing type-punned pointer will break strict-aliasing rules
+loader_xsb.c:727: warning: dereferencing type-punned pointer will break strict-aliasing rules
+loader_xsb.c: In function ‘loader’:
+loader_xsb.c:209: warning: ‘val’ may be used uninitialized in this function
+gcc -I/home/eden/dev/navajoverb/XSB/config/i686-pc-linux-gnu  -c -O4 -fomit-frame-pointer -finline-functions -Wall  memory_xsb.c
+gcc -I/home/eden/dev/navajoverb/XSB/config/i686-pc-linux-gnu  -c -O4 -fomit-frame-pointer -finline-functions -Wall  orient_xsb.c
+gcc -I/home/eden/dev/navajoverb/XSB/config/i686-pc-linux-gnu  -c -O4 -fomit-frame-pointer -finline-functions -Wall  pathname_xsb.c
+gcc -I/home/eden/dev/navajoverb/XSB/config/i686-pc-linux-gnu  -c -O4 -fomit-frame-pointer -finline-functions -Wall  private_builtin.c
+gcc -I/home/eden/dev/navajoverb/XSB/config/i686-pc-linux-gnu  -c -O4 -fomit-frame-pointer -finline-functions -Wall  psc_xsb.c
+psc_xsb.c: In function ‘insert’:
+psc_xsb.c:243: warning: dereferencing type-punned pointer will break strict-aliasing rules
+psc_xsb.c: In function ‘link_sym’:
+psc_xsb.c:290: warning: dereferencing type-punned pointer will break strict-aliasing rules
+gcc -I/home/eden/dev/navajoverb/XSB/config/i686-pc-linux-gnu  -c -O4 -fomit-frame-pointer -finline-functions -Wall  random_xsb.c
+gcc -I/home/eden/dev/navajoverb/XSB/config/i686-pc-linux-gnu  -c -O4 -fomit-frame-pointer -finline-functions -Wall  remove_unf.c
+gcc -I/home/eden/dev/navajoverb/XSB/config/i686-pc-linux-gnu  -c -O4 -fomit-frame-pointer -finline-functions -Wall  residual.c
+gcc -I/home/eden/dev/navajoverb/XSB/config/i686-pc-linux-gnu  -c -O4 -fomit-frame-pointer -finline-functions -Wall  scc_xsb.c
+gcc -I/home/eden/dev/navajoverb/XSB/config/i686-pc-linux-gnu  -c -O4 -fomit-frame-pointer -finline-functions -Wall  slgdelay.c
+gcc -I/home/eden/dev/navajoverb/XSB/config/i686-pc-linux-gnu  -c -O4 -fomit-frame-pointer -finline-functions -Wall  socket_xsb.c
+socket_xsb.c: In function ‘socket_recv’:
+socket_xsb.c:244: warning: dereferencing type-punned pointer will break strict-aliasing rules
+gcc -I/home/eden/dev/navajoverb/XSB/config/i686-pc-linux-gnu  -c -O4 -fomit-frame-pointer -finline-functions -Wall  string_xsb.c
+gcc -I/home/eden/dev/navajoverb/XSB/config/i686-pc-linux-gnu  -c -O4 -fomit-frame-pointer -finline-functions -Wall  storage_xsb.c
+gcc -I/home/eden/dev/navajoverb/XSB/config/i686-pc-linux-gnu  -c -O4 -fomit-frame-pointer -finline-functions -Wall  struct_manager.c
+gcc -I/home/eden/dev/navajoverb/XSB/config/i686-pc-linux-gnu  -c -O4 -fomit-frame-pointer -finline-functions -Wall  sub_delete.c
+gcc -I/home/eden/dev/navajoverb/XSB/config/i686-pc-linux-gnu  -c -O4 -fomit-frame-pointer -finline-functions -Wall  subp.c
+subp.c: In function ‘compare’:
+subp.c:559: warning: implicit declaration of function ‘strcmp’
+gcc -I/home/eden/dev/navajoverb/XSB/config/i686-pc-linux-gnu  -c -O4 -fomit-frame-pointer -finline-functions -Wall  system_xsb.c
+gcc -I/home/eden/dev/navajoverb/XSB/config/i686-pc-linux-gnu  -c -O4 -fomit-frame-pointer -finline-functions -Wall  table_stats.c
+gcc -I/home/eden/dev/navajoverb/XSB/config/i686-pc-linux-gnu  -c -O4 -fomit-frame-pointer -finline-functions -Wall  tables.c
+gcc -I/home/eden/dev/navajoverb/XSB/config/i686-pc-linux-gnu  -c -O4 -fomit-frame-pointer -finline-functions -Wall  timer_xsb.c
+gcc -I/home/eden/dev/navajoverb/XSB/config/i686-pc-linux-gnu  -c -O4 -fomit-frame-pointer -finline-functions -Wall  token_xsb.c
+gcc -I/home/eden/dev/navajoverb/XSB/config/i686-pc-linux-gnu  -c -O1 -fomit-frame-pointer -finline-functions -Wall  tr_utils.c
+gcc -I/home/eden/dev/navajoverb/XSB/config/i686-pc-linux-gnu  -c -O4 -fomit-frame-pointer -finline-functions -Wall  trace_xsb.c
+gcc -I/home/eden/dev/navajoverb/XSB/config/i686-pc-linux-gnu  -c -O4 -fomit-frame-pointer -finline-functions -Wall  trie_lookup.c
+gcc -I/home/eden/dev/navajoverb/XSB/config/i686-pc-linux-gnu  -c -O4 -fomit-frame-pointer -finline-functions -Wall  trie_search.c
+gcc -I/home/eden/dev/navajoverb/XSB/config/i686-pc-linux-gnu  -c -O4 -fomit-frame-pointer -finline-functions -Wall  tries.c
+tries.c: In function ‘get_lastnode_cs_retskel’:
+tries.c:1754: warning: dereferencing type-punned pointer will break strict-aliasing rules
+tries.c:1759: warning: dereferencing type-punned pointer will break strict-aliasing rules
+gcc -I/home/eden/dev/navajoverb/XSB/config/i686-pc-linux-gnu  -c -O4 -fomit-frame-pointer -finline-functions -Wall  tst_insert.c
+gcc -I/home/eden/dev/navajoverb/XSB/config/i686-pc-linux-gnu  -c -O4 -fomit-frame-pointer -finline-functions -Wall  tst_retrv.c
+gcc -I/home/eden/dev/navajoverb/XSB/config/i686-pc-linux-gnu  -c -O4 -fomit-frame-pointer -finline-functions -Wall  tst_unify.c
+gcc -I/home/eden/dev/navajoverb/XSB/config/i686-pc-linux-gnu  -c -O4 -fomit-frame-pointer -finline-functions -Wall  tst_utils.c
+gcc -I/home/eden/dev/navajoverb/XSB/config/i686-pc-linux-gnu  -c -O4 -fomit-frame-pointer -finline-functions -Wall  varstring.c
+
+Making XSB executable /home/eden/dev/navajoverb/XSB/config/i686-pc-linux-gnu/bin/xsb 
+
+cd /home/eden/dev/navajoverb/XSB/emu; \
+	gcc -o /home/eden/dev/navajoverb/XSB/config/i686-pc-linux-gnu/bin/xsb main_xsb.o auxlry.o biassert.o builtin.o cinterf.o debug_xsb.o dis.o dynload.o dynamic_stack.o emuloop.o error_xsb.o findall.o function.o hash_xsb.o  hashtable_xsb.o heap_xsb.o init_xsb.o inst_xsb.o io_builtins_xsb.o loader_xsb.o memory_xsb.o orient_xsb.o pathname_xsb.o private_builtin.o psc_xsb.o random_xsb.o remove_unf.o residual.o scc_xsb.o slgdelay.o socket_xsb.o string_xsb.o storage_xsb.o struct_manager.o sub_delete.o subp.o system_xsb.o table_stats.o tables.o timer_xsb.o token_xsb.o tr_utils.o trace_xsb.o trie_lookup.o trie_search.o tries.o tst_insert.o tst_retrv.o tst_unify.o tst_utils.o varstring.o   -lm -ldl -Wl,-export-dynamic 
+system_xsb.o: In function `sys_system':
+system_xsb.c:(.text+0x8a1): warning: the use of `tmpnam' is dangerous, better use `mkstemp'
+make[1]: Leaving directory `/home/eden/dev/navajoverb/XSB/emu'
+make[1]: Entering directory `/home/eden/dev/navajoverb/XSB/gpp'
+
+gcc  -c  gpp.c
+gcc -lm -ldl -Wl,-export-dynamic -o gpp /home/eden/dev/navajoverb/XSB/config/i686-pc-linux-gnu/saved.o/gpp.o
+
+make[1]: Leaving directory `/home/eden/dev/navajoverb/XSB/gpp'

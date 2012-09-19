@@ -1,0 +1,94 @@
+body {
+    font-family: "Arial", sans-serif;
+    background-color: #630;
+    background-color: white;
+    margin:0; padding:0;
+}
+
+#main {
+    margin: 0 15%;
+    padding: 1em 2%;
+}
+
+#menu {
+    margin: 0;
+    padding: 0.5em 0;
+    background-color: #630;
+    text-align: center;
+    border-bottom: solid 5px #fc9;
+}
+
+#menu a {
+    background-color: #963;
+    border: outset 1px #963;
+
+    margin:0;
+    padding: 0.1em 1em;
+
+    font-family: "Trebuchet MS", Trebuchet, sans-serif;
+    font-size: x-small;
+    color: #fc9;
+    text-decoration: none;
+}
+
+#menu a:hover {
+    background-color: #630;
+    border: inset 1px #630;
+}
+
+
+h1 {
+    margin: 0 0 1em 0;
+    padding: 0;
+    font-family: "Georgia", serif;
+    font-size: large;
+    border-bottom: dotted 1px #999;
+}
+
+a { color: #666; }
+a:visited { color: #999; }
+p { margin-top: 0.5em; }
+
+form {
+    color: #630;
+    /*border: solid 2px #630;
+    background-color: #963;*/
+
+    margin: 0 0 0 0;
+    padding: 1em 1em 1em 1em;
+    font-family: "Trebuchet MS", "Arial", sans-serif;
+    font-size: small;
+}
+
+input,textarea {
+    background-color: #ccc;
+}
+
+input:focus,textarea:focus {
+    background-color: #fc9;
+}
+
+#submit {
+    border: outset 1px #963;
+    color: #fc9;
+    font-family: "Trebuchet MS", "Arial", sans-serif;
+    background-color: #963;
+}
+
+#error, li {
+    color: red;
+}
+
+#success {
+    border: solid 1px #630;
+    background-color: #fc9;
+    padding: 0.2em 0.2em;
+}
+
+#footer {
+    font-size: small;
+    color: #999;
+    border-top: solid 1px #999;
+    margin-top: 1em;
+    padding-top: 0.4em;
+}

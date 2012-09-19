@@ -1,0 +1,93 @@
+/*
+ * Version: MPL 1.1
+ *
+ * The contents of this file are subject to the Mozilla Public License
+ * Version 1.1 (the "License"); you may not use this file except in
+ * compliance with the License. You may obtain a copy of the License at
+ * http://www.mozilla.org/MPL/
+ *
+ * Software distributed under the License is distributed on an "AS IS"
+ * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. See
+ * the License for the specific language governing rights and
+ * limitations under the License.
+ *
+ * The Original Code is Navajo Verb Morphology Parser code.
+ *
+ * The Initial Developer of the Original Code is
+ * Eden Siu-yue Li.
+ * Portions created by the Initial Developer are Copyright (C) 2004
+ * the Initial Developer. All Rights Reserved.
+ *
+ */
+
+:- export vowel/3, consonant/3.
+consonant([ch]) --> [ch].
+consonant([dl]) --> [dl].
+consonant([dz]) --> [dz].
+consonant([ts]) --> [ts].
+consonant([zh]) --> [zh].
+consonant([sh]) --> [sh].
+consonant([gh]) --> [gh].
+consonant([tlB]) --> [tlB].
+consonant([chxG]) --> [chxG].
+consonant([kxG]) --> [kxG].
+consonant([txG]) --> [txG].
+consonant([tlBxG]) --> [tlBxG].
+consonant([tsxG]) --> [tsxG].
+consonant([xG]) --> [xG].
+consonant([lB]) --> [lB].
+consonant([b]) --> [b].
+consonant([d]) --> [d].
+consonant([g]) --> [g].
+consonant([h]) --> [h].
+consonant([j]) --> [j].
+consonant([k]) --> [k].
+consonant([l]) --> [l].
+consonant([w]) --> [w].
+consonant([x]) --> [x].
+consonant([y]) --> [y].
+consonant([z]) --> [z].
+consonant([m]) --> [m].
+consonant([n]) --> [n].
+consonant([s]) --> [s].
+consonant([t]) --> [t].
+vowel([aHNaHN]) --> [aHNaHN].
+vowel([eHNeHN]) --> [eHNeHN].
+vowel([iHNiHN]) --> [iHNiHN].
+vowel([oHNoHN]) --> [oHNoHN].
+vowel([aHaH]) --> [aHaH].
+vowel([eHeH]) --> [eHeH].
+vowel([iHiH]) --> [iHiH].
+vowel([oHoH]) --> [oHoH].
+vowel([aNaN]) --> [aNaN].
+vowel([eNeN]) --> [eNeN].
+vowel([iNiN]) --> [iNiN].
+vowel([oNoN]) --> [oNoN].
+vowel([aa]) --> [aa].
+vowel([ee]) --> [ee].
+vowel([ii]) --> [ii].
+vowel([oo]) --> [oo].
+vowel([aHN]) --> [aHN].
+vowel([eHN]) --> [eHN].
+vowel([iHN]) --> [iHN].
+vowel([oHN]) --> [oHN].
+vowel([aH]) --> [aH].
+vowel([eH]) --> [eH].
+vowel([iH]) --> [iH].
+vowel([oH]) --> [oH].
+vowel([aN]) --> [aN].
+vowel([eN]) --> [eN].
+vowel([iN]) --> [iN].
+vowel([oN]) --> [oN].
+vowel([a]) --> [a].
+vowel([e]) --> [e].
+vowel([i]) --> [i].
+vowel([o]) --> [o].
+vowel([eiH]) --> [eiH].
+vowel([aiH]) --> [aiH].
+vowel([eiHiH]) --> [eiHiH].
+vowel([aiHiH]) --> [aiHiH].
+vowel([ei]) --> [ei].
+vowel([eii]) --> [eii].
+vowel([ai]) --> [ai].
+vowel([aii]) --> [aii].

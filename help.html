@@ -1,0 +1,78 @@
+<html>
+    <head>
+        <title>Navajo Verb Parser -- Help</title>
+        <link rel="stylesheet" type="text/css" href="parse.css">
+    </head>
+    <body>
+        <div id="menu">
+            <a href="parse.s">Main</a>
+            <a href="about.html">About</a>
+            <a href="help.html">Help</a>
+            <a href="contact.s">Contact</a>
+        </div>
+       <div id="main">
+            <h1>Navajo Verb Parser Help</h1>
+
+            <p>Just type in a Navajo verb in the input box given on
+            the Main page.  Make sure it is one of the supported
+            verbs listed on <a href="xml/VerbBases.xml">this page</a>.
+            </p>
+
+            <h2>But I don't know Navajo</h2>
+            <p>If you don't know Navajo and just want to see the parser
+            work, try the following inputs:</p>
+
+            <ul>
+                <li>naashneH</li>
+                <li>yishbeHeHzh</li>
+                <li>yicha</li>
+            </ul>
+
+            <p>The output may not make much sense unless you understand
+            at least a little bit about Navajo verbs.
+            <a href="docs/paper.html">My paper</a> contains a short
+            introduction of them.  Look for the <b>Navajo Verb</b> section.</p>
+
+            <h2>Diacritics and Special Characters</h2>
+            <p>In the text box you may use the following key combinations to
+            generate the corresponding characters.
+            If a given
+            vowel is both nasalized and high, apply the accent first, then the
+            nasal hook.
+            </p>
+            
+            <ul><li>Alt-1 for &#x026b;</li>
+                <li>Alt-2 for o&#x0301; (the accent only applies to vowels)</li>
+                <li>Alt-3 for o&#x0345; (nasals only apply to vowels)</li>
+            </ul>
+
+            <p>You <em>must</em> use Firefox, Netscape 7, or Mozilla in order
+            for the diacritic marking facility to work.</p>
+            
+            <p>If the diacritic and Unicode facilities do not work on your browser,
+            you may instead use the following sequence of characters in their
+            place:</p>
+            
+            <ul><li>H for high tone</li>
+                <li>N for nasal</li>
+                <li>HN for high nasal</li>
+                <li>lB for barred-l</li>
+            </ul>
+
+            <p>If you have a long high/nasal vowel, place the H/N/HN after each
+            vowel in the long vowel sequence.  For example, naashne&#x0301;
+            would be rendered naashneH, and shi&#x026b;be&#x0301;e&#x0301;zh
+            can be represented with shilBbeHeHzh.
+            </p>
+            
+            <p>Note that if a vowel is both high and nasalized, the H should come
+            first followed by the N after the vowel.
+            </p>
+
+ 
+        <p id="footer">Copyright &copy; 2004 Eden Li.  Licensed under the
+        <a href="MPL-1.1.html">Mozilla Public License</a>.</p>
+        </div>
+    </body>
+</html>
+

@@ -1,0 +1,262 @@
+/* File:       flrdebug_data.fli -- data guides for XSB debugger in Flora shell
+**
+** Author(s): Michael Kifer
+** Contact:   flora-users@lists.sourceforge.net
+**
+** Copyright (C) The Research Foundation of SUNY, 2001
+**
+** FLORA-2 is free software; you can redistribute it and/or modify it under the
+** terms of the GNU Library General Public License as published by the Free
+** Software Foundation; either version 2 of the License, or (at your option)
+** any later version.
+** 
+** FLORA-2 is distributed in the hope that it will be useful, but WITHOUT ANY
+** WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+** FOR A PARTICULAR PURPOSE.  See the GNU Library General Public License for
+** more details.
+** 
+** You should have received a copy of the GNU Library General Public License
+** along with FLORA-2; if not, write to the Free Software Foundation,
+** Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+** 
+** $Id: dynamic_data.in,v 1.8 2003/06/18 07:01:33 kifer Exp $
+** 
+*/
+
+%% Data in this file is workspace-dependent
+
+#include "flora_wrap.flh"
+
+%% This will dump the corresponding include instructions in the output file
+:- WRAP_DUMP '#mode standard Prolog'.
+:- WRAP_DUMP '#include "flrheader.flh"'.
+:- WRAP_DUMP '#include "flora_terms.flh"'.
+:- WRAP_DUMP '#include "flora_wrap.flh"'.
+
+#include "flora_wspredicates.flh"
+
+
+:- WRAP_WITH_WORKSPACE
+	newpredicate/_,
+	WRAP_TABLED_HILOG/_,
+	WRAP_DYNA_HILOG/_,
+	WRAP_DYNZ_HILOG/_,
+	WRAP_TDYN_HILOG/_,
+	FLDEFINEDPREFIX(WRAP_HILOG)/_,
+	debugger_data_loaded/0.
+
+
+
+/***************************************************************************
+  F-logic predicates that appear in a rule head
+***************************************************************************/
+
+flora_hide_this_show(FLHEADPREFIX(WRAP_ISA)/2).
+flora_hide_this_show(FLHEADPREFIX(WRAP_SUB)/2).
+flora_hide_this_show(FLHEADPREFIX(WRAP_METH)/2).
+flora_hide_this_show(FLHEADPREFIX(WRAP_IMETH)/2).
+flora_hide_this_show(FLHEADPREFIX(WRAP_FD)/3).
+flora_hide_this_show(FLHEADPREFIX(WRAP_IFD)/3).
+flora_hide_this_show(FLHEADPREFIX(WRAP_FDSIG)/3).
+flora_hide_this_show(FLHEADPREFIX(WRAP_IFDSIG)/3).
+flora_hide_this_show(FLHEADPREFIX(WRAP_MVD)/3).
+flora_hide_this_show(FLHEADPREFIX(WRAP_IMVD)/3).
+flora_hide_this_show(FLHEADPREFIX(WRAP_MVDSIG)/3).
+flora_hide_this_show(FLHEADPREFIX(WRAP_IMVDSIG)/3).
+flora_hide_this_show(FLHEADPREFIX(WRAP_TRAN)/2).
+flora_hide_this_show(FLHEADPREFIX(WRAP_MVDINC)/3).
+flora_hide_this_show(FLHEADPREFIX(WRAP_IMVDINC)/3).
+flora_hide_this_show(FLHEADPREFIX(WRAP_MVDTOLIST)/3).
+flora_hide_this_show(FLHEADPREFIX(WRAP_IMVDTOLIST)/3).
+
+flora_hide_this_show(FLDYNAPREFIX(WRAP_ISA)/2).
+flora_hide_this_show(FLDYNAPREFIX(WRAP_SUB)/2).
+flora_hide_this_show(FLDYNAPREFIX(WRAP_METH)/2).
+flora_hide_this_show(FLDYNAPREFIX(WRAP_IMETH)/2).
+flora_hide_this_show(FLDYNAPREFIX(WRAP_FD)/3).
+flora_hide_this_show(FLDYNAPREFIX(WRAP_IFD)/3).
+flora_hide_this_show(FLDYNAPREFIX(WRAP_FDSIG)/3).
+flora_hide_this_show(FLDYNAPREFIX(WRAP_IFDSIG)/3).
+flora_hide_this_show(FLDYNAPREFIX(WRAP_MVD)/3).
+flora_hide_this_show(FLDYNAPREFIX(WRAP_IMVD)/3).
+flora_hide_this_show(FLDYNAPREFIX(WRAP_MVDSIG)/3).
+flora_hide_this_show(FLDYNAPREFIX(WRAP_IMVDSIG)/3).
+flora_hide_this_show(FLDYNAPREFIX(WRAP_TRAN)/2).
+flora_hide_this_show(FLDYNAPREFIX(WRAP_MVDINC)/3).
+flora_hide_this_show(FLDYNAPREFIX(WRAP_IMVDINC)/3).
+flora_hide_this_show(FLDYNAPREFIX(WRAP_MVDTOLIST)/3).
+flora_hide_this_show(FLDYNAPREFIX(WRAP_IMVDTOLIST)/3).
+
+flora_hide_this_show(FLDYNZPREFIX(WRAP_ISA)/2).
+flora_hide_this_show(FLDYNZPREFIX(WRAP_SUB)/2).
+flora_hide_this_show(FLDYNZPREFIX(WRAP_METH)/2).
+flora_hide_this_show(FLDYNZPREFIX(WRAP_IMETH)/2).
+flora_hide_this_show(FLDYNZPREFIX(WRAP_FD)/3).
+flora_hide_this_show(FLDYNZPREFIX(WRAP_IFD)/3).
+flora_hide_this_show(FLDYNZPREFIX(WRAP_FDSIG)/3).
+flora_hide_this_show(FLDYNZPREFIX(WRAP_IFDSIG)/3).
+flora_hide_this_show(FLDYNZPREFIX(WRAP_MVD)/3).
+flora_hide_this_show(FLDYNZPREFIX(WRAP_IMVD)/3).
+flora_hide_this_show(FLDYNZPREFIX(WRAP_MVDSIG)/3).
+flora_hide_this_show(FLDYNZPREFIX(WRAP_IMVDSIG)/3).
+flora_hide_this_show(FLDYNZPREFIX(WRAP_TRAN)/2).
+flora_hide_this_show(FLDYNZPREFIX(WRAP_MVDINC)/3).
+flora_hide_this_show(FLDYNZPREFIX(WRAP_IMVDINC)/3).
+flora_hide_this_show(FLDYNZPREFIX(WRAP_MVDTOLIST)/3).
+flora_hide_this_show(FLDYNZPREFIX(WRAP_IMVDTOLIST)/3).
+
+%% Hide
+flora_hide_this_hide(FLHEADPREFIX(WRAP_FDDEF)/2).
+flora_hide_this_hide(FLHEADPREFIX(WRAP_IFDDEF)/2).
+flora_hide_this_hide(FLHEADPREFIX(WRAP_MVDDEF)/2).
+flora_hide_this_hide(FLHEADPREFIX(WRAP_IMVDDEF)/2).
+
+flora_hide_this_hide(FLDYNAPREFIX(WRAP_FDDEF)/2).
+flora_hide_this_hide(FLDYNAPREFIX(WRAP_IFDDEF)/2).
+flora_hide_this_hide(FLDYNAPREFIX(WRAP_MVDDEF)/2).
+flora_hide_this_hide(FLDYNAPREFIX(WRAP_IMVDDEF)/2).
+flora_hide_this_hide(FLDYNAPREFIX(WRAP_OBJEQL)/2).
+flora_hide_this_hide(FLDYNAPREFIX(WRAP_EXISTS)/1).
+
+flora_hide_this_hide(FLDYNZPREFIX(WRAP_FDDEF)/2).
+flora_hide_this_hide(FLDYNZPREFIX(WRAP_IFDDEF)/2).
+flora_hide_this_hide(FLDYNZPREFIX(WRAP_MVDDEF)/2).
+flora_hide_this_hide(FLDYNZPREFIX(WRAP_IMVDDEF)/2).
+flora_hide_this_hide(FLDYNZPREFIX(WRAP_OBJEQL)/2).
+flora_hide_this_hide(FLDYNZPREFIX(WRAP_EXISTS)/1).
+
+
+/***************************************************************************
+  F-logic predicates that appear in the trailer
+***************************************************************************/
+flora_hide_this_show(FLTRAILERPREFIX(WRAP_SUB)/2).
+flora_hide_this_show(FLTRAILERPREFIX(WRAP_ISA)/2).
+flora_hide_this_show(FLTRAILERPREFIX(WRAP_FD)/3).
+flora_hide_this_show(FLTRAILERPREFIX(WRAP_IFD)/3).
+flora_hide_this_show(FLTRAILERPREFIX(WRAP_MVD)/3).
+flora_hide_this_show(FLTRAILERPREFIX(WRAP_IMVD)/3).
+flora_hide_this_show(FLTRAILERPREFIX(WRAP_METH)/2).
+flora_hide_this_show(FLTRAILERPREFIX(WRAP_IMETH)/2).
+flora_hide_this_show(FLTRAILERPREFIX(WRAP_TRAN)/2).
+flora_hide_this_show(FLTRAILERPREFIX(WRAP_FDSIG)/3).
+flora_hide_this_show(FLTRAILERPREFIX(WRAP_IFDSIG)/3).
+flora_hide_this_show(FLTRAILERPREFIX(WRAP_MVDSIG)/3).
+flora_hide_this_show(FLTRAILERPREFIX(WRAP_IMVDSIG)/3).
+
+flora_hide_this_hide(FLTRAILERPREFIX(WRAP_FDDEF)/2).
+flora_hide_this_hide(FLTRAILERPREFIX(WRAP_IFDDEF)/2).
+flora_hide_this_hide(FLTRAILERPREFIX(WRAP_MVDDEF)/2).
+flora_hide_this_hide(FLTRAILERPREFIX(WRAP_IMVDDEF)/2).
+flora_hide_this_hide(FLTRAILERPREFIX(WRAP_EXISTS)/1).
+flora_hide_this_hide(FLTRAILERPREFIX(WRAP_OBJEQL)/2).
+
+
+flora_hide_this_show(match(WRAP_SUB/2)).
+flora_hide_this_show(match(WRAP_ISA/2)).
+flora_hide_this_show(match(WRAP_FD/3)).
+flora_hide_this_show(match(WRAP_IFD/3)).
+flora_hide_this_show(match(WRAP_MVD/3)).
+flora_hide_this_show(match(WRAP_IMVD/3)).
+flora_hide_this_show(match(WRAP_METH/2)).
+flora_hide_this_show(match(WRAP_IMETH/2)).
+flora_hide_this_show(match(WRAP_TRAN/2)).
+flora_hide_this_show(match(WRAP_FDSIG/3)).
+flora_hide_this_show(match(WRAP_IFDSIG/3)).
+flora_hide_this_show(match(WRAP_MVDSIG/3)).
+flora_hide_this_show(match(WRAP_IMVDSIG/3)).
+
+flora_hide_this_hide(WRAP_FDDEF/2).
+flora_hide_this_hide(WRAP_IFDDEF/2).
+flora_hide_this_hide(WRAP_MVDDEF/2).
+flora_hide_this_hide(WRAP_IMVDDEF/2).
+flora_hide_this_hide(WRAP_EXISTS/1).
+flora_hide_this_hide(WRAP_OBJEQL/2).
+
+/***************************************************************************
+  intermediate F-logic predicates that appear in the trailer
+***************************************************************************/
+
+flora_hide_this_hide(silent_sub/2).
+flora_show_this_hide(inheritance_sub/2).
+flora_show_this_hide(inheritance_ifd/3).
+flora_show_this_hide(inheritance_imvd/3).
+flora_show_this_hide(inheritance_imvddef/2).
+flora_show_this_hide(inheritance_ifd_eql/3).
+flora_show_this_hide(inheritance_imvd_eql/3).
+flora_show_this_hide(inheritance_imvddef_eql/2).
+
+flora_show_this_hide(match((local_)/2)).
+flora_show_this_hide(match(multiple_object_/_)).
+flora_show_this_hide(match(multiple_class_/_)).
+flora_show_this_hide(match(candidate_object_/_)).
+flora_show_this_hide(match(candidate_class_/_)).
+
+
+/*
+    %% These are no longer used
+    flora_hide_this_hide(super_sub/2).
+    flora_hide_this_hide(super_isa/2).
+    flora_show_this_hide(immediate_isa/2).
+    flora_show_this_hide(immediate_sub/2).
+*/
+
+
+/***************************************************************************
+  F-logic predicates that appear only in the trailer with equality maintenance
+***************************************************************************/
+flora_hide_this_hide(diffobjeql/2).
+flora_hide_this_hide(FLTRAILERPREFIX(sub_eql)/2).
+flora_hide_this_hide(FLTRAILERPREFIX(isa_eql)/2).
+flora_hide_this_hide(FLTRAILERPREFIX(ifd_eql)/3).
+flora_hide_this_hide(FLTRAILERPREFIX(imvd_eql)/3).
+flora_hide_this_hide(FLTRAILERPREFIX(imvddef_eql)/2).
+flora_hide_this_hide(FLTRAILERPREFIX(fd_eql)/3).
+flora_hide_this_hide(FLTRAILERPREFIX(mvd_eql)/3).
+flora_hide_this_hide(FLTRAILERPREFIX(mvddef_eql)/2).
+
+/***************************************************************************
+  Flora debugging predicates
+***************************************************************************/
+flora_hide_this_hide(FLCHECKPREFIX(WRAP_ISA)/2).
+flora_hide_this_hide(FLCHECKPREFIX(WRAP_SUB)/2).
+flora_hide_this_hide(FLCHECKPREFIX(WRAP_TRAN)/2).
+flora_hide_this_hide(FLCHECKPREFIX(WRAP_METH)/2).
+flora_hide_this_hide(FLCHECKPREFIX(WRAP_IMETH)/2).
+flora_hide_this_hide(FLCHECKPREFIX(WRAP_FD)/3).
+flora_hide_this_hide(FLCHECKPREFIX(WRAP_IFD)/3).
+flora_hide_this_hide(FLCHECKPREFIX(WRAP_MVD)/3).
+flora_hide_this_hide(FLCHECKPREFIX(WRAP_IMVD)/3).
+flora_hide_this_hide(FLCHECKPREFIX(WRAP_FDSIG)/3).
+flora_hide_this_hide(FLCHECKPREFIX(WRAP_IFDSIG)/3).
+flora_hide_this_hide(FLCHECKPREFIX(WRAP_MVDSIG)/3).
+flora_hide_this_hide(FLCHECKPREFIX(WRAP_IMVDSIG)/3).
+flora_hide_this_hide(FLCHECKPREFIX(WRAP_FDDEF)/2).
+flora_hide_this_hide(FLCHECKPREFIX(WRAP_IFDDEF)/2).
+flora_hide_this_hide(FLCHECKPREFIX(WRAP_MVDDEF)/2).
+flora_hide_this_hide(FLCHECKPREFIX(WRAP_IMVDDEF)/2).
+
+
+/*****************************************************************************
+    Flora Internal Predicates
+*****************************************************************************/
+flora_hide_this_hide(debugging/0).
+
+
+/*****************************************************************************
+    Intermediate predicates
+*****************************************************************************/
+
+flora_hide_this_show(pref(newpredicate/_)).
+
+%% We put match around because for some reason XSB prepends another _$ to
+%% tabled_flapply, so the goal that the debugger get is diffferent from what
+%% is inside flora_hide_this_show/1.
+flora_hide_this_show(match(WRAP_TABLED_HILOG/_)).
+flora_hide_this_show(match(WRAP_DYNA_HILOG/_)).
+flora_hide_this_show(match(WRAP_DYNZ_HILOG/_)).
+flora_hide_this_show(match(WRAP_TDYN_HILOG/_)).
+flora_hide_this_hide(match(FLDEFINEDPREFIX(WRAP_HILOG)/_)).
+
+
+
+debugger_data_loaded.

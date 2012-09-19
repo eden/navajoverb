@@ -1,0 +1,126 @@
+/*
+ * Version: MPL 1.1
+ *
+ * The contents of this file are subject to the Mozilla Public License
+ * Version 1.1 (the "License"); you may not use this file except in
+ * compliance with the License. You may obtain a copy of the License at
+ * http://www.mozilla.org/MPL/
+ *
+ * Software distributed under the License is distributed on an "AS IS"
+ * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. See
+ * the License for the specific language governing rights and
+ * limitations under the License.
+ *
+ * The Original Code is Navajo Verb Morphology Parser code.
+ *
+ * The Initial Developer of the Original Code is
+ * Eden Siu-yue Li.
+ * Portions created by the Initial Developer are Copyright (C) 2004
+ * the Initial Developer. All Rights Reserved.
+ *
+ */
+
+%%%%%%%%%%%%
+% presentation.P
+%  HTML output functions.
+%%%%%%%%%%%%
+
+:- export printParses/1, printUnderlying/1.
+
+/** Print underlying forms as HTML **/
+printUnderlying([]).
+printUnderlying(L) :-
+    write('<table id="underlying">'),
+    write('<tr><th>Form</th><th>Rules Applied</th></tr>'),
+    printEltList(L),
+    write('</table>').
+
+printEltList(List) :- printEltList(List,true).
+
+printEltList([],_).
+printEltList([elt(Form,Rule)|T],Alt) :-
+        write('<tr'),
+        (Alt -> write(' class="alt"') ; true),
+        write('><td>'),
+            write(Form),
+        write('</td><td>'),
+            writels(Rule),
+        write('</td></tr>'),
+    printEltList(T, not Alt).
+
+
+writels([X|[]]) :- write(X).
+writels([X|R]) :- write(X), write(', '), writels(R).
+
+/** Print parses as HTML **/
+printParses([]).
+printParses([[X,Y]|T]) :- printDebug(X,Y), printEnglish(Y), printTemplate(Y), printParses(T).
+
+printTemplate(X) :- var(X), !.
+printTemplate(X) :- (atom(X) ; is_list(X)),
+    write('<span class="item">'),
+        write(X),
+    write('</span>'), !.
+
+printTemplate(X) :- compound(X),
+    X =.. [Node|List],
+    write('<div class="tree" id="'), write(Node), write('"><h3>'),
+        write(Node), write('</h3>'),
+        printTemplateLs(List),
+    write('</div>'), !.
+
+printTemplate(_).
+
+printTemplateLs([]).
+printTemplateLs([Elt|Rest]) :-
+    printTemplate(Elt), printTemplateLs(Rest).
+
+/** Print debug info as HTML **/
+printDebug(X,Temp) :-
+    write('<div class="debug">'),
+        write(X), write('<br>'), Temp=..[_|Ls], writels(Ls),
+    write('</div>').
+printDebug(_,_).
+
+/** Print English gloss as HTML **/
+printEnglish(template(disjunct(_,distpl(DistPl)),
+                 conjunct(object(Object),P4,_),
+                 subject(Subject),
+                 _,
+                 EnglishVerb)) :-
+    write('<div class="english">'),
+       (nonvar(P4) ->
+            englishSubjectFour(DistPl) ;
+            englishSubject(Subject,DistPl)),
+        englishVerb(EnglishVerb),
+        englishObject(Object),
+    write('</div>'), !.
+printEnglish(_) :- !.
+
+englishVerb(X) :- functor(X,stem,4),
+    arg(4,X,English), arg(1,English,Verb), write(Verb).
+
+englishSubjectFour(Dpl) :- nonvar(Dpl), write('They (4p)').
+englishSubjectFour(_) :- write('He/she/it (4p) ').
+
+englishSubject(oneSG,Dpl) :- nonvar(Dpl), write('All of us ').
+englishSubject(oneSG,_) :- write('I ').
+
+englishSubject(twoSG,_) :- write('You ').
+
+englishSubject(three,Dpl) :- nonvar(Dpl), write('All of them ').
+englishSubject(three,_) :- write('He/she/it ').
+englishSubject(oneDPL,Dpl) :- nonvar(Dpl), write('All of us ').
+englishSubject(oneDPL,_) :- write('You and I ').
+englishSubject(twoDPL,Dpl) :- nonvar(Dpl), write('All of you ').
+englishSubject(twoDPL,_) :- write('The two of you ').
+englishSubject(_,_).
+
+englishObject(X) :- var(X),!.
+englishObject(oneSG) :- write(' me'),!.
+englishObject(twoSG) :- write(' you'),!.
+englishObject(oneDPL) :- write(' us'),!.
+englishObject(twoDPL) :- write(' you'),!.
+englishObject(three) :- write(' it/him/her/them'),!.
+englishObject(four) :- write(' it/him/her/them (4th)'),!.
+englishObject(unspec) :- !.

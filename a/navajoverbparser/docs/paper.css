@@ -1,0 +1,63 @@
+body {
+    margin: 1in 1in 1in 1.5in;
+    font-family: "Georgia", serif;
+    font-size: 10pt;
+}
+p {
+    text-align: justify;
+    line-height: 2em;
+}
+
+h1, h2, h3 {
+    font-family: "Arial", sans-serif;
+    margin:0;padding:0;
+    margin-top:1em;
+}
+
+#author, #date {
+    line-height: 1.2em;
+    margin: 0;
+    padding: 0;
+}
+
+.code {
+    font-family: monospace;
+}
+
+.outfigure {
+    text-align: center;
+    align: center;
+    margin: auto;
+}
+
+.figure {
+    display: table;
+    margin: 0 auto;
+    margin-bottom: 1em;
+}
+
+#templateExample td {
+    border: solid 1px #ccc;
+}
+
+.template .labels {
+    font-family: "Arial", sans-serif;
+    font-weight: bolder;
+}
+.template td {
+    padding: 0 0.3em;
+    text-align: center;
+}
+
+.todo:before {
+    content: "TODO: ";
+}
+.todo {
+    font-family: "Arial", sans-serif;
+    border: dotted 1px red;
+    color: red;
+}
+
+a {
+    color: #333;
+}

@@ -1,0 +1,20 @@
+
+Navajo Verb Morphology Parser
+Copyright (C) 2004 Eden Li.
+Licensed under the Mozilla Public License.  See LICENSE for more info.
+
+Refer to the paper for more information on the inner workings of
+the parser, and a brief overview of Navajo Verb morphology. The
+paper is located in the docs/ directory.
+
+In order to make the Prolog parser accessible on the web, there
+is some Perl code that connects running Prolog to the web server
+through the CGI interface.  This code is located in the following
+files:
+
+    perl/Util.pm
+    perl/Segmentizer.pm
+    parse.s
+  
+The Prolog code is located here:
+    prolog

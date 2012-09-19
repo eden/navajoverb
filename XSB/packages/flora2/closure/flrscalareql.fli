@@ -1,0 +1,31 @@
+/***************************************************************************
+  file: closure/flrscalareql.fli
+
+  Author(s): Guizhen Yang
+
+  Contact:   flora-users@lists.sourceforge.net
+
+  Copyright (C) The Research Foundation of SUNY, 1999-2001
+
+  This is a template file to generate the FLORA rules for the scalar axiom.
+***************************************************************************/
+
+
+#include "flora_wspredicates.flh"
+
+
+diffobjeql(X,Y) :- inferred_fd(O,M,X), inferred_fd(O,M,Y), X \= Y.
+
+diffobjeql(X,Y) :- inferred_ifd(O,M,X), inferred_ifd(O,M,Y), X \= Y.
+
+diffobjeql(X,Y) :-
+	diffobjeql(O1,O2),
+	inferred_fd(O1,M,X),
+	inferred_fd(O2,M,Y),
+	X \= Y.
+
+diffobjeql(X,Y) :-
+	diffobjeql(O1,O2),
+	inferred_ifd(O1,M,X),
+	inferred_ifd(O2,M,Y),
+	X \= Y.

@@ -1,0 +1,11 @@
+*.xwam
+*.O
+cmd...
+*.tmp
+.prolog_path*
+.flora_path*
+runflora
+runflora.bat
+*.gz
+*.Z
+*.tar

@@ -1,0 +1,12 @@
+#!/usr/bin/perl -w 
+
+@ARGV >= 1 or die "Usage: $0 <xsb_modules>";
+
+for my $mod (@ARGV) {
+    $mod =~ s/\.(P|xwam)$//;
+    if (not -f "$mod.xwam" or 
+        (stat "$mod.P")[9] > (stat "$mod.xwam")[9]) {
+        system (qq/xsb --nobanner --quietload \\
+            --noprompt -e "compile($mod). halt."/);
+    }
+}

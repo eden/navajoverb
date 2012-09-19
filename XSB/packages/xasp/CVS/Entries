@@ -1,0 +1,20 @@
+/.cvsignore/1.1/Fri Feb 21 16:57:21 2003//Trelease_2_6
+/README/1.2/Wed Feb 26 17:55:19 2003//Trelease_2_6
+/README.Win32/1.2/Wed Feb 26 17:55:19 2003//Trelease_2_6
+/makelinks.sh/1.1/Fri Feb 21 16:57:22 2003//Trelease_2_6
+/patch-smodels-2.27/1.2/Wed Feb 26 21:20:22 2003//Trelease_2_6
+/sm_clause_store.P/1.1/Fri Feb 21 16:57:22 2003//Trelease_2_6
+/sm_int.H/1.1/Fri Feb 21 16:57:22 2003//Trelease_2_6
+/sm_int.P/1.1/Fri Feb 21 16:57:22 2003//Trelease_2_6
+/teste.H/1.1/Fri Feb 21 16:57:22 2003//Trelease_2_6
+/teste.P/1.1/Fri Feb 21 16:57:22 2003//Trelease_2_6
+/xasppkg.H/1.1/Fri Feb 21 16:57:22 2003//Trelease_2_6
+/xasppkg.c/1.1/Fri Feb 21 16:57:22 2003//Trelease_2_6
+/xasppkg.def/1.1/Fri Feb 21 16:57:22 2003//Trelease_2_6
+/xnmr.H/1.2/Fri Feb 28 15:25:42 2003//Trelease_2_6
+/xnmr.P/1.2/Fri Feb 28 15:25:42 2003//Trelease_2_6
+/xnmr.doc/1.1/Fri Feb 21 16:57:22 2003/-kb/Trelease_2_6
+/xnmr_int.H/1.2/Tue Jun 10 20:37:38 2003//Trelease_2_6
+/xnmr_int.P/1.2/Fri Feb 28 15:25:41 2003//Trelease_2_6
+D/doc////
+D/intf_examples////

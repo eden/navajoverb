@@ -1,0 +1,63 @@
+/*
+ * Version: MPL 1.1
+ *
+ * The contents of this file are subject to the Mozilla Public License
+ * Version 1.1 (the "License"); you may not use this file except in
+ * compliance with the License. You may obtain a copy of the License at
+ * http://www.mozilla.org/MPL/
+ *
+ * Software distributed under the License is distributed on an "AS IS"
+ * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. See
+ * the License for the specific language governing rights and
+ * limitations under the License.
+ *
+ * The Original Code is Navajo Verb Morphology Parser code.
+ *
+ * The Initial Developer of the Original Code is
+ * Eden Siu-yue Li.
+ * Portions created by the Initial Developer are Copyright (C) 2004
+ * the Initial Developer. All Rights Reserved.
+ *
+ */
+
+%%%%%%%%%%%%
+% run.P
+%  Input/output functions.
+%%%%%%%%%%%%
+
+:- import p_verb/2, verb/3 from rules.
+:- import merge/3, absmerge/3 from listutil.
+:- import append/3 from basics.
+
+:- export getUnderlying/2, getParses/2.
+
+getUnderlying(Input,UnderlyingForms) :-
+    p_verb(Input,UnderlyingForms).
+
+getUniqueUnderlying([],[]).
+getUniqueUnderlying([elt(X,_)|Rest],Out) :-
+    getUniqueUnderlying(Rest,Unique), absmerge([X],Unique,Out).
+
+getParses(Underlying,Parses) :-
+    getUniqueUnderlying(Underlying,Unique),
+    findAllParses(Unique,Out),
+    getUniqueParses(Out,Parses).
+
+findAllParses([],[]).
+findAllParses([X|T],Parses) :-
+    getSingleParse(X,P1) -> (findAllParses(T,P2), merge(P1,P2,Parses)) ;
+                            (findAllParses(T,Parses)).
+
+getSingleParse(X,Parses) :-
+    findall(Y, (verb(Out,X,[]), Y=[X,Out]), Parses).
+
+getUniqueParses([[X,Y]|Rest],Unique) :-
+    parseExists(Rest,Y) ->
+         getUniqueParses(Rest,Unique) ;
+        (getUniqueParses(Rest,U),
+         append([[X,Y]],U,Unique)).
+getUniqueParses([],[]).
+
+parseExists([[_,TLeft]|Rest],TRight) :-
+    TLeft = TRight ; parseExists(Rest,TRight).
+parseExists([],_) :- fail.

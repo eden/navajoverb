@@ -1,0 +1,162 @@
+This file contains any messages produced by compilers while
+running configure, to aid debugging if configure makes a mistake.
+
+configure:937: checking host system type
+configure:1106: checking /home/eden/dev/navajoverb/XSB/lib
+configure:1111: checking /home/eden/dev/navajoverb/XSB/syslib
+configure:1116: checking /home/eden/dev/navajoverb/XSB/cmplib
+configure:1127: checking /home/eden/dev/navajoverb/XSB/bin
+configure:1132: checking /home/eden/dev/navajoverb/XSB/config/i686-pc-linux-gnu/bin
+configure:1137: checking /home/eden/dev/navajoverb/XSB/config/i686-pc-linux-gnu/lib
+configure:1142: checking /home/eden/dev/navajoverb/XSB/config/i686-pc-linux-gnu/saved.o
+configure:1147: checking /home/eden/dev/navajoverb/XSB/site/lib
+configure:1152: checking /home/eden/dev/navajoverb/XSB/site/config/i686-pc-linux-gnu/lib
+configure:1157: checking /home/eden/dev/navajoverb/XSB/emu
+configure:1162: checking /home/eden/dev/navajoverb/XSB/lib
+configure:1167: checking /home/eden/dev/navajoverb/XSB/syslib
+configure:1172: checking /home/eden/dev/navajoverb/XSB/cmplib
+configure:1177: checking /home/eden/dev/navajoverb/XSB/bin
+configure:1182: checking /home/eden/dev/navajoverb/XSB/build
+configure:1187: checking /home/eden/dev/navajoverb/XSB/config/i686-pc-linux-gnu/bin
+configure:1192: checking /home/eden/dev/navajoverb/XSB/config/i686-pc-linux-gnu/lib
+configure:1197: checking /home/eden/dev/navajoverb/XSB/config/i686-pc-linux-gnu/saved.o
+configure:1202: checking /home/eden/dev/navajoverb/XSB/etc
+configure:1207: checking /home/eden/dev/navajoverb/XSB/packages
+configure:1212: checking /home/eden/dev/navajoverb/XSB/packages/xmc
+configure:1217: checking /home/eden/dev/navajoverb/XSB/examples
+configure:1222: checking /home/eden/dev/navajoverb/XSB/prolog_includes
+configure:1242: checking for gcc
+configure:1355: checking whether the C compiler (gcc  ) works
+configure:1371: gcc -o conftest    conftest.c  1>&5
+configure:1397: checking whether the C compiler (gcc  ) is a cross-compiler
+configure:1402: checking whether we are using GNU C
+configure:1411: gcc -E conftest.c
+configure:1430: checking whether gcc accepts -g
+configure:1462: checking how to run the C preprocessor
+configure:1483: gcc -E  conftest.c >/dev/null 2>conftest.out
+configure:1553: checking for a BSD compatible install
+configure:1606: checking for AIX
+configure:1633: checking for gcc
+configure:1662: checking whether we are using SunPro C
+configure:1675: gcc -c -g -O2  conftest.c 1>&5
+configure:1668:2: error: #error Not a SunPro compiler :-(
+configure: In function 'main':
+configure:1669: error: expected expression before '==' token
+configure: failed program was:
+#line 1664 "configure"
+#include "confdefs.h"
+
+int main() {
+#ifndef __SUNPRO_C
+#error Not a  SunPro compiler :-(
+******* ======= ******** &&&&&&&&
+#endif
+
+; return 0; }
+configure:1791: checking whether make sets ${MAKE}
+configure:1821: checking size of long
+configure:1840: gcc -o conftest -Wall -ansi -pedantic   conftest.c  1>&5
+configure:1832: warning: return type defaults to 'int'
+configure: In function 'main':
+configure:1834: warning: implicit declaration of function 'exit'
+configure:1834: warning: incompatible implicit declaration of built-in function 'exit'
+configure:1882: checking for main in -lm
+configure:1897: gcc -o conftest -Wall -ansi -pedantic   conftest.c -lm   1>&5
+configure:1928: checking for main in -ldl
+configure:1943: gcc -o conftest -Wall -ansi -pedantic   conftest.c -ldl  -lm  1>&5
+configure:1972: checking for main in -lnsl
+configure:1987: gcc -o conftest -Wall -ansi -pedantic   conftest.c -lnsl  -ldl -lm  1>&5
+configure:2016: checking for main in -lsocket
+configure:2031: gcc -o conftest -Wall -ansi -pedantic   conftest.c -lsocket  -lnsl -ldl -lm  1>&5
+/usr/bin/ld: cannot find -lsocket
+collect2: ld returned 1 exit status
+configure: failed program was:
+#line 2024 "configure"
+#include "confdefs.h"
+
+int main() {
+main()
+; return 0; }
+configure:2061: checking for readline in -lreadline
+configure:2080: gcc -o conftest -Wall -ansi -pedantic   conftest.c -lreadline  -lnsl -ldl -lm  1>&5
+/usr/bin/ld: cannot find -lreadline
+collect2: ld returned 1 exit status
+configure: failed program was:
+#line 2069 "configure"
+#include "confdefs.h"
+/* Override any gcc2 internal prototype to avoid an error.  */
+/* We use char because int might match the return type of a gcc2
+    builtin and then its argument prototype would still apply.  */
+char readline();
+
+int main() {
+readline()
+; return 0; }
+configure:2112: checking for stdarg.h
+configure:2122: gcc -E  conftest.c >/dev/null 2>conftest.out
+configure:2158: checking for sys/time.h
+configure:2168: gcc -E  conftest.c >/dev/null 2>conftest.out
+configure:2196: checking whether time.h and sys/time.h may both be included
+configure:2210: gcc -c -Wall -ansi -pedantic  conftest.c 1>&5
+configure: In function 'main':
+configure:2206: warning: unused variable 'tp'
+configure:2235: checking for sys/resource.h
+configure:2245: gcc -E  conftest.c >/dev/null 2>conftest.out
+configure:2278: checking for malloc
+configure:2306: gcc -o conftest -Wall -ansi -pedantic   conftest.c -lnsl -ldl -lm  1>&5
+configure:2290: warning: conflicting types for built-in function 'malloc'
+configure:2338: checking for unistd.h
+configure:2348: gcc -E  conftest.c >/dev/null 2>conftest.out
+configure:2338: checking for string.h
+configure:2348: gcc -E  conftest.c >/dev/null 2>conftest.out
+configure:2338: checking for stdlib.h
+configure:2348: gcc -E  conftest.c >/dev/null 2>conftest.out
+configure:2382: checking for working const
+configure:2436: gcc -c -Wall -ansi -pedantic  conftest.c 1>&5
+configure: In function 'main':
+configure:2410: warning: unused variable 's'
+configure:2430: warning: unused variable 'foo'
+configure:2398: warning: unused variable 'zero'
+configure:2392: warning: unused variable 'x'
+configure:2458: checking return type of signal handlers
+configure:2480: gcc -c -Wall -ansi -pedantic  conftest.c 1>&5
+configure: In function 'main':
+configure:2476: warning: unused variable 'i'
+configure:2501: checking for strdup
+configure:2529: gcc -o conftest -Wall -ansi -pedantic   conftest.c -lnsl -ldl -lm  1>&5
+configure:2501: checking for mkdir
+configure:2529: gcc -o conftest -Wall -ansi -pedantic   conftest.c -lnsl -ldl -lm  1>&5
+configure:2562: checking for gethostbyname
+configure:2590: gcc -o conftest -Wall -ansi -pedantic   conftest.c -lnsl -ldl -lm  1>&5
+configure:2562: checking for gettimeofday
+configure:2590: gcc -o conftest -Wall -ansi -pedantic   conftest.c -lnsl -ldl -lm  1>&5
+configure:2562: checking for socket
+configure:2590: gcc -o conftest -Wall -ansi -pedantic   conftest.c -lnsl -ldl -lm  1>&5
+configure:2562: checking for snprintf
+configure:2590: gcc -o conftest -Wall -ansi -pedantic   conftest.c -lnsl -ldl -lm  1>&5
+configure:2618: checking for regexec
+configure:2646: gcc -o conftest -Wall -ansi -pedantic   conftest.c -lnsl -ldl -lm  1>&5
+configure:2618: checking for regerror
+configure:2646: gcc -o conftest -Wall -ansi -pedantic   conftest.c -lnsl -ldl -lm  1>&5
+configure:2618: checking for regcomp
+configure:2646: gcc -o conftest -Wall -ansi -pedantic   conftest.c -lnsl -ldl -lm  1>&5
+configure:2674: checking for fnmatch
+configure:2702: gcc -o conftest -Wall -ansi -pedantic   conftest.c -lnsl -ldl -lm  1>&5
+configure:2674: checking for glob
+configure:2702: gcc -o conftest -Wall -ansi -pedantic   conftest.c -lnsl -ldl -lm  1>&5
+configure:2674: checking for globfree
+configure:2702: gcc -o conftest -Wall -ansi -pedantic   conftest.c -lnsl -ldl -lm  1>&5
+configure:2731: checking for execvp
+configure:2759: gcc -o conftest -Wall -ansi -pedantic   conftest.c -lnsl -ldl -lm  1>&5
+configure:2957: checking for perl
+configure:3024: checking for javac
+configure:3062: checking for javac
+configure:3236: checking for itkwish
+configure:3306: checking whether loader understands -Wl
+configure:3315: gcc -o conftest -Wall   -Wl,-export-dynamic conftest.c  -lnsl -ldl -lm  1>&5
+configure:3532: checking for inline
+configure:3546: gcc -c -Wall   conftest.c 1>&5
+configure: In function 'main':
+configure:3542: warning: control reaches end of non-void function
+configure: At top level:
+configure:3542: warning: return type defaults to 'int'

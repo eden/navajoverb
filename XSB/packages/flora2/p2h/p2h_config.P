@@ -1,0 +1,77 @@
+/* File:      p2h_config.P -- loader for the prolog to hilog module
+** Author(s): kifer
+** Contact:   flora-users@lists.sourceforge.net
+** 
+** Copyright (C) The Research Foundation of SUNY, 2000
+** 
+** FLORA-2 is free software; you can redistribute it and/or modify it under the
+** terms of the GNU Library General Public License as published by the Free
+** Software Foundation; either version 2 of the License, or (at your option)
+** any later version.
+** 
+** FLORA-2 is distributed in the hope that it will be useful, but WITHOUT ANY
+** WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+** FOR A PARTICULAR PURPOSE.  See the GNU Library General Public License for
+** more details.
+** 
+** You should have received a copy of the GNU Library General Public License
+** along with FLORA-2; if not, write to the Free Software Foundation,
+** Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+**
+** $Id: p2h_config.P,v 1.11 2003/06/18 07:01:26 kifer Exp $
+** 
+*/
+
+%% bootstrap_flora/0 adds this directory to the library search path.
+%% Loading p2h_config.P ensures that the module prolog2hilog is compiled 
+%% and loaded.
+
+:- compiler_options([xpp_on]).
+#include "flora_porting.flh"
+
+
+:- import
+	flora_slash/1,
+	flora_concat_atoms/2,
+	flora_file_op/3,
+	flora_running_under/1
+    from flrporting.
+:- import flora_configuration/2 from flrregistry.
+:- import search_module/6 from consult.
+:- import xsb_configuration/2 from xsb_configuration.
+
+?-  flora_configuration(installdir, FloraDir),
+    flora_slash(Slash),
+    Basename = prolog2hilog,
+    flora_concat_atoms([FloraDir,Slash,p2h,Slash,Basename],Module),
+    (   %% avoid recompilation: check if prolog2hilog.OBJ exists and 
+	%% is newer than prolog2hilog.c.
+	search_module(Basename,Dir,_Mod,_Ext,_Base,ModuleO),
+	flora_concat_atoms([Module, '.c'], ModuleSourceFile),
+	flora_file_op(newerthan,ModuleO,ModuleSourceFile)
+    %% module compiled and is current, so just load
+    -> [Basename]
+
+    ;  % Don't check anything on Windows -- module is supposed to be compiled
+	(flora_running_under(windows) ; flora_running_under(cygwin))
+	-> [Basename]
+
+    %% If Module isn't compiled or is old --- recompile
+    ;   xsb_configuration(compiler, CC),
+	xsb_configuration(config_libdir, ConfigLibdir),
+	flora_concat_atoms([Module,'.', PROLOG_OFILE_EXT], Objfile),
+	consult(Module, [cc(CC), cc_opts(' ')]),
+	flora_concat_atoms([ConfigLibdir,Slash,Basename,'.',PROLOG_OFILE_EXT],
+			   LibObjFile),
+	flora_file_op(rename,Objfile, LibObjFile),
+	(flora_running_under(unix)
+	->
+	    %% Note: the .so ending is Unix-specific.
+	    %% We don't need to run this script under Windows
+	    flora_concat_atoms([Module, '.so'], SharedLib),
+	    flora_concat_atoms([ConfigLibdir,Slash,Basename,'.so'], LibMod),
+	    flora_file_op(rename,SharedLib,LibMod)
+	; % Not sure what to do under Cygwin -- probably nothing
+	  true
+	)
+     ).

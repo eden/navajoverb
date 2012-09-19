@@ -1,0 +1,138 @@
+
+
+			INSTALLATION SUMMARY
+			--------------------
+
+XSB Version:	   2.6
+Code name:	   Duff
+Release date:	   2003-06-24
+Configuration:	   i686-pc-linux-gnu
+Installation date: Sat Nov 20 14:23:42 MST 2004
+
+  Build process is looking for XSB sources in:	  /home/eden/xbuild/XSB
+  XSB should be installed in:			  /home/eden/xbuild/XSB
+  Configuration-specific executables go in:	  /home/eden/xbuild/XSB/config/i686-pc-linux-gnu/bin
+  Configuration-specific libraries go in:	  /home/eden/xbuild/XSB/config/i686-pc-linux-gnu/lib
+  Object code goes in:				  /home/eden/xbuild/XSB/config/i686-pc-linux-gnu/saved.o
+  Site-specific code goes in:			  /home/eden/xbuild/XSB/site 
+  Site configuration-specific code goes in:	  /home/eden/xbuild/XSB/site/config/i686-pc-linux-gnu
+  XSB will be built with:			  gcc  -O4 -fomit-frame-pointer -finline-functions -Wall 
+  builtin.c will be built with: 		  gcc  -O4 -fomit-frame-pointer -finline-functions -Wall 
+  loader_xsb.c will be built with: 		  gcc  -O2 -fomit-frame-pointer -finline-functions -Wall 
+  emuloop.c will be built with: 		  gcc  -O4 -fomit-frame-pointer -finline-functions -Wall 
+  tr_utils.c will be built with:		  gcc  -O1 -fomit-frame-pointer -finline-functions -Wall 
+  Loader flags: 				    -lm -ldl -Wl,-export-dynamic
+  Compilation mode:				  optimal
+  XSB abstract machine: 			  slg-wam
+  XSB scheduling strategy:			  local
+  Garbage Collection Stress-Test:		  no
+  Jumptable-based emulator loop:		  yes
+  Demand support:                                 no
+	POSIX regexp matching libraries:		  yes
+	POSIX wildcard matching libraries:		  yes
+	Perl support:					  yes
+  Perl archlib: 				  /usr/lib/perl5/5.8.4/i386-linux/CORE
+  Perl C compiler:				  gcc
+  Perl C flags: 				  -fno-strict-aliasing -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64
+  Perl loader flags:				  -lpthread -lnsl -lndbm -lgdbm -ldb -ldl -lm -lcrypt -lutil -lc
+
+  Libwww support: 				  no
+  Java compiler:				  javac
+
+
+make[1]: Entering directory `/home/eden/xbuild/XSB/emu'
+gcc -I/home/eden/xbuild/XSB/config/i686-pc-linux-gnu  -c -O4 -fomit-frame-pointer -finline-functions -Wall  main_xsb.c
+gcc -I/home/eden/xbuild/XSB/config/i686-pc-linux-gnu  -c -O4 -fomit-frame-pointer -finline-functions -Wall  auxlry.c
+gcc -I/home/eden/xbuild/XSB/config/i686-pc-linux-gnu  -c -O4 -fomit-frame-pointer -finline-functions -Wall  biassert.c
+In file included from biassert.c:97:
+biassert.c: In function `new_SOBblock':
+biassert.c:83: warning: passing arg of `dbgen_printinst3' makes integer from pointer without a cast
+gcc -I/home/eden/xbuild/XSB/config/i686-pc-linux-gnu  -c -O4 -fomit-frame-pointer -finline-functions -Wall  builtin.c
+gcc -I/home/eden/xbuild/XSB/config/i686-pc-linux-gnu  -c -O4 -fomit-frame-pointer -finline-functions -Wall  cinterf.c
+gcc -I/home/eden/xbuild/XSB/config/i686-pc-linux-gnu  -c -O4 -fomit-frame-pointer -finline-functions -Wall  debug_xsb.c
+gcc -I/home/eden/xbuild/XSB/config/i686-pc-linux-gnu  -c -O4 -fomit-frame-pointer -finline-functions -Wall  dis.c
+gcc -I/home/eden/xbuild/XSB/config/i686-pc-linux-gnu  -c -O4 -fomit-frame-pointer -finline-functions -Wall  dynload.c
+gcc -I/home/eden/xbuild/XSB/config/i686-pc-linux-gnu  -c -O4 -fomit-frame-pointer -finline-functions -Wall  dynamic_stack.c
+gcc -I/home/eden/xbuild/XSB/config/i686-pc-linux-gnu  -c -O4 -fomit-frame-pointer -finline-functions -Wall  emuloop.c
+gcc -I/home/eden/xbuild/XSB/config/i686-pc-linux-gnu  -c -O4 -fomit-frame-pointer -finline-functions -Wall  error_xsb.c
+gcc -I/home/eden/xbuild/XSB/config/i686-pc-linux-gnu  -c -O4 -fomit-frame-pointer -finline-functions -Wall  findall.c
+gcc -I/home/eden/xbuild/XSB/config/i686-pc-linux-gnu  -c -O4 -fomit-frame-pointer -finline-functions -Wall  function.c
+gcc -I/home/eden/xbuild/XSB/config/i686-pc-linux-gnu  -c -O4 -fomit-frame-pointer -finline-functions -Wall  hash_xsb.c
+gcc -I/home/eden/xbuild/XSB/config/i686-pc-linux-gnu  -c -O4 -fomit-frame-pointer -finline-functions -Wall  hashtable_xsb.c
+hashtable_xsb.c: In function `search_bucket':
+hashtable_xsb.c:86: warning: implicit declaration of function `memcpy'
+hashtable_xsb.c:89: warning: implicit declaration of function `memset'
+gcc -I/home/eden/xbuild/XSB/config/i686-pc-linux-gnu  -c -O4 -fomit-frame-pointer -finline-functions -Wall  heap_xsb.c
+In file included from heap_xsb.c:269:
+gc_print.h: In function `print_regs':
+gc_print.h:335: warning: dereferencing type-punned pointer will break strict-aliasing rules
+In file included from heap_xsb.c:271:
+gc_copy.h: In function `copy_heap':
+gc_copy.h:288: warning: dereferencing type-punned pointer will break strict-aliasing rules
+gcc -I/home/eden/xbuild/XSB/config/i686-pc-linux-gnu  -c -O4 -fomit-frame-pointer -finline-functions -Wall  init_xsb.c
+gcc -I/home/eden/xbuild/XSB/config/i686-pc-linux-gnu  -c -O4 -fomit-frame-pointer -finline-functions -Wall  inst_xsb.c
+gcc -I/home/eden/xbuild/XSB/config/i686-pc-linux-gnu  -c -O4 -fomit-frame-pointer -finline-functions -Wall  io_builtins_xsb.c
+gcc -I/home/eden/xbuild/XSB/config/i686-pc-linux-gnu  -c -O2 -fomit-frame-pointer -finline-functions -Wall  loader_xsb.c
+loader_xsb.c: In function `get_index_tab':
+loader_xsb.c:232: warning: dereferencing type-punned pointer will break strict-aliasing rules
+loader_xsb.c:237: warning: dereferencing type-punned pointer will break strict-aliasing rules
+loader_xsb.c:244: warning: dereferencing type-punned pointer will break strict-aliasing rules
+loader_xsb.c:244: warning: dereferencing type-punned pointer will break strict-aliasing rules
+loader_xsb.c:244: warning: dereferencing type-punned pointer will break strict-aliasing rules
+loader_xsb.c: In function `load_index':
+loader_xsb.c:438: warning: dereferencing type-punned pointer will break strict-aliasing rules
+loader_xsb.c:440: warning: dereferencing type-punned pointer will break strict-aliasing rules
+loader_xsb.c: In function `get_obj_atom':
+loader_xsb.c:571: warning: dereferencing type-punned pointer will break strict-aliasing rules
+loader_xsb.c: In function `loader1':
+loader_xsb.c:725: warning: dereferencing type-punned pointer will break strict-aliasing rules
+loader_xsb.c:727: warning: dereferencing type-punned pointer will break strict-aliasing rules
+gcc -I/home/eden/xbuild/XSB/config/i686-pc-linux-gnu  -c -O4 -fomit-frame-pointer -finline-functions -Wall  memory_xsb.c
+gcc -I/home/eden/xbuild/XSB/config/i686-pc-linux-gnu  -c -O4 -fomit-frame-pointer -finline-functions -Wall  orient_xsb.c
+gcc -I/home/eden/xbuild/XSB/config/i686-pc-linux-gnu  -c -O4 -fomit-frame-pointer -finline-functions -Wall  pathname_xsb.c
+gcc -I/home/eden/xbuild/XSB/config/i686-pc-linux-gnu  -c -O4 -fomit-frame-pointer -finline-functions -Wall  private_builtin.c
+gcc -I/home/eden/xbuild/XSB/config/i686-pc-linux-gnu  -c -O4 -fomit-frame-pointer -finline-functions -Wall  psc_xsb.c
+gcc -I/home/eden/xbuild/XSB/config/i686-pc-linux-gnu  -c -O4 -fomit-frame-pointer -finline-functions -Wall  random_xsb.c
+gcc -I/home/eden/xbuild/XSB/config/i686-pc-linux-gnu  -c -O4 -fomit-frame-pointer -finline-functions -Wall  remove_unf.c
+gcc -I/home/eden/xbuild/XSB/config/i686-pc-linux-gnu  -c -O4 -fomit-frame-pointer -finline-functions -Wall  residual.c
+gcc -I/home/eden/xbuild/XSB/config/i686-pc-linux-gnu  -c -O4 -fomit-frame-pointer -finline-functions -Wall  scc_xsb.c
+gcc -I/home/eden/xbuild/XSB/config/i686-pc-linux-gnu  -c -O4 -fomit-frame-pointer -finline-functions -Wall  slgdelay.c
+gcc -I/home/eden/xbuild/XSB/config/i686-pc-linux-gnu  -c -O4 -fomit-frame-pointer -finline-functions -Wall  socket_xsb.c
+gcc -I/home/eden/xbuild/XSB/config/i686-pc-linux-gnu  -c -O4 -fomit-frame-pointer -finline-functions -Wall  string_xsb.c
+gcc -I/home/eden/xbuild/XSB/config/i686-pc-linux-gnu  -c -O4 -fomit-frame-pointer -finline-functions -Wall  storage_xsb.c
+gcc -I/home/eden/xbuild/XSB/config/i686-pc-linux-gnu  -c -O4 -fomit-frame-pointer -finline-functions -Wall  struct_manager.c
+gcc -I/home/eden/xbuild/XSB/config/i686-pc-linux-gnu  -c -O4 -fomit-frame-pointer -finline-functions -Wall  sub_delete.c
+gcc -I/home/eden/xbuild/XSB/config/i686-pc-linux-gnu  -c -O4 -fomit-frame-pointer -finline-functions -Wall  subp.c
+subp.c: In function `compare':
+subp.c:559: warning: implicit declaration of function `strcmp'
+gcc -I/home/eden/xbuild/XSB/config/i686-pc-linux-gnu  -c -O4 -fomit-frame-pointer -finline-functions -Wall  system_xsb.c
+gcc -I/home/eden/xbuild/XSB/config/i686-pc-linux-gnu  -c -O4 -fomit-frame-pointer -finline-functions -Wall  table_stats.c
+gcc -I/home/eden/xbuild/XSB/config/i686-pc-linux-gnu  -c -O4 -fomit-frame-pointer -finline-functions -Wall  tables.c
+gcc -I/home/eden/xbuild/XSB/config/i686-pc-linux-gnu  -c -O4 -fomit-frame-pointer -finline-functions -Wall  timer_xsb.c
+gcc -I/home/eden/xbuild/XSB/config/i686-pc-linux-gnu  -c -O4 -fomit-frame-pointer -finline-functions -Wall  token_xsb.c
+gcc -I/home/eden/xbuild/XSB/config/i686-pc-linux-gnu  -c -O1 -fomit-frame-pointer -finline-functions -Wall  tr_utils.c
+gcc -I/home/eden/xbuild/XSB/config/i686-pc-linux-gnu  -c -O4 -fomit-frame-pointer -finline-functions -Wall  trace_xsb.c
+gcc -I/home/eden/xbuild/XSB/config/i686-pc-linux-gnu  -c -O4 -fomit-frame-pointer -finline-functions -Wall  trie_lookup.c
+gcc -I/home/eden/xbuild/XSB/config/i686-pc-linux-gnu  -c -O4 -fomit-frame-pointer -finline-functions -Wall  trie_search.c
+gcc -I/home/eden/xbuild/XSB/config/i686-pc-linux-gnu  -c -O4 -fomit-frame-pointer -finline-functions -Wall  tries.c
+gcc -I/home/eden/xbuild/XSB/config/i686-pc-linux-gnu  -c -O4 -fomit-frame-pointer -finline-functions -Wall  tst_insert.c
+gcc -I/home/eden/xbuild/XSB/config/i686-pc-linux-gnu  -c -O4 -fomit-frame-pointer -finline-functions -Wall  tst_retrv.c
+gcc -I/home/eden/xbuild/XSB/config/i686-pc-linux-gnu  -c -O4 -fomit-frame-pointer -finline-functions -Wall  tst_unify.c
+gcc -I/home/eden/xbuild/XSB/config/i686-pc-linux-gnu  -c -O4 -fomit-frame-pointer -finline-functions -Wall  tst_utils.c
+gcc -I/home/eden/xbuild/XSB/config/i686-pc-linux-gnu  -c -O4 -fomit-frame-pointer -finline-functions -Wall  varstring.c
+
+Making XSB executable /home/eden/xbuild/XSB/config/i686-pc-linux-gnu/bin/xsb 
+
+cd /home/eden/xbuild/XSB/emu; \
+gcc -o /home/eden/xbuild/XSB/config/i686-pc-linux-gnu/bin/xsb main_xsb.o auxlry.o biassert.o builtin.o cinterf.o debug_xsb.o dis.o dynload.o dynamic_stack.o emuloop.o error_xsb.o findall.o function.o hash_xsb.o  hashtable_xsb.o heap_xsb.o init_xsb.o inst_xsb.o io_builtins_xsb.o loader_xsb.o memory_xsb.o orient_xsb.o pathname_xsb.o private_builtin.o psc_xsb.o random_xsb.o remove_unf.o residual.o scc_xsb.o slgdelay.o socket_xsb.o string_xsb.o storage_xsb.o struct_manager.o sub_delete.o subp.o system_xsb.o table_stats.o tables.o timer_xsb.o token_xsb.o tr_utils.o trace_xsb.o trie_lookup.o trie_search.o tries.o tst_insert.o tst_retrv.o tst_unify.o tst_utils.o varstring.o   -lm -ldl -Wl,-export-dynamic 
+system_xsb.o(.text+0xf54): In function `sys_system':
+: warning: the use of `tmpnam' is dangerous, better use `mkstemp'
+make[1]: Leaving directory `/home/eden/xbuild/XSB/emu'
+make[1]: Entering directory `/home/eden/xbuild/XSB/gpp'
+
+gcc  -c  gpp.c
+gcc -lm -ldl -Wl,-export-dynamic -o gpp /home/eden/xbuild/XSB/config/i686-pc-linux-gnu/saved.o/gpp.o
+
+make[1]: Leaving directory `/home/eden/xbuild/XSB/gpp'
+
+

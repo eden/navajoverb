@@ -1,0 +1,253 @@
+/*
+ * Version: MPL 1.1
+ *
+ * The contents of this file are subject to the Mozilla Public License
+ * Version 1.1 (the "License"); you may not use this file except in
+ * compliance with the License. You may obtain a copy of the License at
+ * http://www.mozilla.org/MPL/
+ *
+ * Software distributed under the License is distributed on an "AS IS"
+ * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. See
+ * the License for the specific language governing rights and
+ * limitations under the License.
+ *
+ * The Original Code is Navajo Verb Morphology Parser code.
+ *
+ * The Initial Developer of the Original Code is
+ * Eden Siu-yue Li.
+ * Portions created by the Initial Developer are Copyright (C) 2004
+ * the Initial Developer. All Rights Reserved.
+ *
+ */
+
+:- export stem/4.
+stem(steminfo(trans,[],[d],[],i,lv,d),stem([n,eHeH,h],mode(i),aspect(momentaneous),english('be crawling'))) --> [n,eHeH,h].
+stem(steminfo(trans,[],[d],[],p,lv,d),stem([n,a,xG],mode(p),aspect(momentaneous),english('be crawling'))) --> [n,a,xG].
+stem(steminfo(trans,[],[d],[],f,lv,d),stem([n,a,h],mode(f),aspect(momentaneous),english('be crawling'))) --> [n,a,h].
+stem(steminfo(trans,[],[d],[],r,lv,d),stem([n,a,h],mode(r),aspect(momentaneous),english('be crawling'))) --> [n,a,h].
+stem(steminfo(trans,[],[d],[],o,lv,d),stem([n,eHeH,h],mode(o),aspect(momentaneous),english('be crawling'))) --> [n,eHeH,h].
+stem(steminfo(intrans,[],[],[],i,simple,zero),stem([ch,a],mode(i),aspect(durative),english('cry'))) --> [ch,a].
+stem(steminfo(intrans,[],[],[],p,simple,zero),stem([ch,a],mode(p),aspect(durative),english('cry'))) --> [ch,a].
+stem(steminfo(intrans,[],[],[],f,simple,zero),stem([ch,a,h],mode(f),aspect(durative),english('cry'))) --> [ch,a,h].
+stem(steminfo(intrans,[],[],[],r,simple,zero),stem([ch,a,h],mode(r),aspect(durative),english('cry'))) --> [ch,a,h].
+stem(steminfo(intrans,[],[],[],o,simple,zero),stem([ch,a],mode(o),aspect(durative),english('cry'))) --> [ch,a].
+stem(steminfo(trans,[],[],[],i,s,barredl),stem([b,eHeH,zh],mode(i),aspect(conclusive),english('boil'))) --> [b,eHeH,zh].
+stem(steminfo(trans,[],[],[],p,s,barredl),stem([b,eHeH,zh],mode(p),aspect(conclusive),english('boil'))) --> [b,eHeH,zh].
+stem(steminfo(trans,[],[],[],f,s,barredl),stem([b,i,sh],mode(f),aspect(conclusive),english('boil'))) --> [b,i,sh].
+stem(steminfo(trans,[],[],[],r,s,barredl),stem([b,i,sh],mode(r),aspect(conclusive),english('boil'))) --> [b,i,sh].
+stem(steminfo(trans,[],[],[],o,s,barredl),stem([b,eHeH,zh],mode(o),aspect(conclusive),english('boil'))) --> [b,eHeH,zh].
+stem(steminfo(intrans,[y,aH],[],[],i,simple,barredl),stem([t,i,xG],mode(i),aspect(durative),english('speak'))) --> [t,i,xG].
+stem(steminfo(intrans,[y,aH],[],[],p,simple,barredl),stem([t,i,xG],mode(p),aspect(durative),english('speak'))) --> [t,i,xG].
+stem(steminfo(intrans,[y,aH],[],[],f,simple,barredl),stem([t,i,h],mode(f),aspect(durative),english('speak'))) --> [t,i,h].
+stem(steminfo(intrans,[y,aH],[],[],r,simple,barredl),stem([t,i,h],mode(r),aspect(durative),english('speak'))) --> [t,i,h].
+stem(steminfo(intrans,[y,aH],[],[],o,simple,barredl),stem([t,i,xG],mode(o),aspect(durative),english('speak'))) --> [t,i,xG].
+stem(steminfo(intrans,[n,a],[],[],i,s,zero),stem([n,eH],mode(i),aspect(continuative),english('play'))) --> [n,eH].
+stem(steminfo(intrans,[n,a],[],[],p,s,zero),stem([n,e,xG],mode(p),aspect(continuative),english('play'))) --> [n,e,xG].
+stem(steminfo(intrans,[n,a],[],[],f,s,zero),stem([n,ee,lB],mode(f),aspect(continuative),english('play'))) --> [n,ee,lB].
+stem(steminfo(intrans,[n,a],[],[],r,s,zero),stem([n,ee,h],mode(r),aspect(continuative),english('play'))) --> [n,ee,h].
+stem(steminfo(intrans,[n,a],[],[],o,s,zero),stem([n,e,xG],mode(o),aspect(continuative),english('play'))) --> [n,e,xG].
+stem(steminfo(trans,[],[d],[],i,simple,barredl),stem([y,iHNiHN,h],mode(i),aspect(momentaneous),english('melt'))) --> [y,iHNiHN,h].
+stem(steminfo(trans,[],[d],[],p,simple,barredl),stem([y,iHNiHN,xG],mode(p),aspect(momentaneous),english('melt'))) --> [y,iHNiHN,xG].
+stem(steminfo(trans,[],[d],[],f,simple,barredl),stem([y,iN,h],mode(f),aspect(momentaneous),english('melt'))) --> [y,iN,h].
+stem(steminfo(trans,[],[d],[],r,simple,barredl),stem([y,iN,h],mode(r),aspect(momentaneous),english('melt'))) --> [y,iN,h].
+stem(steminfo(trans,[],[d],[],o,simple,barredl),stem([y,iHNiHN,h],mode(o),aspect(momentaneous),english('melt'))) --> [y,iHNiHN,h].
+stem(steminfo(trans,[],[],[],i,flv,barredl),stem([ts,eHeH,h],mode(i),aspect(transitional),english('see'))) --> [ts,eHeH,h].
+stem(steminfo(trans,[],[],[],p,flv,barredl),stem([ts,aHN],mode(p),aspect(transitional),english('see'))) --> [ts,aHN].
+stem(steminfo(trans,[],[],[],f,flv,barredl),stem([ts,eHeH,lB],mode(f),aspect(transitional),english('see'))) --> [ts,eHeH,lB].
+stem(steminfo(trans,[],[],[],r,flv,barredl),stem([ts,eHeH,h],mode(r),aspect(transitional),english('see'))) --> [ts,eHeH,h].
+stem(steminfo(trans,[],[],[],o,flv,barredl),stem([ts,eHeH,lB],mode(o),aspect(transitional),english('see'))) --> [ts,eHeH,lB].
+stem(steminfo(trans,[],[],[],i,simple,barredl),stem([zh,oHoH,h],mode(i),aspect(durative),english('brush/comb/shell'))) --> [zh,oHoH,h].
+stem(steminfo(trans,[],[],[],p,simple,barredl),stem([zh,oHoH,xG],mode(p),aspect(durative),english('brush/comb/shell'))) --> [zh,oHoH,xG].
+stem(steminfo(trans,[],[],[],f,simple,barredl),stem([zh,o,h],mode(f),aspect(durative),english('brush/comb/shell'))) --> [zh,o,h].
+stem(steminfo(trans,[],[],[],r,simple,barredl),stem([zh,o,h],mode(r),aspect(durative),english('brush/comb/shell'))) --> [zh,o,h].
+stem(steminfo(trans,[],[],[],o,simple,barredl),stem([zh,oHoH,h],mode(o),aspect(durative),english('brush/comb/shell'))) --> [zh,oHoH,h].
+stem(steminfo(trans,[h,a],[],[],i,simple,zero),stem([g,eHeH,d],mode(i),aspect(momentaneous),english('dig out'))) --> [g,eHeH,d].
+stem(steminfo(trans,[h,a],[],[],p,simple,zero),stem([g,ee,d],mode(p),aspect(momentaneous),english('dig out'))) --> [g,ee,d].
+stem(steminfo(trans,[h,a],[],[],f,simple,zero),stem([g,o,lB],mode(f),aspect(momentaneous),english('dig out'))) --> [g,o,lB].
+stem(steminfo(trans,[h,a],[],[],r,simple,zero),stem([g,o,xG],mode(r),aspect(momentaneous),english('dig out'))) --> [g,o,xG].
+stem(steminfo(trans,[h,a],[],[],o,simple,zero),stem([g,eHeH,d],mode(o),aspect(momentaneous),english('dig out'))) --> [g,eHeH,d].
+stem(steminfo(trans,[],[],[],i,simple,zero),stem([xG,aa,lB],mode(i),aspect(durative),english('chew'))) --> [xG,aa,lB].
+stem(steminfo(trans,[],[],[],p,simple,zero),stem([xG,aa,l],mode(p),aspect(durative),english('chew'))) --> [xG,aa,l].
+stem(steminfo(trans,[],[],[],f,simple,zero),stem([xG,a,lB],mode(f),aspect(durative),english('chew'))) --> [xG,a,lB].
+stem(steminfo(trans,[],[],[],r,simple,zero),stem([xG,a,lB],mode(r),aspect(durative),english('chew'))) --> [xG,a,lB].
+stem(steminfo(trans,[],[],[],o,simple,zero),stem([xG,aa,lB],mode(o),aspect(durative),english('chew'))) --> [xG,aa,lB].
+stem(steminfo(trans,[h,a],[],[],i,simple,barredl),stem([g,eHeH,sh],mode(i),aspect(momentaneous),english('cut out'))) --> [g,eHeH,sh].
+stem(steminfo(trans,[h,a],[],[],p,simple,barredl),stem([g,i,zh],mode(p),aspect(momentaneous),english('cut out'))) --> [g,i,zh].
+stem(steminfo(trans,[h,a],[],[],f,simple,barredl),stem([g,i,sh],mode(f),aspect(momentaneous),english('cut out'))) --> [g,i,sh].
+stem(steminfo(trans,[h,a],[],[],r,simple,barredl),stem([g,i,sh],mode(r),aspect(momentaneous),english('cut out'))) --> [g,i,sh].
+stem(steminfo(trans,[h,a],[],[],o,simple,barredl),stem([g,eHeH,sh],mode(o),aspect(momentaneous),english('cut out'))) --> [g,eHeH,sh].
+stem(steminfo(intrans,[n,i,ts,iH],[],[],i,s,zero),stem([k,ee,s],mode(i),aspect(conclusive),english('think'))) --> [k,ee,s].
+stem(steminfo(intrans,[n,i,ts,iH],[],[],p,s,zero),stem([k,eHeH,z],mode(p),aspect(conclusive),english('think'))) --> [k,eHeH,z].
+stem(steminfo(intrans,[n,i,ts,iH],[],[],f,s,zero),stem([k,o,s],mode(f),aspect(conclusive),english('think'))) --> [k,o,s].
+stem(steminfo(intrans,[n,i,ts,iH],[],[],r,s,zero),stem([k,o,s],mode(r),aspect(conclusive),english('think'))) --> [k,o,s].
+stem(steminfo(intrans,[n,i,ts,iH],[],[],o,s,zero),stem([k,ee,s],mode(o),aspect(conclusive),english('think'))) --> [k,ee,s].
+stem(steminfo(trans,[n,a],[],[],i,s,barredl),stem([k,aa,h],mode(i),aspect(continuative),english('investigate'))) --> [k,aa,h].
+stem(steminfo(trans,[n,a],[],[],p,s,barredl),stem([k,aHaH,xG],mode(p),aspect(continuative),english('investigate'))) --> [k,aHaH,xG].
+stem(steminfo(trans,[n,a],[],[],f,s,barredl),stem([k,a,h],mode(f),aspect(continuative),english('investigate'))) --> [k,a,h].
+stem(steminfo(trans,[n,a],[],[],r,s,barredl),stem([g,o,xG],mode(r),aspect(continuative),english('investigate'))) --> [g,o,xG].
+stem(steminfo(trans,[n,a],[],[],o,s,barredl),stem([g,eHeH,d],mode(o),aspect(continuative),english('investigate'))) --> [g,eHeH,d].
+stem(steminfo(intrans,[n,a],[],[],i,s,plainl),stem([n,i,sh],mode(i),aspect(continuative),english('work'))) --> [n,i,sh].
+stem(steminfo(intrans,[n,a],[],[],p,s,plainl),stem([n,i,sh],mode(p),aspect(continuative),english('work'))) --> [n,i,sh].
+stem(steminfo(intrans,[n,a],[],[],f,s,plainl),stem([n,i,sh],mode(f),aspect(continuative),english('work'))) --> [n,i,sh].
+stem(steminfo(intrans,[n,a],[],[],r,s,plainl),stem([n,i,sh],mode(r),aspect(continuative),english('work'))) --> [n,i,sh].
+stem(steminfo(intrans,[n,a],[],[],o,s,plainl),stem([n,i,sh],mode(o),aspect(continuative),english('work'))) --> [n,i,sh].
+stem(steminfo(intrans,[n,a],[],[],i,s,d),stem([n,a,xG],mode(i),aspect(continuative),english('crawl around'))) --> [n,a,xG].
+stem(steminfo(intrans,[n,a],[],[],p,s,d),stem([n,a,xG],mode(p),aspect(continuative),english('crawl around'))) --> [n,a,xG].
+stem(steminfo(intrans,[n,a],[],[],f,s,d),stem([n,a,h],mode(f),aspect(continuative),english('crawl around'))) --> [n,a,h].
+stem(steminfo(intrans,[n,a],[],[],r,s,d),stem([n,a,h],mode(r),aspect(continuative),english('crawl around'))) --> [n,a,h].
+stem(steminfo(intrans,[n,a],[],[],o,s,d),stem([n,eHeH,h],mode(o),aspect(continuative),english('crawl around'))) --> [n,eHeH,h].
+stem(steminfo(intrans,[h,a],[],[],i,simple,plainl),stem([t,aa,lB],mode(i),aspect(momentaneous),english('dash up out'))) --> [t,aa,lB].
+stem(steminfo(intrans,[h,a],[],[],p,simple,plainl),stem([t,aHaH,l],mode(p),aspect(momentaneous),english('dash up out'))) --> [t,aHaH,l].
+stem(steminfo(intrans,[h,a],[],[],f,simple,plainl),stem([t,a,lB],mode(f),aspect(momentaneous),english('dash up out'))) --> [t,a,lB].
+stem(steminfo(intrans,[h,a],[],[],r,simple,plainl),stem([t,a,lB],mode(r),aspect(momentaneous),english('dash up out'))) --> [t,a,lB].
+stem(steminfo(intrans,[h,a],[],[],o,simple,plainl),stem([t,aa,lB],mode(o),aspect(momentaneous),english('dash up out'))) --> [t,aa,lB].
+stem(steminfo(trans,[],[],[],i,simple,d),stem([dl,aHN],mode(i),aspect(durative),english('drink'))) --> [dl,aHN].
+stem(steminfo(trans,[],[],[],p,simple,d),stem([dl,aHNaHN,xG],mode(p),aspect(durative),english('drink'))) --> [dl,aHNaHN,xG].
+stem(steminfo(trans,[],[],[],f,simple,d),stem([dl,iHNiHN,lB],mode(f),aspect(durative),english('drink'))) --> [dl,iHNiHN,lB].
+stem(steminfo(trans,[],[],[],r,simple,d),stem([dl,iHNiHN,h],mode(r),aspect(durative),english('drink'))) --> [dl,iHNiHN,h].
+stem(steminfo(trans,[],[],[],o,simple,d),stem([dl,iHNiHN,h],mode(o),aspect(durative),english('drink'))) --> [dl,iHNiHN,h].
+stem(steminfo(intrans,[],[],[],i,simple,d),stem([dz,ii,h],mode(i),aspect(momentaneous),english('remain, survive'))) --> [dz,ii,h].
+stem(steminfo(intrans,[],[],[],p,simple,d),stem([dz,iHiH,xG],mode(p),aspect(momentaneous),english('remain, survive'))) --> [dz,iHiH,xG].
+stem(steminfo(intrans,[],[],[],f,simple,d),stem([dz,i,h],mode(f),aspect(momentaneous),english('remain, survive'))) --> [dz,i,h].
+stem(steminfo(intrans,[],[],[],r,simple,d),stem([dz,i,h],mode(r),aspect(momentaneous),english('remain, survive'))) --> [dz,i,h].
+stem(steminfo(intrans,[],[],[],o,simple,d),stem([dz,ii,h],mode(o),aspect(momentaneous),english('remain, survive'))) --> [dz,ii,h].
+stem(steminfo(trans,[h,a],[],[],i,simple,barredl),stem([t,ee,h],mode(i),aspect(momentaneous),english('carry him/her up out'))) --> [t,ee,h].
+stem(steminfo(trans,[h,a],[],[],p,simple,barredl),stem([t,iHN],mode(p),aspect(momentaneous),english('carry him/her up out'))) --> [t,iHN].
+stem(steminfo(trans,[h,a],[],[],f,simple,barredl),stem([t,eHeH,lB],mode(f),aspect(momentaneous),english('carry him/her up out'))) --> [t,eHeH,lB].
+stem(steminfo(trans,[h,a],[],[],r,simple,barredl),stem([t,eHeH,h],mode(r),aspect(momentaneous),english('carry him/her up out'))) --> [t,eHeH,h].
+stem(steminfo(trans,[h,a],[],[],o,simple,barredl),stem([t,eHeH,lB],mode(o),aspect(momentaneous),english('carry him/her up out'))) --> [t,eHeH,lB].
+stem(steminfo(trans,[n,a],[],[],i,s,barredl),stem([t,eH],mode(i),aspect(continuative),english('carry him/her around'))) --> [t,eH].
+stem(steminfo(trans,[n,a],[],[],p,s,barredl),stem([t,iHN],mode(p),aspect(continuative),english('carry him/her around'))) --> [t,iHN].
+stem(steminfo(trans,[n,a],[],[],f,s,barredl),stem([t,ee,lB],mode(f),aspect(continuative),english('carry him/her around'))) --> [t,ee,lB].
+stem(steminfo(trans,[n,a],[],[],r,s,barredl),stem([t,ee,h],mode(r),aspect(continuative),english('carry him/her around'))) --> [t,ee,h].
+stem(steminfo(trans,[n,a],[],[],o,s,barredl),stem([t,ee,lB],mode(o),aspect(continuative),english('carry him/her around'))) --> [t,ee,lB].
+stem(steminfo(trans,[n,a],[],[],i,s,zero),stem([tlB,xG,oH],mode(i),aspect(conclusive),english('weave'))) --> [tlB,xG,oH].
+stem(steminfo(trans,[n,a],[],[],p,s,zero),stem([tlB,xG,oHN],mode(p),aspect(conclusive),english('weave'))) --> [tlB,xG,oHN].
+stem(steminfo(trans,[n,a],[],[],f,s,zero),stem([tlB,xG,oHoH,lB],mode(f),aspect(conclusive),english('weave'))) --> [tlB,xG,oHoH,lB].
+stem(steminfo(trans,[n,a],[],[],r,s,zero),stem([tlB,xG,oHoH,h],mode(r),aspect(conclusive),english('weave'))) --> [tlB,xG,oHoH,h].
+stem(steminfo(trans,[n,a],[],[],o,s,zero),stem([tlB,xG,oHoH,lB],mode(o),aspect(conclusive),english('weave'))) --> [tlB,xG,oHoH,lB].
+stem(steminfo(intrans,[],[],[h,w],i,simple,plainl),stem([n,e,xG],mode(i),aspect(durative),english('talk about'))) --> [n,e,xG].
+stem(steminfo(intrans,[],[],[h,w],p,simple,plainl),stem([n,e,xG],mode(p),aspect(durative),english('talk about'))) --> [n,e,xG].
+stem(steminfo(intrans,[],[],[h,w],f,simple,plainl),stem([n,i,h],mode(f),aspect(durative),english('talk about'))) --> [n,i,h].
+stem(steminfo(intrans,[],[],[h,w],r,simple,plainl),stem([n,i,h],mode(r),aspect(durative),english('talk about'))) --> [n,i,h].
+stem(steminfo(intrans,[],[],[h,w],o,simple,plainl),stem([n,e,xG],mode(o),aspect(durative),english('talk about'))) --> [n,e,xG].
+stem(steminfo(intrans,[],[],[h,w],i,simple,zero),stem([t,aa,lB],mode(i),aspect(durative),english('sing'))) --> [t,aa,lB].
+stem(steminfo(intrans,[],[],[h,w],p,simple,zero),stem([t,aHaH,l],mode(p),aspect(durative),english('sing'))) --> [t,aHaH,l].
+stem(steminfo(intrans,[],[],[h,w],f,simple,zero),stem([t,a,lB],mode(f),aspect(durative),english('sing'))) --> [t,a,lB].
+stem(steminfo(intrans,[],[],[h,w],r,simple,zero),stem([t,a,lB],mode(r),aspect(durative),english('sing'))) --> [t,a,lB].
+stem(steminfo(intrans,[],[],[h,w],o,simple,zero),stem([t,aa,lB],mode(o),aspect(durative),english('sing'))) --> [t,aa,lB].
+stem(steminfo(intrans,[],[],[xG],i,simple,plainl),stem([zh,i,sh],mode(i),aspect(repetitive),english('dance'))) --> [zh,i,sh].
+stem(steminfo(intrans,[],[],[xG],p,simple,plainl),stem([zh,ii,zh],mode(p),aspect(repetitive),english('dance'))) --> [zh,ii,zh].
+stem(steminfo(intrans,[],[],[xG],f,simple,plainl),stem([zh,i,sh],mode(f),aspect(repetitive),english('dance'))) --> [zh,i,sh].
+stem(steminfo(intrans,[],[],[xG],r,simple,plainl),stem([zh,i,sh],mode(r),aspect(repetitive),english('dance'))) --> [zh,i,sh].
+stem(steminfo(intrans,[],[],[xG],o,simple,plainl),stem([zh,i,sh],mode(o),aspect(repetitive),english('dance'))) --> [zh,i,sh].
+stem(steminfo(trans,[n,a],[],[],i,s,zero),stem([l,eH],mode(i),aspect(continuative),english('carry around'))) --> [l,eH].
+stem(steminfo(trans,[n,a],[],[],p,s,zero),stem([l,aH],mode(p),aspect(continuative),english('carry around'))) --> [l,aH].
+stem(steminfo(trans,[n,a],[],[],f,s,zero),stem([l,ee,lB],mode(f),aspect(continuative),english('carry around'))) --> [l,ee,lB].
+stem(steminfo(trans,[n,a],[],[],r,s,zero),stem([l,ee,h],mode(r),aspect(continuative),english('carry around'))) --> [l,ee,h].
+stem(steminfo(trans,[n,a],[],[],o,s,zero),stem([l,eHeH,lB],mode(o),aspect(continuative),english('carry around'))) --> [l,eHeH,lB].
+stem(steminfo(intrans,[],[d],[],i,simple,plainl),stem([xG,eHeH,s],mode(i),aspect(momentaneous),english('step'))) --> [xG,eHeH,s].
+stem(steminfo(intrans,[],[d],[],p,simple,plainl),stem([xG,ee,z],mode(p),aspect(momentaneous),english('step'))) --> [xG,ee,z].
+stem(steminfo(intrans,[],[d],[],f,simple,plainl),stem([xG,i,s],mode(f),aspect(momentaneous),english('step'))) --> [xG,i,s].
+stem(steminfo(intrans,[],[d],[],r,simple,plainl),stem([xG,i,s],mode(r),aspect(momentaneous),english('step'))) --> [xG,i,s].
+stem(steminfo(intrans,[],[d],[],o,simple,plainl),stem([xG,eHeH,s],mode(o),aspect(momentaneous),english('step'))) --> [xG,eHeH,s].
+stem(steminfo(intrans,[],[d],[],i,s,zero),stem([g,ee,h],mode(i),aspect(momentaneous),english('fall'))) --> [g,ee,h].
+stem(steminfo(intrans,[],[d],[],p,s,zero),stem([g,o,xG],mode(p),aspect(momentaneous),english('fall'))) --> [g,o,xG].
+stem(steminfo(intrans,[],[d],[],f,s,zero),stem([g,o,h],mode(f),aspect(momentaneous),english('fall'))) --> [g,o,h].
+stem(steminfo(intrans,[],[d],[],r,s,zero),stem([g,o,h],mode(r),aspect(momentaneous),english('fall'))) --> [g,o,h].
+stem(steminfo(intrans,[],[d],[],o,s,zero),stem([g,ee,h],mode(o),aspect(momentaneous),english('fall'))) --> [g,ee,h].
+stem(steminfo(intrans,[],[d],[],i,s,plainl),stem([n,iHiH,sh],mode(i),aspect(momentaneous),english('start to work'))) --> [n,iHiH,sh].
+stem(steminfo(intrans,[],[d],[],p,s,plainl),stem([n,i,sh],mode(p),aspect(momentaneous),english('start to work'))) --> [n,i,sh].
+stem(steminfo(intrans,[],[d],[],f,s,plainl),stem([n,i,sh],mode(f),aspect(momentaneous),english('start to work'))) --> [n,i,sh].
+stem(steminfo(intrans,[],[d],[],r,s,plainl),stem([n,i,sh],mode(r),aspect(momentaneous),english('start to work'))) --> [n,i,sh].
+stem(steminfo(intrans,[],[d],[],o,s,plainl),stem([n,iHiH,sh],mode(o),aspect(momentaneous),english('start to work'))) --> [n,iHiH,sh].
+stem(steminfo(intrans,[s,o],[d],[],i,simple,plainl),stem([z,i,n],mode(i),aspect(momentaneous),english('pray'))) --> [z,i,n].
+stem(steminfo(intrans,[s,o],[d],[],p,simple,plainl),stem([z,i,n],mode(p),aspect(momentaneous),english('pray'))) --> [z,i,n].
+stem(steminfo(intrans,[s,o],[d],[],f,simple,plainl),stem([z,iNiN,lB],mode(f),aspect(momentaneous),english('pray'))) --> [z,iNiN,lB].
+stem(steminfo(intrans,[s,o],[d],[],r,simple,plainl),stem([z,iNiN,h],mode(r),aspect(momentaneous),english('pray'))) --> [z,iNiN,h].
+stem(steminfo(intrans,[s,o],[d],[],o,simple,plainl),stem([z,i,n],mode(o),aspect(momentaneous),english('pray'))) --> [z,i,n].
+stem(steminfo(intrans,[s,o],[d],[],i,simple,plainl),stem([z,i,n],mode(i),aspect(durative),english('pray'))) --> [z,i,n].
+stem(steminfo(intrans,[s,o],[d],[],p,simple,plainl),stem([z,iNiN,h],mode(p),aspect(durative),english('pray'))) --> [z,iNiN,h].
+stem(steminfo(intrans,[s,o],[d],[],f,simple,plainl),stem([z,iNiN,lB],mode(f),aspect(durative),english('pray'))) --> [z,iNiN,lB].
+stem(steminfo(intrans,[s,o],[d],[],r,simple,plainl),stem([z,iNiN,h],mode(r),aspect(durative),english('pray'))) --> [z,iNiN,h].
+stem(steminfo(intrans,[s,o],[d],[],o,simple,plainl),stem([z,i,n],mode(o),aspect(durative),english('pray'))) --> [z,i,n].
+stem(steminfo(trans,[d,i],[d],[],i,simple,barredl),stem([j,ee,h],mode(i),aspect(momentaneous),english('make/light/build/start'))) --> [j,ee,h].
+stem(steminfo(trans,[d,i],[d],[],p,simple,barredl),stem([j,eHeH,xG],mode(p),aspect(momentaneous),english('make/light/build/start'))) --> [j,eHeH,xG].
+stem(steminfo(trans,[d,i],[d],[],f,simple,barredl),stem([j,a,h],mode(f),aspect(momentaneous),english('make/light/build/start'))) --> [j,a,h].
+stem(steminfo(trans,[d,i],[d],[],r,simple,barredl),stem([j,a,h],mode(r),aspect(momentaneous),english('make/light/build/start'))) --> [j,a,h].
+stem(steminfo(trans,[d,i],[d],[],o,simple,barredl),stem([j,ee,h],mode(o),aspect(momentaneous),english('make/light/build/start'))) --> [j,ee,h].
+stem(steminfo(intrans,[n,a],[],[],i,s,zero),stem([xG,aa,sh],mode(i),aspect(continuative),english('go (dual)'))) --> [xG,aa,sh].
+stem(steminfo(intrans,[n,a],[],[],p,s,zero),stem([xG,aHaH,zh],mode(p),aspect(continuative),english('go (dual)'))) --> [xG,aHaH,zh].
+stem(steminfo(intrans,[n,a],[],[],f,s,zero),stem([xG,a,sh],mode(f),aspect(continuative),english('go (dual)'))) --> [xG,a,sh].
+stem(steminfo(intrans,[n,a],[],[],r,s,zero),stem([xG,a,sh],mode(r),aspect(continuative),english('go (dual)'))) --> [xG,a,sh].
+stem(steminfo(intrans,[n,a],[],[],o,s,zero),stem([xG,aa,sh],mode(o),aspect(continuative),english('go (dual)'))) --> [xG,aa,sh].
+stem(steminfo(intrans,[n,a],[],[],i,s,d),stem([k,a,i],mode(i),aspect(continuative),english('go (pl)'))) --> [k,a,i].
+stem(steminfo(intrans,[n,a],[],[],p,s,d),stem([k,a,i],mode(p),aspect(continuative),english('go (pl)'))) --> [k,a,i].
+stem(steminfo(intrans,[n,a],[],[],f,s,d),stem([k,a,h],mode(f),aspect(continuative),english('go (pl)'))) --> [k,a,h].
+stem(steminfo(intrans,[n,a],[],[],r,s,d),stem([k,a,h],mode(r),aspect(continuative),english('go (pl)'))) --> [k,a,h].
+stem(steminfo(intrans,[n,a],[],[],o,s,d),stem([k,a,i],mode(o),aspect(continuative),english('go (pl)'))) --> [k,a,i].
+stem(steminfo(trans,[],[],[],i,simple,barredl),stem([m,aHaH,s],mode(i),aspect(momentaneous),english('roll'))) --> [m,aHaH,s].
+stem(steminfo(trans,[],[],[],p,simple,barredl),stem([m,aHaH,z],mode(p),aspect(momentaneous),english('roll'))) --> [m,aHaH,z].
+stem(steminfo(trans,[],[],[],f,simple,barredl),stem([m,a,s],mode(f),aspect(momentaneous),english('roll'))) --> [m,a,s].
+stem(steminfo(trans,[],[],[],r,simple,barredl),stem([m,a,s],mode(r),aspect(momentaneous),english('roll'))) --> [m,a,s].
+stem(steminfo(trans,[],[],[],o,simple,barredl),stem([m,aHaH,s],mode(o),aspect(momentaneous),english('roll'))) --> [m,aHaH,s].
+stem(steminfo(trans,[],[],[],i,simple,barredl),stem([m,aa,s],mode(i),aspect(continuative),english('drag'))) --> [m,aa,s].
+stem(steminfo(trans,[],[],[],p,simple,barredl),stem([m,aHaH,z],mode(p),aspect(continuative),english('drag'))) --> [m,aHaH,z].
+stem(steminfo(trans,[],[],[],f,simple,barredl),stem([m,a,s],mode(f),aspect(continuative),english('drag'))) --> [m,a,s].
+stem(steminfo(trans,[],[],[],r,simple,barredl),stem([m,a,s],mode(r),aspect(continuative),english('drag'))) --> [m,a,s].
+stem(steminfo(trans,[],[],[],o,simple,barredl),stem([m,aa,s],mode(o),aspect(continuative),english('drag'))) --> [m,aa,s].
+stem(steminfo(intrans,[xG,a],[],[],i,simple,zero),stem([xG,aa,sh],mode(i),aspect(momentaneous),english('go off (dual)'))) --> [xG,aa,sh].
+stem(steminfo(intrans,[xG,a],[],[],p,simple,zero),stem([xG,aHaH,zh],mode(p),aspect(momentaneous),english('go off (dual)'))) --> [xG,aHaH,zh].
+stem(steminfo(intrans,[xG,a],[],[],f,simple,zero),stem([xG,a,sh],mode(f),aspect(momentaneous),english('go off (dual)'))) --> [xG,a,sh].
+stem(steminfo(intrans,[xG,a],[],[],r,simple,zero),stem([xG,a,sh],mode(r),aspect(momentaneous),english('go off (dual)'))) --> [xG,a,sh].
+stem(steminfo(intrans,[xG,a],[],[],o,simple,zero),stem([xG,aa,sh],mode(o),aspect(momentaneous),english('go off (dual)'))) --> [xG,aa,sh].
+stem(steminfo(intrans,[xG,a],[],[],i,simple,d),stem([k,aHaH,h],mode(i),aspect(momentaneous),english('go off (pl)'))) --> [k,aHaH,h].
+stem(steminfo(intrans,[xG,a],[],[],p,simple,d),stem([k,a,i],mode(p),aspect(momentaneous),english('go off (pl)'))) --> [k,a,i].
+stem(steminfo(intrans,[xG,a],[],[],f,simple,d),stem([k,a,h],mode(f),aspect(momentaneous),english('go off (pl)'))) --> [k,a,h].
+stem(steminfo(intrans,[xG,a],[],[],r,simple,d),stem([k,a,h],mode(r),aspect(momentaneous),english('go off (pl)'))) --> [k,a,h].
+stem(steminfo(intrans,[xG,a],[],[],o,simple,d),stem([k,aHaH,h],mode(o),aspect(momentaneous),english('go off (pl)'))) --> [k,aHaH,h].
+stem(steminfo(intrans,[xG,a],[],[xG],i,simple,barredl),stem([n,ee,h],mode(i),aspect(momentaneous),english('have a bite to eat'))) --> [n,ee,h].
+stem(steminfo(intrans,[xG,a],[],[xG],p,simple,barredl),stem([n,a,xG],mode(p),aspect(momentaneous),english('have a bite to eat'))) --> [n,a,xG].
+stem(steminfo(intrans,[xG,a],[],[xG],f,simple,barredl),stem([n,a,h],mode(f),aspect(momentaneous),english('have a bite to eat'))) --> [n,a,h].
+stem(steminfo(intrans,[xG,a],[],[xG],r,simple,barredl),stem([n,a,h],mode(r),aspect(momentaneous),english('have a bite to eat'))) --> [n,a,h].
+stem(steminfo(intrans,[xG,a],[],[xG],o,simple,barredl),stem([n,ee,h],mode(o),aspect(momentaneous),english('have a bite to eat'))) --> [n,ee,h].
+stem(steminfo(trans,[ch,xG,iH],[],[],i,n,barredl),stem([t,ee,h],mode(i),aspect(momentaneous),english('carry out'))) --> [t,ee,h].
+stem(steminfo(trans,[ch,xG,iH],[],[],p,n,barredl),stem([t,iHN],mode(p),aspect(momentaneous),english('carry out'))) --> [t,iHN].
+stem(steminfo(trans,[ch,xG,iH],[],[],f,n,barredl),stem([t,eHeH,lB],mode(f),aspect(momentaneous),english('carry out'))) --> [t,eHeH,lB].
+stem(steminfo(trans,[ch,xG,iH],[],[],r,n,barredl),stem([t,eHeH,h],mode(r),aspect(momentaneous),english('carry out'))) --> [t,eHeH,h].
+stem(steminfo(trans,[ch,xG,iH],[],[],o,n,barredl),stem([t,eHeH,lB],mode(o),aspect(momentaneous),english('carry out'))) --> [t,eHeH,lB].
+stem(steminfo(trans,[],[],[],i,slv,zero),stem([g,i,sh],mode(i),aspect(semelfactive),english('make one cut in'))) --> [g,i,sh].
+stem(steminfo(trans,[],[],[],p,slv,zero),stem([g,i,sh],mode(p),aspect(semelfactive),english('make one cut in'))) --> [g,i,sh].
+stem(steminfo(trans,[],[],[],f,slv,zero),stem([g,i,sh],mode(f),aspect(semelfactive),english('make one cut in'))) --> [g,i,sh].
+stem(steminfo(trans,[],[],[],r,slv,zero),stem([g,i,sh],mode(r),aspect(semelfactive),english('make one cut in'))) --> [g,i,sh].
+stem(steminfo(trans,[],[],[],o,slv,zero),stem([g,i,sh],mode(o),aspect(semelfactive),english('make one cut in'))) --> [g,i,sh].
+stem(steminfo(trans,[],[],[],i,slv,zero),stem([ts,xG,oN,s],mode(i),aspect(semelfactive),english('suck'))) --> [ts,xG,oN,s].
+stem(steminfo(trans,[],[],[],p,slv,zero),stem([ts,xG,oN,s],mode(p),aspect(semelfactive),english('suck'))) --> [ts,xG,oN,s].
+stem(steminfo(trans,[],[],[],f,slv,zero),stem([ts,xG,oN,s],mode(f),aspect(semelfactive),english('suck'))) --> [ts,xG,oN,s].
+stem(steminfo(trans,[],[],[],r,slv,zero),stem([ts,xG,oN,s],mode(r),aspect(semelfactive),english('suck'))) --> [ts,xG,oN,s].
+stem(steminfo(trans,[],[],[],o,slv,zero),stem([ts,xG,oN,s],mode(o),aspect(semelfactive),english('suck'))) --> [ts,xG,oN,s].
+stem(steminfo(trans,[],[],[],i,flv,barredl),stem([ts,eHeH,h],mode(i),aspect(semelfactive),english('catch sight of'))) --> [ts,eHeH,h].
+stem(steminfo(trans,[],[],[],p,flv,barredl),stem([ts,aHN],mode(p),aspect(semelfactive),english('catch sight of'))) --> [ts,aHN].
+stem(steminfo(trans,[],[],[],f,flv,barredl),stem([ts,eHeH,lB],mode(f),aspect(semelfactive),english('catch sight of'))) --> [ts,eHeH,lB].
+stem(steminfo(trans,[],[],[],r,flv,barredl),stem([ts,eHeH,h],mode(r),aspect(semelfactive),english('catch sight of'))) --> [ts,eHeH,h].
+stem(steminfo(trans,[],[],[],o,flv,barredl),stem([ts,eHeH,lB],mode(o),aspect(semelfactive),english('catch sight of'))) --> [ts,eHeH,lB].
+stem(steminfo(intrans,[],[],[],i,flv,d),stem([zh,iHNiHN,h],mode(i),aspect(semelfactive),english('got sunburned'))) --> [zh,iHNiHN,h].
+stem(steminfo(intrans,[],[],[],p,flv,d),stem([zh,iHNiHN,xG],mode(p),aspect(semelfactive),english('got sunburned'))) --> [zh,iHNiHN,xG].
+stem(steminfo(intrans,[],[],[],f,flv,d),stem([zh,iHNiHN,lB],mode(f),aspect(semelfactive),english('got sunburned'))) --> [zh,iHNiHN,lB].
+stem(steminfo(intrans,[],[],[],r,flv,d),stem([zh,iHNiHN,h],mode(r),aspect(semelfactive),english('got sunburned'))) --> [zh,iHNiHN,h].
+stem(steminfo(intrans,[],[],[],o,flv,d),stem([zh,iHNiHN,h],mode(o),aspect(semelfactive),english('got sunburned'))) --> [zh,iHNiHN,h].
+stem(steminfo(trans,[h,a],[n],[],i,simple,barredl),stem([ch,aa,d],mode(i),aspect(momentaneous),english('card'))) --> [ch,aa,d].
+stem(steminfo(trans,[h,a],[n],[],p,simple,barredl),stem([ch,aa,d],mode(p),aspect(momentaneous),english('card'))) --> [ch,aa,d].
+stem(steminfo(trans,[h,a],[n],[],f,simple,barredl),stem([ch,a,lB],mode(f),aspect(momentaneous),english('card'))) --> [ch,a,lB].
+stem(steminfo(trans,[h,a],[n],[],r,simple,barredl),stem([ch,a,xG],mode(r),aspect(momentaneous),english('card'))) --> [ch,a,xG].
+stem(steminfo(trans,[h,a],[n],[],o,simple,barredl),stem([ch,aa,d],mode(o),aspect(momentaneous),english('card'))) --> [ch,aa,d].
+stem(steminfo(trans,[n,a],[n],[],i,s,barredl),stem([k,aa,d],mode(i),aspect(continuative),english('herd'))) --> [k,aa,d].
+stem(steminfo(trans,[n,a],[n],[],p,s,barredl),stem([k,aa,d],mode(p),aspect(continuative),english('herd'))) --> [k,aa,d].
+stem(steminfo(trans,[n,a],[n],[],f,s,barredl),stem([k,a,lB],mode(f),aspect(continuative),english('herd'))) --> [k,a,lB].
+stem(steminfo(trans,[n,a],[n],[],r,s,barredl),stem([k,a,xG],mode(r),aspect(continuative),english('herd'))) --> [k,a,xG].
+stem(steminfo(trans,[n,a],[n],[],o,s,barredl),stem([k,aa,d],mode(o),aspect(continuative),english('herd'))) --> [k,aa,d].
+stem(steminfo(intrans,[],[n],[],i,s,plainl),stem([j,iHNiHN,d],mode(i),aspect(momentaneous),english('squatted down'))) --> [j,iHNiHN,d].
+stem(steminfo(intrans,[],[n],[],p,s,plainl),stem([j,iHNiHN,d],mode(p),aspect(momentaneous),english('squatted down'))) --> [j,iHNiHN,d].
+stem(steminfo(intrans,[],[n],[],f,s,plainl),stem([j,iHNiHN,lB],mode(f),aspect(momentaneous),english('squatted down'))) --> [j,iHNiHN,lB].
+stem(steminfo(intrans,[],[n],[],r,s,plainl),stem([j,iHNiHN,h],mode(r),aspect(momentaneous),english('squatted down'))) --> [j,iHNiHN,h].
+stem(steminfo(intrans,[],[n],[],o,s,plainl),stem([j,iHNiHN,d],mode(o),aspect(momentaneous),english('squatted down'))) --> [j,iHNiHN,d].

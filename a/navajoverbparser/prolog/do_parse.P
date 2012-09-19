@@ -1,0 +1,54 @@
+/*
+ * Version: MPL 1.1
+ *
+ * The contents of this file are subject to the Mozilla Public License
+ * Version 1.1 (the "License"); you may not use this file except in
+ * compliance with the License. You may obtain a copy of the License at
+ * http://www.mozilla.org/MPL/
+ *
+ * Software distributed under the License is distributed on an "AS IS"
+ * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. See
+ * the License for the specific language governing rights and
+ * limitations under the License.
+ *
+ * The Original Code is Navajo Verb Morphology Parser code.
+ *
+ * The Initial Developer of the Original Code is
+ * Eden Siu-yue Li.
+ * Portions created by the Initial Developer are Copyright (C) 2004
+ * the Initial Developer. All Rights Reserved.
+ *
+ */
+
+%%%%%%%%%%%%
+% do_parse.P
+%  Command-line driver.
+%%%%%%%%%%%%
+
+:- import printParses/1, printUnderlying/1 from presentation.
+:- import getParses/2, getUnderlying/2 from run.
+
+:- read(Input),
+
+    cputime(UStart),
+    getUnderlying(Input,Underlying),
+    cputime(UEnd),
+
+    write('<h4><a href="javascript:collapseExpand(''underlying'')">Possible'),
+        write(' underlying forms (click to expand)</a></h4>'),
+    printUnderlying(Underlying),
+    writeln('<h4>Parses</h4>'),
+
+    cputime(PStart),
+    getParses(Underlying,Parses),
+    cputime(PEnd),
+
+    printParses(Parses),
+
+    is(UDiff, UEnd-UStart), 
+    is(PDiff, PEnd-PStart), 
+    write('<p id="execution_time">'),
+    write('Finding underlying forms took '),  write(UDiff), write(' seconds, and '),
+    write('matching morphology took '),  write(PDiff), write(' seconds.'),
+    write('</p>').
+

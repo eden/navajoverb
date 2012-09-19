@@ -1,0 +1,26 @@
+/.cvsignore/1.1/Fri Dec  6 05:16:07 2002//Trelease_2_6
+/InterPrologCHANGES.txt/1.1/Fri Aug 16 19:06:03 2002//Trelease_2_6
+/Interprolog-Package-Readme/1.1/Fri Aug 16 19:06:03 2002//Trelease_2_6
+/LICENSE.txt/1.1/Fri Aug 16 19:06:03 2002//Trelease_2_6
+/Makefile/1.2/Tue Aug 27 22:55:33 2002//Trelease_2_6
+/TODO-InterProlog.txt/1.1/Fri Aug 16 19:06:03 2002//Trelease_2_6
+/build/1.2/Tue Aug 20 18:38:40 2002//Trelease_2_6
+/build.bat/1.1/Fri Aug 16 19:06:03 2002//Trelease_2_6
+/builddoc/1.1/Fri Aug 16 19:06:03 2002//Trelease_2_6
+/builddoc.bat/1.1/Fri Aug 16 19:06:03 2002//Trelease_2_6
+/compile_Ps/1.1/Fri Aug 16 19:06:03 2002//Trelease_2_6
+/compile_Ps.bat/1.1/Fri Aug 16 19:06:03 2002//Trelease_2_6
+/interprolog.mcp/1.1/Fri Aug 16 19:06:03 2002//Trelease_2_6
+/junit.jar/1.1/Fri Aug 16 19:06:03 2002//Trelease_2_6
+/runNativeListener/1.2/Tue Aug 20 19:04:45 2002//Trelease_2_6
+/runNativeListener.bat/1.1/Fri Aug 16 19:06:03 2002//Trelease_2_6
+/runSubprocessListener/1.2/Tue Aug 20 19:04:07 2002//Trelease_2_6
+/testNative/1.1/Tue Aug 20 19:46:47 2002//Trelease_2_6
+/testSubproces/1.1/Tue Aug 20 19:47:30 2002//Trelease_2_6
+/testit/1.2/Tue Aug 20 19:02:51 2002//Trelease_2_6
+/testit.bat/1.1/Fri Aug 16 19:06:03 2002//Trelease_2_6
+D/JNI-Test////
+D/com////
+D/heavy_debugging////
+D/htmldocs////
+D/tests////

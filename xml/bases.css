@@ -1,0 +1,90 @@
+
+VerbBases {
+    margin-top: 2em;
+}
+VerbBases:before {
+    margin-left: 2%;
+    font-family: "Trebuchet MS", "Arial", sans-serif;
+    content: 'Some Navajo Verb Bases';
+    font-size: x-large;
+}
+
+VerbBase {
+    font-size: 10pt;
+
+    margin: 1em 15% 2em 2%;
+    padding: 1em 1em 1em 1em;
+    font-family: "Arial", sans-serif;
+    display: block;
+
+    background-color: #ccc;
+
+    border-bottom: solid 3px #999;
+}
+
+Aspect, Classifier, Conjugation, Gloss, Inner, Outer, Object,
+    Transitivity, Prefix {
+    display: block;
+    margin-left: 3em;
+}
+
+Gloss English:before {
+    font-weight: bold;
+    content: 'english gloss: ';
+}
+
+Aspect:before {
+    font-weight: bold;
+    content: 'aspect: ';
+}
+
+Inner:before {
+    font-weight: bold;
+    content: 'inner prefix: ';
+}
+
+Outer:before {
+    font-weight: bold;
+    content: 'outer prefix: ';
+}
+
+Object:before {
+    font-weight: bold;
+    content: 'object prefix: ';
+}
+
+Prefix:before {
+    font-weight: bold;
+    content: 'prefix(es) -- ';
+}
+
+Classifier:before {
+    font-weight: bold;
+    content: 'classifier: ';
+}
+
+Conjugation:before {
+    font-weight: bold;
+    content: 'conjugation: ';
+}
+
+Transitivity:before {
+    font-weight: bold;
+    content: 'transitivity: ';
+}
+
+I:before { content: '(I) '; font-size: small; }
+P:before { content: '(P) '; font-size: small; }
+F:before { content: '(F) '; font-size: small; }
+R:before { content: '(R) '; font-size: small; }
+O:before { content: '(O) '; font-size: small; }
+
+StemSet {
+    display: block;
+    font-size: large;
+}
+
+StemSet:before {
+    font-weight: bold;
+    content: 'Stem set: ';
+}

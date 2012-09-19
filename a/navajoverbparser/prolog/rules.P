@@ -1,0 +1,1423 @@
+/*
+ * Version: MPL 1.1
+ *
+ * The contents of this file are subject to the Mozilla Public License
+ * Version 1.1 (the "License"); you may not use this file except in
+ * compliance with the License. You may obtain a copy of the License at
+ * http://www.mozilla.org/MPL/
+ *
+ * Software distributed under the License is distributed on an "AS IS"
+ * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. See
+ * the License for the specific language governing rights and
+ * limitations under the License.
+ *
+ * The Original Code is Navajo Verb Morphology Parser code.
+ *
+ * The Initial Developer of the Original Code is
+ * Eden Siu-yue Li.
+ * Portions created by the Initial Developer are Copyright (C) 2004
+ * the Initial Developer. All Rights Reserved.
+ *
+ */
+
+%%%%%%%%%%%%
+% rules.P
+%  Phonological and morphological rules.  This is the meat of the
+%  system.
+%%%%%%%%%%%%
+
+:- import append/3 from basics.
+:- import absmerge/3 from listutil.
+
+:- import consonant/3, vowel/3 from segments.
+:- import stem/4 from stems.
+
+:- import absmerge/4, append/4, append/5, append/6, append/7
+          from util.
+
+:- table consonants/3, vowels/3, prefixes/3, any/3.
+
+:- export verb/3, p_verb/2.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Shared rules
+%   These rules are shared between morphology and phonology rules.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+any(O) --> anyOne(O).
+any(O) --> anyOne(O1), any(O2), {append(O1,O2,O)}.
+anyOne(O) --> vowel(O) | consonant(O) | [X], {compound(X), O=[X]} | [], {O=[]}.
+
+prefix(CV) --> consonants(C), vowels(V), {append(C,V,CV)}.
+prefix(CV) --> vowels(V), consonants(C), {append(V,C,CV)}.
+prefix(C) --> consonants(C).
+prefix([I]) --> [I], {compound(I)}.
+prefix([peg]) --> [peg].
+
+vowels(X) --> vowel(X) | [I], {compound(I), I=..[_|[L]], vowels(_,L,[]), X=[I]}.
+vowels(XT) --> vowels(XT) | vowels(X), vowels(T), {append(X,T,XT)}.
+
+consonants(X) --> consonant(X) | [I], {compound(I), I=..[_|[L]], consonants(_,L,[]), X=[I]}.
+consonants(XT) --> consonants(XT) | consonants(X), consonants(T), {append(X,T,XT)}.
+
+last([X|[]],X) :- !.
+last([_|R],X) :- last(R,X).
+
+p_consonant(C) --> consonant(C) | [I], {compound(I), I=..[_|[L]], [C1|_]=L, consonant(_,[C1],[]), C=[I]}.
+p_end_consonant(C) --> consonant(C) | [I], {compound(I), I=..[_|[L]], last(L,C1), consonant(_,[C1],[]), C=[I]}.
+p_vowel(V) --> vowel(V) | [I], {compound(I), I=..[_|[L]], [V1|_]=L, vowel(_,[V1],[]), V=[I]}.
+p_end_vowel(V) --> vowel(V) | [I], {compound(I), I=..[_|[L]], last(L,V1), vowel(_,[V1],[]), V=[I]}.
+
+syllable(S) --> consonants(C), vowels(V), consonants(C2), {append(C,V,C2,S)}.
+syllable(S) --> vowels(V), consonants(C), {append(V,C,S)}.
+syllable(S) --> consonants(C), vowels(V), {append(C,V,S)}.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Phonology rules
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% These are required by XSB if we are going to use
+% variables as predicate heads
+apply(p_longVowelBreakup,A,B,C) :- p_longVowelBreakup(A,B,C).
+apply(p_contractedPrefixes,A,B,C) :- p_contractedPrefixes(A,B,C).
+apply(p_specialPmodeSubject,A,B,C) :- p_specialPmodeSubject(A,B,C).
+
+
+apply(p_ruleStr1,A,B,C) :- p_ruleStr1(A,B,C).
+apply(p_ruleStr2,A,B,C) :- p_ruleStr2(A,B,C).
+apply(p_ruleStr3,A,B,C) :- p_ruleStr3(A,B,C).
+apply(p_ruleStr5,A,B,C) :- p_ruleStr5(A,B,C).
+apply(p_ruleStr7,A,B,C) :- p_ruleStr7(A,B,C).
+
+apply(p_ruleDisj1,A,B,C) :- p_ruleDisj1(A,B,C).
+apply(p_ruleDisj2,A,B,C) :- p_ruleDisj2(A,B,C).
+apply(p_ruleDisj3,A,B,C) :- p_ruleDisj3(A,B,C).
+apply(p_ruleDisj4,A,B,C) :- p_ruleDisj4(A,B,C).
+
+apply(p_ruleSubj1,A,B,C) :- p_ruleSubj1(A,B,C).
+apply(p_ruleSubj2,A,B,C) :- p_ruleSubj2(A,B,C).
+apply(p_ruleSubj3,A,B,C) :- p_ruleSubj3(A,B,C).
+apply(p_ruleSubj4,A,B,C) :- p_ruleSubj4(A,B,C).
+apply(p_ruleSubj5,A,B,C) :- p_ruleSubj5(A,B,C).
+apply(p_ruleSubj6,A,B,C) :- p_ruleSubj6(A,B,C).
+apply(p_ruleSubj7,A,B,C) :- p_ruleSubj7(A,B,C).
+apply(p_ruleSubj8,A,B,C) :- p_ruleSubj8(A,B,C).
+
+apply(p_ruleConj1,A,B,C) :- p_ruleConj1(A,B,C).
+apply(p_ruleConj2,A,B,C) :- p_ruleConj2(A,B,C).
+apply(p_ruleConj3,A,B,C) :- p_ruleConj3(A,B,C).
+apply(p_ruleConj4,A,B,C) :- p_ruleConj4(A,B,C).
+apply(p_ruleConj5,A,B,C) :- p_ruleConj5(A,B,C).
+apply(p_ruleConj6,A,B,C) :- p_ruleConj6(A,B,C).
+apply(p_ruleConj7,A,B,C) :- p_ruleConj7(A,B,C).
+apply(p_ruleConj8,A,B,C) :- p_ruleConj8(A,B,C).
+
+% apply rules in turn, each rule may produce
+% multiple outputs.  Order matters big time.
+p_verb(In,Out) :-
+    p_verb(
+        [p_longVowelBreakup,
+
+         p_ruleStr1,
+         p_ruleStr2,
+         p_ruleStr3,
+         p_ruleStr5,
+         p_ruleStr7,
+
+         % disj2 needs to occur before conj2
+         p_ruleDisj2,
+
+         p_ruleConj8,
+
+         p_ruleSubj5,
+         p_ruleSubj1,
+         p_ruleSubj2,
+         p_ruleSubj4,
+         p_ruleSubj3,
+         p_ruleSubj6,
+
+         % voiced fricative stems
+         p_ruleSubj8,
+         p_ruleSubj7,
+
+         p_ruleConj1,
+
+         p_ruleDisj4,
+
+         % conj5 and conj2 must be applied after disj4
+         p_ruleConj5,
+         p_ruleConj2,
+         p_ruleConj4,
+
+         p_ruleDisj1,
+         p_ruleDisj3,
+
+         p_ruleConj3,
+         p_ruleConj6,
+         p_ruleConj7,
+
+         p_contractedPrefixes,
+         p_specialPmodeSubject
+        ],
+    [elt(In,[initial])], Out).
+
+p_verb([X|T],In,Out) :-
+    rule(X,In,L1), rule(X,L1,L2), absmerge(In,L1,L2,L3),
+        p_verb(T,L3,L4), absmerge(L3,L4,Out).
+p_verb([],_,[]).
+
+rule(Rule,elt(Parse,In),Out) :-
+    last(In,LastRule), not Rule == LastRule,
+    setof(L, Rule(L,Parse,[]), O), append(In,[Rule],Tag), pairtag(Tag,O,Out), !.
+rule(Rule,[X|T],Out) :-
+    rule(Rule,X,Out1), rule(Rule,T,Out2),
+    absmerge(Out1,Out2,Out),!.
+rule(Rule,[_|T],Out) :- rule(Rule,T,Out).
+rule(_,[],[]).
+
+% turns a list [a,b,c] -> [elt(a,tag),elt(b,tag),elt(c,tag)]
+pairtag(Tag,List,Out) :- 
+    pairtag(Tag,List,[],Out).
+
+pairtag(Tag,[X|T],In,Out) :-
+    pairtag(Tag,T,In,O),
+    append(O,[elt(X,Tag)],Out).
+pairtag(_,[],_,_).
+
+%--
+
+prefixOrEmpty([]) --> [].
+prefixOrEmpty(P) --> prefix(P).
+
+prefixes([]) --> [].
+prefixes(P) --> prefix(P).
+prefixes(P) --> prefix(P1), prefixes(P2), {append(P1,P2,P)}.
+
+p_stem(S) -->
+    p_steminitial(C), p_stemrest(R), {append(C,R,S)}.
+
+p_steminitial(S) --> consonants(C), vowels(V), {append(C,V,S)}.
+
+p_stemrest([]) --> [].
+p_stemrest(R) --> consonants(R).
+
+%------------
+% Vowel break up
+%  Breaks up long vowel combos in case some rules depend
+%  on consecutive vowels to be separate.
+p_longVowelBreakup(O) -->
+    (any(A), p_longVowelBreakup_vb(VB), any(A2),
+        {append(A,VB,A2,O)}) |
+    (any(A), p_longVowelBreakup_vb(VB), any(A2),
+        p_longVowelBreakup(LVB),
+        {append(A,VB,A2,LVB,O)}).
+
+p_longVowelBreakup_vb([aHN,aHN]) --> [aHNaHN].
+p_longVowelBreakup_vb([eHN,eHN]) --> [eHNeHN].
+p_longVowelBreakup_vb([eHN,eHN]) --> [eHNeHN].
+p_longVowelBreakup_vb([iHN,iHN]) --> [iHNiHN].
+
+p_longVowelBreakup_vb([a,a]) --> [aa].
+p_longVowelBreakup_vb([e,e]) --> [ee].
+p_longVowelBreakup_vb([e,e]) --> [ee].
+p_longVowelBreakup_vb([i,i]) --> [ii].
+
+p_longVowelBreakup_vb([aH,aH]) --> [aHaH].
+p_longVowelBreakup_vb([eH,eH]) --> [eHeH].
+p_longVowelBreakup_vb([iH,iH]) --> [iHiH].
+p_longVowelBreakup_vb([oH,oH]) --> [oHoH].
+
+%------------
+
+%------------
+% Contracted prefixes
+%  Takes care of contractions of the subject prefix
+%  with the inner-n and d prefixes.
+p_contractedPrefixes(O) -->
+    any(A), (p_contractedPrefixes_SPN(X) |
+             p_contractedPrefixes_SPD(X)),
+    any(A2),
+    {append(A,X,A2,O)}.
+
+%%% lB/zero classifiers
+p_contractedPrefixes_SPN([n,s,eH]) --> [n,eH].
+p_contractedPrefixes_SPN([n,s,iH,n,iH]) --> [n,iH,n,iH].
+p_contractedPrefixes_SPN([n,s,ii,d]) --> [n,ee,d] | [n,subject([ee,d])].
+p_contractedPrefixes_SPN([n,s,oo]) --> [n,oo] | [s,i,n,oo].
+p_contractedPrefixes_SPN([n,z]) --> [n,ee,z] |
+                                    [n,subject([ee,z])] |
+                                    [n,ee,subject([z])] |
+                                    [conjunct([n]),ee,subject([z])] |
+                                    [conjunct([n]),ee,z].
+p_contractedPrefixes_SPN([n,s]) --> [n,ee,s] |
+                                    [n,subject([ee,s])] |
+                                    [n,ee,subject([s])] |
+                                    [conjunct([n]),ee,subject([s])] |
+                                    [conjunct([n]),ee,s].
+
+%%% d/l classifiers
+p_contractedPrefixes_SPN([n,s,i,s]) --> [n,eH,sh].
+%* 2sg same as lB/zero
+%* 1dpl same as lB/zero
+p_contractedPrefixes_SPN([n,s,oo,h]) --> [n,oo,h] | [s,i,n,oo].
+%* 3 same as lB/zero
+
+%%% lB/zero classifiers
+p_contractedPrefixes_SPD([d,s,eH]) --> [d,eH].
+p_contractedPrefixes_SPD([d,s,iH,n,iH]) --> [d,iH,n,iH].
+p_contractedPrefixes_SPD([d,s,ii,d]) --> [d,ee,d] | [d,subject([ee,d])] | [d,i,s,ii,d].
+p_contractedPrefixes_SPD([d,s,oo]) --> [d,i,s,oo].
+p_contractedPrefixes_SPD([d,z]) --> [d,ee,z] |
+                                    [d,subject([ee,z])] |
+                                    [d,ee,subject([z])] |
+                                    [conjunct([d]),ee,subject([z])] |
+                                    [conjunct([d]),ee,z].
+p_contractedPrefixes_SPD([d,s]) --> [d,ee,s] |
+                                    [d,subject([ee,s])] |
+                                    [d,ee,subject([s])] |
+                                    [conjunct([d]),ee,subject([s])] |
+                                    [conjunct([d]),ee,s].
+
+%%% d/l classifiers
+p_contractedPrefixes_SPD([d,s,i,s]) --> [d,eH,sh].
+%* 2sg same as lB/zero
+%* 1dpl same as lB/zero
+p_contractedPrefixes_SPD([d,s,oo,h]) --> [d,i,s,oo,h].
+%* 3 same as lB/zero
+
+%------------
+
+%------------
+% Special P-mode Subject prefixes
+%  Some p-mode subj prefixes change depending on the
+%  prefix that preceeds it.
+p_specialPmodeSubject(O) -->
+    any(A), p_specialPmodeSubject_vowel(V), any(A2),
+    {append(A,V,A2,O)}.
+
+p_specialPmodeSubject_vowel([a,subject([aHaH])]) --> [aHaH].
+p_specialPmodeSubject_vowel([e,subject([eHeH])]) --> [eHeH].
+p_specialPmodeSubject_vowel([i,subject([iHiH])]) --> [iHiH].
+p_specialPmodeSubject_vowel([o,subject([oHoH])]) --> [oHoH].
+
+p_specialPmodeSubject_vowel([a,subject([aH,iH,n,iH])]) --> [aH,iH,n,iH].
+p_specialPmodeSubject_vowel([e,subject([eH,iH,n,iH])]) --> [eH,iH,n,iH].
+p_specialPmodeSubject_vowel([i,subject([iH,iH,n,iH])]) --> [iH,iH,n,iH] | [iHiH,n,iH].
+p_specialPmodeSubject_vowel([o,subject([oH,iH,n,iH])]) --> [oH,iH,n,iH].
+
+p_specialPmodeSubject_vowel([a,subject([aa,sh])]) --> [aa,sh], !.
+p_specialPmodeSubject_vowel([e,subject([ee,sh])]) --> [ee,sh], !.
+p_specialPmodeSubject_vowel([i,subject([ii,sh])]) --> [ii,sh], !.
+p_specialPmodeSubject_vowel([o,subject([oo,sh])]) --> [oo,sh], !.
+
+p_specialPmodeSubject_vowel([a,subject([aa])]) --> [aa].
+p_specialPmodeSubject_vowel([e,subject([ee])]) --> [ee].
+p_specialPmodeSubject_vowel([i,subject([ii])]) --> [ii].
+p_specialPmodeSubject_vowel([o,subject([oo])]) --> [oo].
+
+%------------
+
+%------------
+% Rule Str-1
+%  In certain circumstances, put yy in place of y for object 3p
+
+p_ruleStr1(O) --> 
+    any(A), [y,y], any(A2),
+    {append(A,[conjunct([y])],A2,O)}.
+
+%------------
+
+%------------
+% Rule Str-2
+%  If a verb has no syllable preceding the verb-stem syllable, then put in
+%  the prefix yi.
+
+p_ruleStr2(O) --> 
+    [y, i], any(A),
+    {append([peg], A, O)}.
+
+%------------
+
+%------------
+% Rule Str-3
+%  If a verb form is stranded with an initial vowel:
+%   ( i | ii ) -> y\1
+%   ( o | oo ) -> w\1
+
+p_ruleStr3([First|Rest]) -->
+    [y], any([First|Rest]),
+    {First = i ; First = ii}.
+
+p_ruleStr3([First|Rest]) -->
+    [w], any([First|Rest]),
+    {First = o ; First = oo}.
+
+%------------
+
+%------------
+% Rule Str-4
+%   No rule needed.  4p prefix always follows the object, and
+%   3p obj prefix always follows unspec object.  Since the input
+%   form will be correct, we don't need to change anything around.
+%------------
+
+%------------
+% Rule Str-5
+%  (a) If the 4p subject prefix j is preceded by another prefix
+%      and is followed directly by the long-vowel-F (y) prefix,
+%      interchange them.
+%  (b) If 3p object prefix y is preceded by another prefix and
+%      followed by the long-vowel-F y prefix then the two y
+%      prefixes merge and become one y
+
+p_ruleStr5(O) -->
+    any(A), [y,j], any(A2),
+    {append(A,[conjunct([j]),y],A2,O)}.
+
+p_ruleStr5(O) -->
+    any(A), [y], any(A2),
+    {append(A,[conjunct([y]),y],A2,O)}.
+
+%------------
+
+%------------
+% Rule Str-6
+%  If a verb base has an inner n prefix in it, insert a conjunct high tone
+%  just in front of the inner n.
+%
+%  This is not implemented because Rule Conj-8 takes care of all the cases
+%  where this high-tone marker would exist.
+%------------
+
+%------------
+% Rule Str-7
+%  naHaHnaH shortens to naHaH when followed by a consonant and the next
+%  syllable is not the verb-stem syllable.  If the conosnant that follows
+%  naHaHnaH is the 3p object prefix y and if y is itself immediately
+%  followed by a consonant then the original longer form is used.
+
+p_ruleStr7(O) -->
+    [n,aHaH], any(A),
+    {append([n,aHaH,n,aH],A,O)}.
+
+%------------
+
+%------------
+% Rule Disj-1
+%  If the last syllable of a disjunct prefix is the pre-stem syllable
+%  and the prefix is followed by a consonant, do the following to the
+%  last segment:
+%   (a) a -> aa
+%   (b) iH -> eH
+%   (c) i -> ee
+p_ruleDisj1(O) -->
+    prefixes(PR),
+    consonants(C), p_ruleDisj1vc(VC), % vc = vowel cluster
+    syllable([S1|SRest]),
+    {p_consonant(_,[S1],[]),
+        append(C,VC,Disj),
+        append(PR,[disjunct(Disj)],[S1|SRest],O)}.
+
+p_ruleDisj1vc([a]) --> [aa].
+p_ruleDisj1vc([iH]) --> [eH].
+p_ruleDisj1vc([i]) --> [ee].
+
+%------------
+
+%------------
+% Rule Disj-2
+%  If a disjunct prefix is followed by a vowel then 
+%   (a) ai -> ei, aii -> eii except when [a] is preceeded by g, gh, h, k, k'
+%       also aHi -> eHi, aHii -> eHii, aHiH -> eHiH
+%   (b) iHii -> iHi
+%   (c) iHo -> oH
+p_ruleDisj2(O) -->
+    prefixOrEmpty(P),
+    consonants(C), p_ruleDisj2vv(V,Rest),
+        {append(C,[V],Disj)},
+    prefixes(Pf), p_stem(S),
+    {append(P,[disjunct(Disj),Rest],Pf,S,O)}.
+
+p_ruleDisj2vv(a,i) --> [e,i].
+p_ruleDisj2vv(a,ii) --> [e,ii].
+p_ruleDisj2vv(aH,i) --> [eH,i].
+p_ruleDisj2vv(aH,ii) --> [eH,ii].
+p_ruleDisj2vv(iH,ii) --> [iH,i].
+p_ruleDisj2vv(iH,o) --> [iH,o].
+
+%------------
+
+%------------
+% Rule Disj-3
+%  na -> ni and naH -> niH when preceeding
+%   (a) j
+%   (b) da
+%   (c) s-P subject prefix other than z or s
+%   (d) F mode d or any inner prefix beginning with d
+%   (e) zh, xG, zhxG followed by d
+%   (f) naHaH or naHaHnaH
+%   (g) s-I subject prefix other than 3 person zero prefix
+p_ruleDisj3(O) -->
+    any(A), p_ruleDisj3_rule(R), p_ruleDisj3_following(F),
+        prefixes(Pf), p_stem(S),
+    {append(A,[disjunct(R)],F,Pf,S,O)}.
+
+p_ruleDisj3_rule(O) --> p_ruleDisj3_change(O).
+
+% special case of multiple na or naH in a row
+p_ruleDisj3_rule(O) --> p_ruleDisj3_repeat(P), [n,aH],
+    {append(P,[n,aH],O)}.
+
+p_ruleDisj3_repeat(C) --> p_ruleDisj3_change(C).
+p_ruleDisj3_repeat(C) -->
+    p_ruleDisj3_change(C1), p_ruleDisj3_repeat(C2),
+    {append(C1,C2,C)}.
+
+p_ruleDisj3_change([n,a]) --> [n,i].
+p_ruleDisj3_change([n,aH]) --> [n,iH].
+
+p_ruleDisj3_following([conjunct([j])]) --> [j] | [conjunct([j])].
+p_ruleDisj3_following([disjunct([d,a])]) --> [d,a] | [disjunct([d,a])].
+
+% s-P subject prefixes except s and z
+p_ruleDisj3_following([subject([s,eH])]) --> [s,eH] | [subject([s,eH])].
+p_ruleDisj3_following([subject([s,ii,d])]) --> [s,ii,d] | [subject([s,ii,d])].
+p_ruleDisj3_following([subject([s,iH,n,iH])]) -->[s,iH,n,iH] | [subject([s,iH,n,iH])].
+p_ruleDisj3_following([subject([s,oo])]) -->[s,oo] | [subject([s,oo])].
+p_ruleDisj3_following([subject([s,i,s])]) --> [s,i,s] | [subject([s,i,s])].
+p_ruleDisj3_following([subject([s,oo,h])]) --> [s,oo,h] | [subject([s,oo,h])].
+%--
+
+p_ruleDisj3_following([conjunct([d])]) --> [d] | [conjunct([d])].
+p_ruleDisj3_following([zh,d]) --> [zh,d].
+p_ruleDisj3_following([xG,d]) --> [xG,d] | [xG,d].
+p_ruleDisj3_following([zhxG,d]) --> [zhxG,d].
+p_ruleDisj3_following([n,aHaH]) --> [n,aHaH].
+p_ruleDisj3_following([n,aHaH,n,aH]) --> [n,aHaH,n,aH].
+p_ruleDisj3_following([n,aH]) --> [n,aH].
+
+% s-I subject prefix other than 3p zero
+p_ruleDisj3_following([sh,i,sh]) --> [sh,i,sh].
+p_ruleDisj3_following([s,iH]) --> [s,iH].
+p_ruleDisj3_following([s,ii,d]) --> [s,ii,d].
+p_ruleDisj3_following([s,o,h]) --> [s,o,h].
+
+%------------
+
+%------------
+% Rule Disj-4
+%  (a) Whenever 'a is followed by a consonant and the 'a syllable would
+%      be the pre-stem syllable change 'a into 'ii
+%  (b) If 'a is followed by ii or o or oo then 'a becomes ' EXCEPT in
+%      O mode (not handled here)
+%  (c) If 'a is followed by a conjunct prefix y and this y is followed by
+%      a consonant , 'a and y becomes 'ii.
+%  (d) In the y-P conjugation the following occur:
+%      (i)   'avHvH -> 'iHiH
+%      (ii)  'avHiHniH -> 'iHiHniH
+%      (iii) 'avv -> 'ee
+%  (e) If 'a is followed by unspec obj prefix (') then:
+%      (i)   'a'a -> 'e'e (Rule Conj-5 should be applied first)
+%      (ii)  'a'C -> 'i'C (Rule Conj-5 should be applied first)
+%      (iii) 'azh'C -> 'izh'C (Rule Conj-5 should be applied first)
+%      (iv)  'a'iH -> 'i'iH (Rule Conj-2 should be applied first)
+%      (v)   'a'V -> 'V'V
+
+p_ruleDisj4(O) -->
+    any(A), p_ruleDisj4_rules(R), any(A2),
+    {append(A,R,A2,O)}.
+
+% (a)
+p_ruleDisj4_rules([disjunct([xG,a]),C]) --> ([xG,ii] | [xG,ii]), p_consonant([C]).
+
+% (b)
+p_ruleDisj4_rules([disjunct([xG,a]),ii]) --> [xG,ii].
+p_ruleDisj4_rules([disjunct([xG,a]),o]) --> [xG,o].
+p_ruleDisj4_rules([disjunct([xG,a]),oo]) --> [xG,oo].
+
+% (c)
+p_ruleDisj4_rules([disjunct([xG,a]),conjunct([y]),C]) -->
+    [xG,ii], p_consonant([C]).
+
+% (d) we'll ignore the vowel information loss, we may have to relax
+%     the yP subject morphology rules to accomodate
+p_ruleDisj4_rules([xG,a,iHiH]) --> [xG,iHiH].
+p_ruleDisj4_rules([xG,a,iHiH,n,iH]) --> [xG,iHiH,n,iH].
+p_ruleDisj4_rules([xG,a,ee]) --> [xG,ee].
+
+% (e)
+p_ruleDisj4_rules([xG,a,xG,a]) --> [xG,e,xG,e].
+p_ruleDisj4_rules([xG,a,xG,C]) --> [xG,i,xG], p_consonant([C]).
+p_ruleDisj4_rules([xG,a,zh,xG,C]) --> [xG,i,zh,xG], p_consonant([C]).
+p_ruleDisj4_rules([xG,a,xG,iH]) --> [xG,i,xG,iH].
+p_ruleDisj4_rules([xG,a,xG,VV]) --> [xG,V,xG], p_ruleDisj4_vowel(V,VV).
+
+% matches and converts any vowel to its long short version
+p_ruleDisj4_vowel(V,I) --> p_vowel([I]),
+    {compound(I), I=..[_,[VV|_]|_], p_ruleDisj4_vowel(V,_,[VV],[])}.
+
+p_ruleDisj4_vowel(a,aHaH) --> [aHaH].
+p_ruleDisj4_vowel(a,aHNaHN) --> [aHNaHN].
+p_ruleDisj4_vowel(a,aa) --> [aa].
+p_ruleDisj4_vowel(a,a) --> [a].
+
+p_ruleDisj4_vowel(e,eHeH) --> [eHeH].
+p_ruleDisj4_vowel(e,eHNeHN) --> [eHNeHN].
+p_ruleDisj4_vowel(e,ee) --> [ee].
+p_ruleDisj4_vowel(e,e) --> [e].
+
+p_ruleDisj4_vowel(i,iHiH) --> [iHiH].
+p_ruleDisj4_vowel(i,iHNiHN) --> [iHNiHN].
+p_ruleDisj4_vowel(i,ii) --> [ii].
+p_ruleDisj4_vowel(i,i) --> [i].
+
+p_ruleDisj4_vowel(o,oHoH) --> [oHoH].
+p_ruleDisj4_vowel(o,oHNoHN) --> [oHNoHN].
+p_ruleDisj4_vowel(o,oo) --> [oo].
+p_ruleDisj4_vowel(o,o) --> [o].
+
+
+%------------
+
+%------------
+% Rule Subj-1
+%  The d-effect only applies when 1dpl subject prefix
+%  appears immediately before the stem.
+p_ruleSubj1(O) -->
+    prefixes(P),
+        p_ruleSubj1_1dpl(DPL), p_deffect_initials(D),
+    vowels(V), p_stemrest(R),
+    {append(P,DPL,D,V,R,O)}.
+
+p_ruleSubj1_1dpl([subject([C,ii,d])]) --> consonant([C]), [ii].
+p_ruleSubj1_1dpl([subject([ii,d])]) --> [ii].
+
+% for contracted prefixes
+p_ruleSubj1_1dpl([ee,d]) --> [ee].
+
+% initials involved in the d-effect
+p_deffect_initials([z]) --> [dz].
+p_deffect_initials([zh]) --> [j].
+p_deffect_initials([gh]) --> [g].
+p_deffect_initials([w]) --> [g].
+p_deffect_initials([y]) --> [g].
+p_deffect_initials([w]) --> [xG,w].
+p_deffect_initials([y]) --> [xG,y].
+p_deffect_initials([m]) --> [xG,m].
+p_deffect_initials([n]) --> [xG,n].
+p_deffect_initials([l]) --> [dl].
+p_deffect_initials([xG]) --> [txG].
+
+% the rest
+p_deffect_initials(C) --> p_consonant(C).
+
+%------------
+
+%------------
+% Rule Subj-2
+%  The barred-l classifier and plain-l classifiers disappear
+%  when sandwiched between any subject prefix that ends in sh or
+%  s and the first consonant of the verb stem.
+p_ruleSubj2(O) -->
+    prefixes(P),
+        (vowels(V), p_ruleSubj2_ssh(SSH), {append(V,SSH,Subj)} |
+         p_ruleSubj2_ssh(Subj)),
+    p_ruleSubj2_llB(LLB),
+    p_stem(S),
+    {append(P,[subject(Subj)],LLB,S,O)}.
+
+p_ruleSubj2_ssh([s]) --> [s].
+p_ruleSubj2_ssh([sh]) --> [sh].
+
+p_ruleSubj2_llB([classifier([l])]) --> [].
+p_ruleSubj2_llB([classifier([lB])]) --> [].
+
+%------------
+
+%------------
+% Rule Subj-3
+%  The d at the end of any 1dpl prefix disappears when immediately
+%  followed by the plain-l classifier.  The same is true of the
+%  barred-l classifier except also the lB -> l
+p_ruleSubj3(O) -->
+    prefixes(P),
+        p_ruleSubj3_1dpl(Subject), p_ruleSubj3_llB(LLB),
+    p_stem(R),
+    {append(P,Subject,LLB,R,O)}.
+
+p_ruleSubj3_1dpl([subject([ii,d])]) --> [ii] | [ii,d] | [subject([ii,d])].
+
+% contracted prefixes
+p_ruleSubj3_1dpl([subject([ee,d])]) --> [ee].
+
+p_ruleSubj3_llB([classifier([l])]) --> [].
+p_ruleSubj3_llB([classifier([lB])]) --> [l].
+
+%------------
+
+%------------
+% Rule Subj-4
+%  If a 2dpl subject prefix ends in h, it disappears when followed
+%  by the barred-l classifier.  It also disappears when followed
+%  by the plain-l classifier except also the l -> lB.
+p_ruleSubj4(O) -->
+    prefixes(P),
+        p_ruleSubj4_2dpl(OO),
+        p_ruleSubj4_llB(LLB),
+    p_stem(R),
+    {append(P,OO,LLB,R,O)}.
+
+p_ruleSubj4_2dpl([subject([oo,h])]) --> [oo].
+p_ruleSubj4_2dpl([subject([o,h])]) --> [o].
+p_ruleSubj4_2dpl([subject([oH,h])]) --> [oH].
+
+p_ruleSubj4_llB([classifier([lB])]) --> [lB] | [classifier([lB])].
+p_ruleSubj4_llB([classifier([l])]) --> [lB] | [classifier([l])].
+
+%------------
+
+%------------
+% Rule Subj-5
+%  The pre-stem syllable with a low tone acquires a high tone
+%  if the syllable immediately preceding it has a high tone
+%  on the vowel it ends with.
+
+p_ruleSubj5(O) -->
+    any(A), vowel_hightone(V),
+        consonants(C), p_ruleSubj5_change(H), consonants(C2),
+    p_stem(S),
+    {append(A,V,C,H,C2,S,O)}.
+
+vowel_hightone([aH]) --> [aH].
+vowel_hightone([iH]) --> [iH].
+vowel_hightone([eH]) --> [eH].
+vowel_hightone([oH]) --> [oH].
+vowel_hightone([aHaH]) --> [aHaH].
+vowel_hightone([iHiH]) --> [iHiH].
+vowel_hightone([eHeH]) --> [eHeH].
+vowel_hightone([oHoH]) --> [oHoH].
+vowel_hightone([aHN]) --> [aHN].
+vowel_hightone([iHN]) --> [iHN].
+vowel_hightone([eHN]) --> [eHN].
+vowel_hightone([oHN]) --> [oHN].
+vowel_hightone([aHNaHN]) --> [aHNaHN].
+vowel_hightone([iHNiHN]) --> [iHNiHN].
+vowel_hightone([eHNeHN]) --> [eHNeHN].
+vowel_hightone([oHNoHN]) --> [oHNoHN].
+
+p_ruleSubj5_change([a]) --> [aH].
+p_ruleSubj5_change([i]) --> [iH].
+p_ruleSubj5_change([e]) --> [eH].
+p_ruleSubj5_change([o]) --> [oH].
+
+p_ruleSubj5_change([aa]) --> [aHaH].
+p_ruleSubj5_change([ii]) --> [iHiH].
+p_ruleSubj5_change([oo]) --> [oHoH].
+p_ruleSubj5_change([ee]) --> [eHeH].
+
+p_ruleSubj5_change([aN]) --> [aHN].
+p_ruleSubj5_change([iN]) --> [iHN].
+p_ruleSubj5_change([eN]) --> [eHN].
+p_ruleSubj5_change([oN]) --> [oHN].
+
+p_ruleSubj5_change([aNaN]) --> [aHNaHN].
+p_ruleSubj5_change([iNiN]) --> [iHNiHN].
+p_ruleSubj5_change([oNoN]) --> [oHNoHN].
+p_ruleSubj5_change([eNeN]) --> [eHNeHN].
+
+%------------
+
+%------------
+% Rule Subj-6
+%  If the verb stem contains the consonants s,z,dz,ts,ts'
+%  then any sh or zh that occurs in the subject prefix
+%  changes to s or z, respectively.
+%  If the verb stem contains sh,zh,j,ch,ch' then any
+%  s or z in subj. prefix changes to sh or zh respectively.
+
+p_ruleSubj6(O) -->
+    any(A),
+        (vowels(V), p_ruleSubj6_change(C), {append(V,C,Subj)} |
+         p_ruleSubj6_change(Subj)), 
+    any(A2), p_stem(S),
+    {append(A,[subject(Subj)],A2,S,O)}.
+
+p_ruleSubj6_change([sh]) --> [s].
+p_ruleSubj6_change([zh]) --> [z].
+p_ruleSubj6_change([s]) --> [sh].
+p_ruleSubj6_change([z]) --> [zh].
+
+%------------
+
+%------------
+% Rule Subj-7
+%  Devoicing voiced fricatives if the subject ends
+%  in s, z, or sh and the verb base has a zero classifier
+p_ruleSubj7(O) -->
+    prefixes(P),
+        p_ruleSubj7_szsh(S), p_ruleSubj7_voiced_fricatives(VF),
+    vowels(V), p_stemrest(R),
+    {append(P,S,VF,V,R,O)}.
+
+p_ruleSubj7_szsh([s]) --> [s].
+p_ruleSubj7_szsh([z]) --> [z].
+p_ruleSubj7_szsh([sh]) --> [sh].
+
+p_ruleSubj7_voiced_fricatives([z]) --> [s].
+p_ruleSubj7_voiced_fricatives([zh]) --> [sh].
+p_ruleSubj7_voiced_fricatives([l]) --> [lB].
+p_ruleSubj7_voiced_fricatives([y]) --> [h].
+p_ruleSubj7_voiced_fricatives([w]) --> [h].
+p_ruleSubj7_voiced_fricatives([gh]) --> [h].
+
+%------------
+
+%------------
+% Rule Subj-8
+%  If a verb stem begins with a voiced fricative and the classifier
+%  of the verb is barred-l, devoice it EXCEPT if the classifier is
+%  preceeded by a 1dpl prefix ending in d.
+%
+%  In the case where z or zh devoices, the barred-l gets dropped.
+%
+%  Rules Subj-3 and Subj-4 depend on this rule being run first.
+%
+%  Note: since we are parsing, we don't need a rule
+%        that addresses the exceptions since none of
+%        the input will have been devoiced if the
+%        exceptions were applied when building the verb.
+
+
+p_ruleSubj8(O) -->
+    any(P),
+        p_ruleSubj8_ssh(SSH),
+    vowels(V), p_stemrest(R),
+    {append(P,[classifier([lB])],SSH,V,R,O)}.
+
+p_ruleSubj8_ssh([z]) --> [s].
+p_ruleSubj8_ssh([zh]) --> [sh].
+
+p_ruleSubj8(O) -->
+    any(P),
+        p_ruleSubj8_classifier_barredl(BL), p_ruleSubj8_voiced_fricatives(VF),
+    vowels(V), p_stemrest(R),
+    {append(P,BL,VF,V,R,O)}.
+
+p_ruleSubj8_classifier_barredl([classifier([lB])]) --> [lB] | [classifier([lB])].
+
+p_ruleSubj8_voiced_fricatives([l]) --> [lB].
+p_ruleSubj8_voiced_fricatives([y]) --> [h].
+p_ruleSubj8_voiced_fricatives([w]) --> [h].
+p_ruleSubj8_voiced_fricatives([gh]) --> [h].
+
+%------------
+
+%------------
+% Rule Conj-1
+%  If a conjunct prefix that ends in a consonant is followed by a consonant,
+%  insert an i between the two consonants.
+
+p_ruleConj1(O) -->
+    any(A),
+        p_ruleConj1_condition(Cond),
+        p_consonant(C2),
+    any(A2),
+    {append(A,Cond,C2,A2,O)}.
+
+p_ruleConj1_condition(O) -->
+    ((consonants(Cs), vowels(Vs), p_consonant(C),
+      {append(Cs,Vs,C,Conj)}) |
+      (consonants(C), {Conj = C})),
+        [i],
+        (p_ruleConj1_condition(O2) | [], {O2=[]}),
+    {create_predicate(conjunct,O1,Conj),
+    append([O1],O2,O)}.
+
+%------------
+
+%------------
+% Rule Conj-2
+%  If a conjunct prefix y is followed directly by a consonant and preceded
+%  by the vowel at the end of a disjunct prefix, then change y to an i.
+%  Except if y is between two consonants, in this case y -> ii.
+
+p_ruleConj2(O) -->
+    any(A), p_end_vowel(V), [i], p_consonant(C), any(A2),
+    {append(A,V,[conjunct([y])],C,A2,O)}.
+
+p_ruleConj2(O) -->
+    any(A), p_end_consonant(C), [ii], p_consonant(C2), any(A2),
+    {append(A,C,[conjunct([y])],C2,A2,O)}.
+
+%------------
+
+%------------
+% Rule Conj-3
+%  If the consonant at the end of a conjunct prefix is followed by ni, then
+%  ni -> iH (APPLY Rule Conj-1 FIRST).
+
+p_ruleConj3(O) -->
+    any(A), p_consonant(C), [iH], any(A2),
+    {append(A,C,[n,i],A2,O)}.
+
+%------------
+
+%------------
+% Rule Conj-4
+%  If a conjunct prefix contains sh, zh or j then it changes to s, z
+%  or dz if prefix or verb stem following contains s,z,dz,ts, or ts'.
+% 
+%  If a conjunct prefix contains s, z or dz then it changes to an sh, zh
+%  or j if prefix or verb stem following contains sh,zh,j,ch, or ch'.
+
+p_ruleConj4(O) -->
+    any(A), p_ruleConj4_change(C), any(A2),
+    {append(A,C,A2,O)}.
+
+p_ruleConj4_change([sh]) --> [s].
+p_ruleConj4_change([zh]) --> [z].
+p_ruleConj4_change([j]) --> [dz].
+
+p_ruleConj4_change([s]) --> [sh].
+p_ruleConj4_change([z]) --> [zh].
+p_ruleConj4_change([dz]) --> [j].
+
+%------------
+
+%------------
+% Rule Conj-5
+%  The following apply for the object position:
+%   (i)   'C -> 'aC
+%   (ii)  'y -> 'iy
+%   (iii) 'j -> zh'
+%   (iv)  V ' C1 C2 -> V C1 ' C2
+%         if C2 is part of a conjunct prefix or the n that starts
+%         a subject prefix
+
+p_ruleConj5(O) -->
+    any(A), p_ruleConj5_change(C), any(A2),
+    {append(A,C,A2,O)}.
+
+p_ruleConj5_change([xG,y]) --> [xG,i,y].
+p_ruleConj5_change([xG,j]) --> [zh,xG].
+p_ruleConj5_change([xG,C]) --> [xG,a], p_consonant([C]).
+p_ruleConj5_change([V,xG,C1,C2]) --> p_vowel([V]), p_consonant([C1]), [xG], p_consonant([C2]).
+
+%------------
+
+%------------
+% Rule Conj-6
+%  (a) (i)   hwC -> haC (if C is part of the verb-stem syllable)
+%      (ii)  hwC -> hoC (if C is NOT part of the verb-stem syllable)
+%      (iii) hooz | hoos -> haz | has (sometimes)
+%  (b) hwni -> hoH
+%  (c) hwa(a) | hwo(o) -> ha(a) | ho(o)
+%  (d) (i)   hwiHiH -> hwoHoH
+%      (ii)  hweesh -> hoosh
+%      (iii) hwiH -> hoH
+%      (iv)  hwiish | hwii -> hoosh | hoo
+
+p_ruleConj6(O) -->
+    any(A), p_ruleConj6_change(C), any(A2),
+    {append(A,C,A2,O)}.
+
+p_ruleConj6_change([h,w,C]) --> ([h,a] | [h,o]), p_consonant([C]).
+p_ruleConj6_change([h,oo,z]) --> [h,a,z].
+p_ruleConj6_change([h,oo,s]) --> [h,a,s].
+p_ruleConj6_change([h,w,n,i]) --> [h,oH].
+
+p_ruleConj6_change([h,w,a]) --> [h,a].
+p_ruleConj6_change([h,w,aa]) --> [h,aa].
+p_ruleConj6_change([h,w,o]) --> [h,o].
+p_ruleConj6_change([h,w,oo]) --> [h,oo].
+
+p_ruleConj6_change([h,w,iHiH]) --> [h,w,oHoH].
+p_ruleConj6_change([h,w,ee,sh]) --> [h,oo,sh].
+p_ruleConj6_change([h,w,iH]) --> [h,oH].
+p_ruleConj6_change([h,w,ii,sh]) --> [h,oo,sh].
+p_ruleConj6_change([h,w,ii]) --> [h,oo].
+
+%------------
+
+%------------
+% Rule Conj-7
+%  (a) VjC | ji -> zh
+%  (b) 'j -> zh'
+%  (c) jdd -> djd (there are some conditions which we may
+%                  be able to ignore here)
+
+p_ruleConj7(O) -->
+    any(A), p_ruleConj7_change(C), any(A2),
+    {append(A,C,A2,O)}.
+
+p_ruleConj7_change([V,j,C]) --> p_end_vowel([V]), [zh], p_consonant([C]).
+p_ruleConj7_change([j,i]) --> [zh].
+p_ruleConj7_change([xG,j]) --> [zh,xG].
+p_ruleConj7_change([j,d,d]) --> [d,j,d].
+
+%------------
+
+%------------
+% Rule Conj-8
+
+create_predicate(Pred,X,[X]) :- compound(X), X=..[P|_], Pred=P,!.
+create_predicate(Pred,Out,List) :- Out =.. [Pred|[List]].
+
+% (b)
+p_ruleConj8(O) -->
+    any(A),
+        prefix(Conjunct),
+        (p_ruleConj8_vowel_change(V) | [],{V=[]}),
+        p_consonant(C2),
+        p_ruleConj8_replace_syllable_vowel(Syll),
+    any(A2),
+
+    {last(Conjunct,C), p_end_consonant(_,[C],[]),
+        create_predicate(conjunct,Pred,Conjunct),
+        append(A,[Pred],V,C2,Syll,A2,O)}.
+
+p_ruleConj8_replace_syllable_vowel(O) -->
+    (consonants(C) | [], {C=[]}),
+        p_ruleConj8_vowel_change(V),
+    (consonants(C2) | [], {C2=[]}),
+    {append(C,V,C2,O)}.
+
+% (a)
+p_ruleConj8(O) -->
+    % only applies if the last segment of Conjunct is a consonant
+    any(A), prefix(Conjunct), p_ruleConj8_vowel_change(V), any(A2),
+    {last(Conjunct,C), consonant(_,[C],[]),
+        create_predicate(conjunct,Pred,Conjunct),
+        append(A,[Pred],V,A2,O)}.
+
+p_ruleConj8_vowel_change([aa]) --> [aH,a].
+p_ruleConj8_vowel_change([ii]) --> [iH,i].
+p_ruleConj8_vowel_change([ee]) --> [eH,e].
+p_ruleConj8_vowel_change([oo]) --> [oH,o].
+p_ruleConj8_vowel_change([a]) --> [aH].
+p_ruleConj8_vowel_change([i]) --> [iH].
+p_ruleConj8_vowel_change([e]) --> [eH].
+p_ruleConj8_vowel_change([o]) --> [oH].
+
+%------------
+
+%------------
+% Rule Conj-9
+% NON-GOAL: Seriative
+%------------
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Morphology rules
+%   These rules are for after applying all the phonology rules from before
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+verb(template(Disjunct,Conjunct,Subject,Classifier,Stem)) -->
+    ([peg] | []), any(A),
+    stem(StemInfo,Stem),
+    {restcapture(StemInfo,Disjunct,Conjunct,Subject,Classifier,A,[])}.
+    
+restcapture(StemInfo,Disjunct,RealConjunct,subject(Subject),Classifier) -->
+    disjunct(StemInfo,Disjunct),
+    conjunct(StemInfo,Conjunct),
+    subject(Disjunct,Conjunct,StemInfo,Subject),
+    classifier(StemInfo,Classifier),
+    {testFourPerson(Conjunct,Subject),
+     testThreeEmptiness(StemInfo,Conjunct,Subject,RealConjunct)}.
+
+% TEST: only accept 4P when the subject prefix is 3
+testFourPerson(conjunct(_,Four,_),_) :- var(Four).
+testFourPerson(conjunct(_,Four,_),three) :- nonvar(Four).
+
+% TEST: part of Rule Str-1 3rd person subjects cannot take empty third person objects
+%       also, non 3 person subjects can take only empty objects
+testThreeEmptiness(StemInfo,conjunct(object(Object),Four,Inner),
+        Subj,
+        conjunct(object(NewObject),Four,Inner)) :-
+    nonvar(StemInfo), not is_intrans(StemInfo), nonvar(Subj), nonvar(Object),
+    threePersonValidCond(Subj,Four,Object,NewObject).
+
+testThreeEmptiness(StemInfo,conjunct(object(Object),Four,Inner),
+        _, conjunct(object(Object),Four,Inner)) :-
+    var(Object), nonvar(StemInfo), is_intrans(StemInfo).
+
+threePersonValidCond(three,Four,three,three) :- var(Four).
+threePersonValidCond(Subject,Four,threeEmpty,three) :-
+    (not Subject == three) ; nonvar(Four).
+threePersonValidCond(_,_,Object,Object) :-
+    (not Object == threeEmpty),
+    (not Object == three).
+
+% steminfo(transitivity,outer,inner,object,mode,conjugation,classifier)
+
+%========================
+% Disjunct
+
+disjunct(StemInfo,disjunct(outer(Outer),distpl(DistPl))) -->
+    {nonvar(StemInfo)},(
+    outer(StemInfo,Outer), distpl(StemInfo,DistPl) |
+    outer(StemInfo,Outer) |
+    
+    % may omit outer if the stem has no outer prefix
+    ({has_no_outer(StemInfo)},
+        (distpl(StemInfo,DistPl) | []))
+    ).
+
+outer(steminfo(_,Outer,_,_,_,_,_),Outer) -->
+    pref(Outer) |
+    [disjunct(Outer)].
+
+distpl(_,[d,a]) --> [d,a] | [disjunct([d,a])].
+
+%========================
+% Conjunct
+
+conjunct(StemInfo,conjunct(object(Object),FourthPerson,inner(Inner))) -->
+    {nonvar(StemInfo)}, (
+
+    {is_intrans(StemInfo)}, (
+        fourthperson(FourthPerson), inner(StemInfo,Inner)  |
+        fourthperson(FourthPerson), {has_no_inner(StemInfo)}
+    ) | (
+        object(StemInfo,Object), fourthperson(FourthPerson), inner(StemInfo,Inner) |
+        object(StemInfo,Object), fourthperson(FourthPerson), {has_no_inner(StemInfo)}
+    )).
+
+has_no_inner(steminfo(_,_,[],_,_,_,_)).
+has_no_outer(steminfo(_,[],_,_,_,_,_)).
+
+is_intrans(steminfo(intrans,_,_,[],_,_,_)).
+
+object(steminfo(_,_,_,Object,_,_,_),unspec) --> pref(Object) | [conjunct(Object)].
+
+object(steminfo(trans,_,_,_,_,_,_),oneSG) --> [sh] | [conjunct([sh])].
+object(steminfo(trans,_,_,_,_,_,_),oneDPL) --> [n,i,h] | [conjunct([n,i,h])].
+object(steminfo(trans,_,_,_,_,_,_),twoSG) --> [n] | [conjunct([n])].
+object(steminfo(trans,_,_,_,_,_,_),twoDPL) --> [n,i,h] | [conjunct([n,i,h])].
+object(steminfo(trans,_,_,_,_,_,_),three) --> [y] | [conjunct([y])].
+object(steminfo(trans,_,_,_,_,_,_),three) --> [b] | [conjunct([b])].
+object(steminfo(trans,_,_,_,_,_,_),threeEmpty) --> [].
+object(steminfo(trans,_,_,_,_,_,_),four) --> [h,w] | [conjunct([h,w])].
+object(steminfo(trans,_,_,_,_,_,_),unspec) --> [xG] | [conjunct([xG])].
+
+fourthperson(subj4p) --> [j] | [conjunct([j])].
+fourthperson(_) --> [].
+
+inner(steminfo(_,_,Inner,_,_,_,_),Inner) --> pref(Inner) | [conjunct(Inner)].
+
+% F-mode may have a d in the inner prefix position
+inner(steminfo(_,_,Inner,_,f,flv,_),Inner) --> ([y, d] | [conjunct([y,d])]), (pref(Inner) | [conjunct(Inner)]).
+inner(steminfo(_,_,_,_,f,flv,_),_) --> [y, d] | [conjunct([y,d])].
+
+inner(steminfo(_,_,Inner,_,f,_,_),Inner) --> ([d] | [conjunct([d])]), (pref(Inner) | [conjunct(Inner)]).
+inner(steminfo(_,_,_,_,f,_,_),_) --> [d] | [conjunct([d])].
+
+pref(P) --> consonants(C), vowels(V), consonants(C2), {append(C,V,C2,P)}.
+pref(P) --> consonants(C), vowels(V), {append(C,V,P)}.
+pref(P) --> consonants(P).
+
+
+%========================
+% Subject
+
+subject(D,C,Si,Subj) --> [subject(S)], {subject(D,C,Si,Subj,S,[])}.
+
+%%%%                   %%%%
+% I-mode subject prefixes %
+%%%%                   %%%%
+
+%----------------------
+% LV, FLV, SLV, YLV conjugations, I-mode
+subject(disjunct(outer(Outer),distpl(DistPl)),
+        conjunct(object(Object),FourthPerson,inner(Inner)),
+        steminfo(_,_,_,_,i,Conj,_),Subject) -->
+
+    {Conj = lv ; Conj = flv ; Conj = slv ; Conj = ylv },
+
+    {((var(Object);Object=object(threeSG)), % uninstantiated or three-sg which is empty
+       var(FourthPerson),var(Inner),(nonvar(Outer);nonvar(DistPl))) ->
+        PrecededByDisjunct = yes ;
+        PrecededByDisjunct = no},
+
+    {nonvar(DistPl) -> HasDistPl = yes ;
+                       HasDistPl = no},
+
+    subjectImodeLongVowel(PrecededByDisjunct,HasDistPl,Subject).
+
+subjectImodeLongVowel(yes,_,oneSG) --> [i,sh].
+subjectImodeLongVowel(yes,_,twoSG) --> [i].
+subjectImodeLongVowel(yes,_,oneDPL) --> [ii,d].
+subjectImodeLongVowel(yes,_,twoDPL) --> [oo,h].
+subjectImodeLongVowel(yes,no,three) --> [ii].
+subjectImodeLongVowel(yes,yes,three) --> [y,ii].
+
+subjectImodeLongVowel(no,_,oneSG) --> [ii,sh].
+subjectImodeLongVowel(no,_,twoSG) --> [ii].
+subjectImodeLongVowel(no,_,oneDPL) --> [ii,d].
+subjectImodeLongVowel(no,_,twoDPL) --> [oo,h].
+subjectImodeLongVowel(no,_,three) --> [ii].
+
+%----------------------
+% N conjugation, I-mode
+subject(_,_,steminfo(_,_,_,_,i,n,_),oneSG) --> [n,i,sh].
+subject(_,_,steminfo(_,_,_,_,i,n,_),twoSG) --> [n,iH].
+subject(_,_,steminfo(_,_,_,_,i,n,_),oneDPL) --> [n,ii,d].
+subject(_,_,steminfo(_,_,_,_,i,n,_),twoDPL) --> [n,o,h].
+
+% when preceded by the outer prefix
+subject(disjunct(outer(Outer),distpl(P1)),
+        conjunct(object(P2),P3,inner(P4)),
+        steminfo(_,_,_,_,i,n,_),three) -->
+    {nonvar(Outer),var(P1),var(P2),var(P3),var(P4)},
+    [].
+
+% when preceded by the dist pl da
+subject(disjunct(_,distpl(DistPl)),
+        conjunct(object(P2),P3,inner(P4)),
+        steminfo(_,_,_,_,i,n,_),three) -->
+    {nonvar(DistPl),var(P2),var(P3),var(P4)},
+    ([] | [iH]).
+
+% when preceded by an object prefix
+subject(_,conjunct(object(Object),FourthPerson,inner(P4)),
+          steminfo(_,_,_,_,i,n,_),three) -->
+    {(nonvar(Object) ; nonvar(FourthPerson)), var(P4)},
+    [iH].
+
+% when preceded by an inner prefix
+subject(_,conjunct(_,_,inner(Inner)),steminfo(_,_,_,_,i,n,_),three) -->
+    {nonvar(Inner)}, [ee].
+
+% when preceded by no prefix (default)
+subject(_,_,steminfo(_,_,_,_,i,n,_),three) --> [y,iH].
+
+%----------------------
+% DS conjugation, I-mode
+subject(_,_,steminfo(_,_,_,_,i,ds,_),oneSG) --> [sh,i,sh].
+subject(_,_,steminfo(_,_,_,_,i,ds,_),twoSG) --> [s,iH].
+subject(_,_,steminfo(_,_,_,_,i,ds,_),oneDPL) --> [s,ii,d].
+subject(_,_,steminfo(_,_,_,_,i,ds,_),twoDPL) --> [s,o,h].
+subject(_,_,steminfo(_,_,_,_,i,ds,_),three) --> [].
+
+%----------------------
+% Simple and S conjugation I-mode subject prefixes
+
+subject(_,_,steminfo(_,_,_,_,i,Conj,_),Subject) -->
+    { Conj = s ; Conj = simple },
+    subjectImodeSimpleS(Subject).
+
+subjectImodeSimpleS(oneSG) --> [sh].
+subjectImodeSimpleS(twoSG) --> [n,i].
+subjectImodeSimpleS(oneDPL) --> [ii,d].
+subjectImodeSimpleS(twoDPL) --> [o,h].
+subjectImodeSimpleS(three) --> [].
+
+%%%%                   %%%%
+% P-mode subject prefixes %
+%%%%                   %%%%
+
+%----------------------
+% S, SLV and DS conjugations
+subject(_,_,steminfo(_,_,_,_,p,Conj,Classifier),Subject) -->
+    { Conj = s ; Conj = slv ; Conj = ds }, (
+    ({ Classifier = barredl ; Classifier = zero },
+        subjectPmodeSSLVDS_lBzero(Subject)) |
+    ({ Classifier = plainl ; Classifier = d },
+        subjectPmodeSSLVDS_ld(Subject))
+    ).
+
+subjectPmodeSSLVDS_lBzero(oneSG) --> [s,eH].
+subjectPmodeSSLVDS_lBzero(twoSG) --> [s,iH,n,iH].
+subjectPmodeSSLVDS_lBzero(oneDPL) --> [s,ii,d].
+subjectPmodeSSLVDS_lBzero(twoDPL) --> [s,oo].
+subjectPmodeSSLVDS_lBzero(three) --> [z] | [s] | [s,i]. /* peg rule */
+
+subjectPmodeSSLVDS_ld(oneSG) --> [s,i,s].
+subjectPmodeSSLVDS_ld(twoSG) --> [s,iH,n,iH].
+subjectPmodeSSLVDS_ld(oneDPL) --> [s,ii,d].
+subjectPmodeSSLVDS_ld(twoDPL) --> [s,oo,h].
+subjectPmodeSSLVDS_ld(three) --> [s] | [s,i]. /* peg rule */
+
+%----------------------
+% Simple and YLV conjugations
+subject(disjunct(outer(Outer),distpl(DistPl)),
+        conjunct(object(Object),FourthPerson,inner(Inner)),
+        steminfo(_,_,_,_,p,Conj,Classifier),Subject) -->
+    { Conj = simple ; Conj = ylv },
+
+    {((nonvar(Object),(not Object == threeEmpty)) ; nonvar(FourthPerson) ; nonvar(Inner)) ->
+        PrecededBy = conjunct ;
+        ((nonvar(DistPl) ; nonvar(Outer)) ->
+            PrecededBy = disjunct ;
+            PrecededBy = nothing)},
+
+    ( ({ Classifier = zero ; Classifier = barredl },
+            subjectPmodeSimpleYLV_lBzero(PrecededBy,Subject)) ;
+
+      ({ Classifier = plainl ; Classifier = d },
+            subjectPmodeSimpleYLV_ld(PrecededBy,Subject))
+    ).
+
+highLongVowel --> [aHaH] | [iHiH] | [oHoH] | [eHeH].
+highShortVowel --> [aH] | [iH] | [oH] | [eH].
+lowLongVowel --> [aa] | [ii] | [oo] | [ee].
+
+subjectPmodeSimpleYLV_lBzero(disjunct,oneSG) --> highLongVowel.
+subjectPmodeSimpleYLV_lBzero(disjunct,twoSG) --> highShortVowel, [iH,n,iH].
+subjectPmodeSimpleYLV_lBzero(disjunct,oneDPL) --> [ii,d].
+subjectPmodeSimpleYLV_lBzero(disjunct,twoDPL) --> [oo].
+subjectPmodeSimpleYLV_lBzero(disjunct,three) --> highLongVowel.
+
+subjectPmodeSimpleYLV_lBzero(conjunct,oneSG) --> [iHiH].
+subjectPmodeSimpleYLV_lBzero(conjunct,twoSG) --> [iHiH,n,iH].
+subjectPmodeSimpleYLV_lBzero(conjunct,oneDPL) --> [ii,d].
+subjectPmodeSimpleYLV_lBzero(conjunct,twoDPL) --> [oo].
+subjectPmodeSimpleYLV_lBzero(conjunct,three) --> [iHiH].
+
+subjectPmodeSimpleYLV_lBzero(nothing,oneSG) --> [y,iH].
+subjectPmodeSimpleYLV_lBzero(nothing,twoSG) --> [y,iH,n,iH].
+subjectPmodeSimpleYLV_lBzero(nothing,oneDPL) --> [y,ii,d].
+subjectPmodeSimpleYLV_lBzero(nothing,twoDPL) --> [w,oo].
+subjectPmodeSimpleYLV_lBzero(nothing,three) --> [y,iH].
+
+subjectPmodeSimpleYLV_ld(disjunct,oneSG) --> lowLongVowel, [sh].
+subjectPmodeSimpleYLV_ld(disjunct,twoSG) --> highShortVowel, [iH,n,iH].
+subjectPmodeSimpleYLV_ld(disjunct,oneDPL) --> [ii,d].
+subjectPmodeSimpleYLV_ld(disjunct,twoDPL) --> [oo,h].
+subjectPmodeSimpleYLV_ld(disjunct,three) --> lowLongVowel.
+
+subjectPmodeSimpleYLV_ld(conjunct,oneSG) --> [ee,sh].
+subjectPmodeSimpleYLV_ld(conjunct,twoSG) --> [iHiH,n,iH].
+subjectPmodeSimpleYLV_ld(conjunct,oneDPL) --> [ii,d].
+subjectPmodeSimpleYLV_ld(conjunct,twoDPL) --> [oo,h].
+subjectPmodeSimpleYLV_ld(conjunct,three) --> [oo].
+
+subjectPmodeSimpleYLV_ld(nothing,oneSG) --> [y,i,sh].
+subjectPmodeSimpleYLV_ld(nothing,twoSG) --> [y,iH,n,iH].
+subjectPmodeSimpleYLV_ld(nothing,oneDPL) --> [y,ii,d].
+subjectPmodeSimpleYLV_ld(nothing,twoDPL) --> [w,oo,h].
+subjectPmodeSimpleYLV_ld(nothing,three) --> [y,i].
+
+%%----------------------
+% N conjugation
+subject(_,_,steminfo(_,_,_,_,p,n,Classifier),Subject) -->
+    ({ Classifier = zero ; Classifier = barredl },
+        subjectPmodeN_lBzero(Subject)) ;
+        subjectPmodeN_ld(Subject).
+
+subjectPmodeN_lBzero(oneSG) --> [n,iH].
+subjectPmodeN_lBzero(twoSG) --> highShortVowel, [iH,n,i] | [iHiH,n,iH] | [y,iH,n,iH].
+subjectPmodeN_lBzero(oneDPL) --> [n,ii,d].
+subjectPmodeN_lBzero(twoDPL) --> [n,oo].
+subjectPmodeN_lBzero(three) --> [n,iH].
+
+subjectPmodeN_ld(oneSG) --> [n,i,sh].
+subjectPmodeN_ld(twoSG) --> highShortVowel, [iH,n,i] | [iHiH,n,iH] | [y,iH,n,iH].
+subjectPmodeN_ld(oneDPL) --> [n,ii,d].
+subjectPmodeN_ld(twoDPL) --> [n,oo,h].
+% threep is handled by the following rules
+
+% when preceded by the outer prefix
+subject(disjunct(outer(Outer),distpl(P1)),
+        conjunct(object(P2),P3,inner(P4)),
+        steminfo(_,_,_,_,p,n,_),three) -->
+    {nonvar(Outer),var(P1),var(P2),var(P3),var(P4)},
+    [].
+
+% when preceded by the dist pl da
+subject(disjunct(_,distpl(DistPl)),
+        conjunct(object(P2),P3,inner(P4)),
+        steminfo(_,_,_,_,p,n,_),three) -->
+    {nonvar(DistPl),var(P2),var(P3),var(P4)},
+    ([] | [iH]).
+
+% when preceded by an object prefix
+subject(_,conjunct(object(Object),FourthPerson,inner(P4)),
+          steminfo(_,_,_,_,p,n,_),three) -->
+    {(nonvar(Object) ; nonvar(FourthPerson)), var(P4)},
+    [iH].
+
+% when preceded by an inner prefix
+subject(_,conjunct(_,_,inner(Inner)),steminfo(_,_,_,_,p,n,_),three) -->
+    {nonvar(Inner)}, [ee].
+
+% when preceded by no prefix (default)
+subject(_,_,steminfo(_,_,_,_,p,n,_),three) --> [y,iH].
+
+
+%----------------------
+% LV, FLV conjugations
+subject(disjunct(outer(Outer),distpl(DistPl)),
+        conjunct(object(Object),FourthPerson,inner(Inner)),
+        steminfo(_,_,_,_,p,Conj,Classifier),Subject) -->
+    { Conj = lv ; Conj = flv },
+
+    {(nonvar(Object) ; nonvar(FourthPerson) ; nonvar(Inner)) ->
+        (PrecededBy = conjunct,
+         (nonvar(Object) -> Pref = object ; Pref = conjunct));
+        (nonvar(DistPl) ->
+                (PrecededBy = disjunct,
+                 Pref = distpl) ;
+                (nonvar(Outer) ->
+                    (PrecededBy = disjunct,
+                     Pref = outer);
+
+                    (PrecededBy = nothing,
+                     Pref = none)))},
+
+    ( ({ Classifier = zero ; Classifier = barredl },
+            subjectPmodeLVFLV_lBzero(PrecededBy,Pref,Subject)) ;
+
+      ({ Classifier = plainl ; Classifier = d },
+            subjectPmodeLVFLV_ld(PrecededBy,Pref,Subject))
+    ).
+
+subjectPmodeLVFLV_lBzero(disjunct,_,oneSG) --> [i].
+subjectPmodeLVFLV_lBzero(disjunct,_,twoSG) --> [i,n,i].
+subjectPmodeLVFLV_lBzero(disjunct,_,oneDPL) --> [ii,d].
+subjectPmodeLVFLV_lBzero(disjunct,_,twoDPL) --> [oo].
+subjectPmodeLVFLV_lBzero(disjunct,object,three) --> [y,ii].
+subjectPmodeLVFLV_lBzero(disjunct,_,three) --> [i].
+
+subjectPmodeLVFLV_lBzero(_,_,oneSG) --> [ii].
+subjectPmodeLVFLV_lBzero(_,object,twoSG) --> [ii,n,i].
+subjectPmodeLVFLV_lBzero(_,_,twoSG) --> [i,n,i].
+subjectPmodeLVFLV_lBzero(_,_,oneDPL) --> [ii,d].
+subjectPmodeLVFLV_lBzero(_,_,twoDPL) --> [oo].
+subjectPmodeLVFLV_lBzero(_,_,three) --> [ii].
+
+subjectPmodeLVFLV_ld(disjunct,_,oneSG) --> [i,sh].
+subjectPmodeLVFLV_ld(disjunct,_,twoSG) --> [i,n,i].
+subjectPmodeLVFLV_ld(disjunct,_,oneDPL) --> [ii,d].
+subjectPmodeLVFLV_ld(disjunct,_,twoDPL) --> [oo,h].
+subjectPmodeLVFLV_ld(disjunct,object,three) --> [y,ii].
+subjectPmodeLVFLV_ld(disjunct,_,three) --> [i].
+
+subjectPmodeLVFLV_ld(_,_,oneSG) --> [ii,sh].
+subjectPmodeLVFLV_ld(_,object,twoSG) --> [ii,n,i].
+subjectPmodeLVFLV_ld(_,_,twoSG) --> [i,n,i].
+subjectPmodeLVFLV_ld(_,_,oneDPL) --> [ii,d].
+subjectPmodeLVFLV_ld(_,_,twoDPL) --> [oo,h].
+subjectPmodeLVFLV_ld(_,_,three) --> [ii].
+
+%%%%                   %%%%
+% F-mode subject prefixes %
+%%%%                   %%%%
+
+% NOTE: we assume the [d] in the inner prefix position
+%       has already been taken care of
+
+subject(_,_,steminfo(_,_,_,_,f,_,_),oneSG) --> [ee,sh].
+subject(_,_,steminfo(_,_,_,_,f,_,_),twoSG) --> [iHiH].
+subject(_,_,steminfo(_,_,_,_,f,_,_),oneDPL) --> [ii,d].
+subject(_,_,steminfo(_,_,_,_,f,_,_),twoDPL) --> [oo,h].
+subject(_,_,steminfo(_,_,_,_,f,_,_),three) --> [oo].
+
+
+%========================
+% Classifiers
+
+classifier(steminfo(_,_,_,_,_,_,zero),classifier(zero)) --> [].
+classifier(steminfo(_,_,_,_,_,_,d),classifier(d)) --> [d] | [classifier([d])].
+classifier(steminfo(_,_,_,_,_,_,barredl),classifier(barredl)) --> [lB] | [classifier([lB])].
+classifier(steminfo(_,_,_,_,_,_,plainl),classifier(plainl)) --> [l] | [classifier([l])].
+

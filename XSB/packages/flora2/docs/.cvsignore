@@ -1,0 +1,4 @@
+auto
+*.out
+*.pdf *.dvi *.ps
+*.aux *.bbl *.blg *.ild *.ind *.log *.toc *.idx *.ilg
